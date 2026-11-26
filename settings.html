@@ -8,19 +8,55 @@
       <div class="aero-setting-row">
         <label for="aero_theme_mode">界面气候主题（防误触内置切换）</label>
         <select id="aero_theme_mode" class="text_pole">
-          <option value="day">日间主方案（浅/中明度 · 暖顶冷底）</option>
-          <option value="night">夜间备选方案（深色低疲劳）</option>
+          <option value="day">日间主方案（翡翠顶 × 暖珊瑚AI × 水蓝底）</option>
+          <option value="night">夜间备选方案（深海极光低疲劳）</option>
         </select>
       </div>
 
-      <div class="aero-setting-row checkbox_label" style="margin-top: 8px;">
+      <div class="aero-setting-row" style="margin-top: 8px;">
+        <label for="aero_font_style">叙事正文与角色名字体气质</label>
+        <select id="aero_font_style" class="text_pole">
+          <option value="serif">人文温润衬线（默认 · 适合长篇叙事）</option>
+          <option value="sans">清爽现代无衬线（系统黑体）</option>
+        </select>
+      </div>
+
+      <hr class="sysHR" style="margin: 10px 0;" />
+
+      <div class="aero-setting-row checkbox_label">
+        <input id="aero_enable_ribbons" type="checkbox" />
+        <label for="aero_enable_ribbons">B1 · 动态 Vista Aurora 极光丝带</label>
+      </div>
+
+      <div class="aero-setting-row checkbox_label" style="margin-top: 6px;">
+        <input id="aero_enable_grain" type="checkbox" />
+        <label for="aero_enable_grain">B2 · 物理晶体/纸纹微噪点（去电子冷感）</label>
+      </div>
+
+      <div class="aero-setting-row checkbox_label" style="margin-top: 6px;">
+        <input id="aero_enable_bg_window" type="checkbox" />
+        <label for="aero_enable_bg_window">B3 · 柔焦透出 ST 当前背景图</label>
+      </div>
+
+      <div class="aero-setting-row" id="aero_bg_blend_wrap" style="margin-top: 6px;">
+        <label for="aero_bg_blend">B3 · 背景图透窗显露程度</label>
+        <select id="aero_bg_blend" class="text_pole">
+          <option value="soft">轻柔剪影（推荐 · 极光为主）</option>
+          <option value="balanced">均衡融合（极光与场景并重）</option>
+          <option value="clear">通透剧场（更清晰看见背景细节）</option>
+        </select>
+      </div>
+
+      <hr class="sysHR" style="margin: 10px 0;" />
+
+      <div class="aero-setting-row checkbox_label">
         <input id="aero_hide_wand" type="checkbox" />
         <label for="aero_hide_wand">隐藏输入栏魔法棒按钮（保留横菜单）</label>
       </div>
 
       <div class="aero-setting-row checkbox_label" style="margin-top: 6px;">
         <input id="aero_compact_meta" type="checkbox" />
-        <label for="aero_compact_meta">元数据极简模式（压缩上下边距）</label>
+        <label for="aero_compact_meta">铭牌紧凑模式（略微压缩上下边距）</label>
       </div>
     </div>
   </div>

@@ -2,6 +2,11 @@ const MODULE_NAME = 'aero_mobile_ui';
 
 const DEFAULT_SETTINGS = Object.freeze({
     theme: 'day',
+    fontStyle: 'serif',
+    enableRibbons: true,
+    enableGrain: true,
+    enableBgWindow: true,
+    bgBlend: 'balanced',
     hideWand: true,
     compactMeta: false,
 });
@@ -27,8 +32,81 @@ function applyAppearance() {
     const s = getSettings();
     const root = document.documentElement;
     root.setAttribute('data-aero-theme', s.theme);
+    root.setAttribute('data-aero-font', s.fontStyle);
+    root.setAttribute('data-aero-ribbons', String(Boolean(s.enableRibbons)));
+    root.setAttribute('data-aero-grain', String(Boolean(s.enableGrain)));
+    root.setAttribute('data-aero-bg-window', String(Boolean(s.enableBgWindow)));
+    root.setAttribute('data-aero-bg-blend', s.bgBlend || 'balanced');
     root.setAttribute('data-aero-hide-wand', String(Boolean(s.hideWand)));
     root.setAttribute('data-aero-compact', String(Boolean(s.compactMeta)));
+
+    const blendWrap = document.getElementById('aero_bg_blend_wrap');
+    if (blendWrap) {
+        blendWrap.style.display = s.enableBgWindow ? 'flex' : 'none';
+    }
+}
+
+/**
+ * 一次性生成 128x128 静态物理颗粒纹理（零运行时 GPU/CPU 负担）
+ */
+function initStaticGrainTexture() {
+    const size = 128;
+    const canvas = document.createElement('canvas');
+    canvas.width = size;
+    canvas.height = size;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const img = ctx.createImageData(size, size);
+    const data = img.data;
+    for (let i = 0; i < data.length; i += 4) {
+        const v = Math.random() > 0.5 ? 255 : 0;
+        data[i] = v;
+        data[i + 1] = v;
+        data[i + 2] = v;
+        data[i + 3] = Math.floor(Math.random() * 26);
+    }
+    ctx.putImageData(img, 0, 0);
+    document.documentElement.style.setProperty('--aero-grain-img', `url(${canvas.toDataURL('image/png')})`);
+}
+
+/**
+ * 注入极光三明治光学舞台（位于 ST 背景图 #bg1 之上、#sheld 之下）
+ */
+function mountAuroraStage() {
+    if (document.getElementById('aero-aurora-stage')) return;
+
+    const stage = document.createElement('div');
+    stage.id = 'aero-aurora-stage';
+    stage.setAttribute('aria-hidden', 'true');
+    stage.innerHTML = `
+      <div class="aero-stage-wash"></div>
+      <div class="aero-stage-ribbons">
+        <svg class="aero-ribbon aero-ribbon-1" viewBox="0 0 400 800" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="aeroGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="var(--spec-emerald)" stop-opacity="0.34" />
+              <stop offset="48%" stop-color="var(--spec-cyan)" stop-opacity="0.28" />
+              <stop offset="100%" stop-color="var(--spec-violet)" stop-opacity="0.22" />
+            </linearGradient>
+          </defs>
+          <path d="M-60,120 C110,40 260,310 460,210 L460,360 C250,450 90,190 -60,290 Z" fill="url(#aeroGrad1)" />
+        </svg>
+        <svg class="aero-ribbon aero-ribbon-2" viewBox="0 0 400 800" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="aeroGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="var(--spec-solar)" stop-opacity="0.28" />
+              <stop offset="50%" stop-color="var(--spec-coral)" stop-opacity="0.22" />
+              <stop offset="100%" stop-color="var(--spec-cyan)" stop-opacity="0.26" />
+            </linearGradient>
+          </defs>
+          <path d="M-50,510 C130,410 270,630 470,480 L470,620 C260,760 110,550 -50,650 Z" fill="url(#aeroGrad2)" />
+        </svg>
+      </div>
+      <div class="aero-stage-grain"></div>
+    `;
+
+    document.body.prepend(stage);
 }
 
 function instantJumpToBottom() {
@@ -68,14 +146,7 @@ function injectJumpToBottomMenuItem() {
     optionsContent.prepend(btn);
 }
 
-/**
- * 双表面三层结构重组：
- * .mes_block (flex column)
- *   ├─ .aero-mes-header (表面 A: 3:4立绘 + 身份/常规按钮 + 元数据)
- *   ├─ .mes_edit_buttons (编辑态独立全宽工具条，不与楼层号抢空间)
- *   └─ 正文表面 B (.mes_reasoning_details / .mes_text / .edit_textarea)
- */
-function restructureMessage(mesEl) {
+function restructureMessage(mesEl, isLiveNew = false) {
     if (!mesEl || !mesEl.classList?.contains('mes')) return;
     if (mesEl.dataset.aeroStructured === '1') return;
 
@@ -127,9 +198,7 @@ function restructureMessage(mesEl) {
     infoCol.append(rowIdentity, rowMeta);
     header.append(avatarSlot, infoCol);
 
-    // 1. 表面 A 放在 .mes_block 最顶部
     mesBlock.prepend(header);
-    // 2. 编辑按钮组紧随表面 A 之后，占据独立全宽行（仍在 .mes_block 内部）
     if (mesEditButtons) {
         header.after(mesEditButtons);
     }
@@ -137,13 +206,17 @@ function restructureMessage(mesEl) {
     avatarWrapper.classList.add('aero-emptied');
     if (chName) chName.classList.add('aero-emptied');
 
+    if (isLiveNew) {
+        mesEl.classList.add('aero-mes-enter');
+    }
+
     mesEl.dataset.aeroStructured = '1';
 }
 
 function scanChatMessages() {
     const chat = document.getElementById('chat');
     if (!chat) return;
-    chat.querySelectorAll(':scope > .mes').forEach(restructureMessage);
+    chat.querySelectorAll(':scope > .mes').forEach((el) => restructureMessage(el, false));
 }
 
 function initChatObserver() {
@@ -154,7 +227,7 @@ function initChatObserver() {
         for (const m of mutations) {
             for (const node of m.addedNodes) {
                 if (node.nodeType === 1 && node.classList.contains('mes')) {
-                    restructureMessage(node);
+                    restructureMessage(node, false);
                 }
             }
         }
@@ -172,6 +245,32 @@ function initAndroidViewportFix() {
     syncHeight();
 }
 
+function bindSettingSelect(id, key) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const settings = getSettings();
+    const { saveSettingsDebounced } = getCtx();
+    el.value = settings[key];
+    el.addEventListener('change', (e) => {
+        settings[key] = e.target.value;
+        applyAppearance();
+        saveSettingsDebounced();
+    });
+}
+
+function bindSettingCheckbox(id, key) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const settings = getSettings();
+    const { saveSettingsDebounced } = getCtx();
+    el.checked = Boolean(settings[key]);
+    el.addEventListener('change', (e) => {
+        settings[key] = e.target.checked;
+        applyAppearance();
+        saveSettingsDebounced();
+    });
+}
+
 async function mountSettingsPanel() {
     const container = document.getElementById('extensions_settings2');
     if (!container || document.getElementById('aero_mobile_ui_settings')) return;
@@ -183,59 +282,66 @@ async function mountSettingsPanel() {
         const cleanHtml = DOMPurify ? DOMPurify.sanitize(rawHtml) : rawHtml;
         $(container).append(cleanHtml);
 
-        const settings = getSettings();
-        const { saveSettingsDebounced } = getCtx();
+        bindSettingSelect('aero_theme_mode', 'theme');
+        bindSettingSelect('aero_font_style', 'fontStyle');
+        bindSettingSelect('aero_bg_blend', 'bgBlend');
 
-        const themeSelect = document.getElementById('aero_theme_mode');
-        const wandCheck = document.getElementById('aero_hide_wand');
-        const compactCheck = document.getElementById('aero_compact_meta');
+        bindSettingCheckbox('aero_enable_ribbons', 'enableRibbons');
+        bindSettingCheckbox('aero_enable_grain', 'enableGrain');
+        bindSettingCheckbox('aero_enable_bg_window', 'enableBgWindow');
+        bindSettingCheckbox('aero_hide_wand', 'hideWand');
+        bindSettingCheckbox('aero_compact_meta', 'compactMeta');
 
-        if (themeSelect) {
-            themeSelect.value = settings.theme;
-            themeSelect.addEventListener('change', (e) => {
-                settings.theme = e.target.value;
-                applyAppearance();
-                saveSettingsDebounced();
-            });
-        }
-
-        if (wandCheck) {
-            wandCheck.checked = Boolean(settings.hideWand);
-            wandCheck.addEventListener('change', (e) => {
-                settings.hideWand = e.target.checked;
-                applyAppearance();
-                saveSettingsDebounced();
-            });
-        }
-
-        if (compactCheck) {
-            compactCheck.checked = Boolean(settings.compactMeta);
-            compactCheck.addEventListener('change', (e) => {
-                settings.compactMeta = e.target.checked;
-                applyAppearance();
-                saveSettingsDebounced();
-            });
-        }
+        applyAppearance();
     } catch (err) {
         console.error('[Aero Mobile UI] 挂载设置面板失败:', err);
     }
 }
 
 jQuery(async () => {
+    initStaticGrainTexture();
+    mountAuroraStage();
     applyAppearance();
     initAndroidViewportFix();
     injectJumpToBottomMenuItem();
     await mountSettingsPanel();
 
     const { eventSource, event_types } = getCtx();
-    eventSource.on(event_types.CHAT_CHANGED, () => requestAnimationFrame(scanChatMessages));
+
+    eventSource.on(event_types.CHAT_CHANGED, () => {
+        document.documentElement.setAttribute('data-aero-generating', 'false');
+        requestAnimationFrame(scanChatMessages);
+    });
+
+    eventSource.on(event_types.USER_MESSAGE_RENDERED, (mesId) => {
+        const el = document.querySelector(`#chat > .mes[mesid="${mesId}"]`);
+        if (el) restructureMessage(el, true);
+    });
+
+    eventSource.on(event_types.CHARACTER_MESSAGE_RENDERED, (mesId) => {
+        const el = document.querySelector(`#chat > .mes[mesid="${mesId}"]`);
+        if (el) restructureMessage(el, true);
+    });
+
     eventSource.on(event_types.MESSAGE_RENDERED, (mesId) => {
         const el = document.querySelector(`#chat > .mes[mesid="${mesId}"]`);
-        if (el) restructureMessage(el);
+        if (el) restructureMessage(el, false);
     });
+
     eventSource.on(event_types.MESSAGE_SWIPED, (mesId) => {
         const el = document.querySelector(`#chat > .mes[mesid="${mesId}"]`);
-        if (el) restructureMessage(el);
+        if (el) restructureMessage(el, false);
+    });
+
+    // 生成呼吸态闭环
+    eventSource.on(event_types.GENERATION_STARTED, () => {
+        document.documentElement.setAttribute('data-aero-generating', 'true');
+    });
+    eventSource.on(event_types.GENERATION_ENDED, () => {
+        document.documentElement.setAttribute('data-aero-generating', 'false');
+    });
+    eventSource.on(event_types.GENERATION_STOPPED, () => {
+        document.documentElement.setAttribute('data-aero-generating', 'false');
     });
 
     scanChatMessages();
