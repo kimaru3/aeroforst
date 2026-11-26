@@ -2,8 +2,8 @@ const MODULE_NAME = 'aero_mobile_ui';
 
 const DEFAULT_SETTINGS = Object.freeze({
     theme: 'day',
-    proseGlass: 'balanced', // 'airy' | 'balanced' | 'solid'
-    fontStyle: 'sans',      // 默认回归系统字体
+    proseGlass: 'balanced',
+    fontStyle: 'sans',
     enableRibbons: true,
     enableGrain: true,
     enableBgWindow: true,
@@ -81,22 +81,22 @@ function mountAuroraStage() {
         <svg class="aero-ribbon aero-ribbon-1" viewBox="0 0 400 800" preserveAspectRatio="none">
           <defs>
             <linearGradient id="aeroGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="var(--spec-emerald)" stop-opacity="0.36" />
-              <stop offset="48%" stop-color="var(--spec-cyan)" stop-opacity="0.30" />
-              <stop offset="100%" stop-color="var(--spec-violet)" stop-opacity="0.24" />
+              <stop offset="0%" stop-color="var(--spec-emerald-bright)" stop-opacity="0.46" />
+              <stop offset="48%" stop-color="var(--spec-cyan)" stop-opacity="0.38" />
+              <stop offset="100%" stop-color="var(--spec-violet)" stop-opacity="0.32" />
             </linearGradient>
           </defs>
-          <path d="M-60,120 C110,40 260,310 460,210 L460,360 C250,450 90,190 -60,290 Z" fill="url(#aeroGrad1)" />
+          <path d="M-60,110 C110,20 260,320 460,200 L460,380 C250,480 90,190 -60,310 Z" fill="url(#aeroGrad1)" />
         </svg>
         <svg class="aero-ribbon aero-ribbon-2" viewBox="0 0 400 800" preserveAspectRatio="none">
           <defs>
             <linearGradient id="aeroGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="var(--spec-solar)" stop-opacity="0.30" />
-              <stop offset="50%" stop-color="var(--spec-coral)" stop-opacity="0.24" />
-              <stop offset="100%" stop-color="var(--spec-cyan)" stop-opacity="0.28" />
+              <stop offset="0%" stop-color="var(--spec-solar)" stop-opacity="0.38" />
+              <stop offset="50%" stop-color="var(--spec-coral)" stop-opacity="0.32" />
+              <stop offset="100%" stop-color="var(--spec-cyan)" stop-opacity="0.36" />
             </linearGradient>
           </defs>
-          <path d="M-50,510 C130,410 270,630 470,480 L470,620 C260,760 110,550 -50,650 Z" fill="url(#aeroGrad2)" />
+          <path d="M-50,490 C130,380 270,640 470,460 L470,630 C260,790 110,550 -50,670 Z" fill="url(#aeroGrad2)" />
         </svg>
       </div>
       <div class="aero-stage-grain"></div>
@@ -330,7 +330,9 @@ jQuery(async () => {
         if (el) restructureMessage(el, false);
     });
 
-    eventSource.on(event_types.GENERATION_STARTED, () => {
+    // 过滤 dryRun 和 quiet 静默后台任务，只响应真实前台生成
+    eventSource.on(event_types.GENERATION_STARTED, (type, _options, dryRun) => {
+        if (dryRun || type === 'quiet') return;
         document.documentElement.setAttribute('data-aero-generating', 'true');
     });
     eventSource.on(event_types.GENERATION_ENDED, () => {
