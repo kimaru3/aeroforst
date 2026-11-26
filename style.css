@@ -473,14 +473,16 @@ body::-webkit-scrollbar,
   --aero-grain-opacity: 0.10;
 }
 
-/* B3：ST 原生背景层显隐与清晰度控制 */
+/* B3：ST 原生背景层显隐与清晰度控制（强制压制 ST 原生模糊） */
 :root[data-aero-bg-window="false"] #bg1,
+:root[data-aero-bg-window="false"] #bg2,
 :root[data-aero-bg-window="false"] #bg_custom {
   opacity: 0 !important;
   pointer-events: none;
 }
 
 :root[data-aero-bg-window="true"][data-aero-has-st-bg="true"] #bg1,
+:root[data-aero-bg-window="true"][data-aero-has-st-bg="true"] #bg2,
 :root[data-aero-bg-window="true"][data-aero-has-st-bg="true"] #bg_custom {
   display: block !important;
   visibility: visible !important;
@@ -493,23 +495,24 @@ body::-webkit-scrollbar,
   background-color: transparent !important;
   background-size: cover !important;
   background-position: center center !important;
-  filter: blur(var(--aero-bg-blur)) saturate(1.1);
-  transform: scale(1.06);
-  transition: opacity 0.3s ease, filter 0.3s ease;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  filter: blur(var(--aero-bg-blur)) saturate(1.06) !important;
+  transform: scale(1.03);
+  transition: opacity 0.28s ease, filter 0.28s ease;
 }
 
-/* 无 ST 背景图时底纱满铺；有 ST 背景图时底纱按 3 档让路透窗 */
 :root[data-aero-bg-window="true"][data-aero-has-st-bg="true"][data-aero-bg-blend="soft"] {
-  --aero-bg-blur: 10px;
-  --aero-wash-opacity: 0.38;
+  --aero-bg-blur: 8px;
+  --aero-wash-opacity: 0.36;
 }
 :root[data-aero-bg-window="true"][data-aero-has-st-bg="true"][data-aero-bg-blend="balanced"] {
-  --aero-bg-blur: 5px;
-  --aero-wash-opacity: 0.20;
+  --aero-bg-blur: 3px;
+  --aero-wash-opacity: 0.16;
 }
 :root[data-aero-bg-window="true"][data-aero-has-st-bg="true"][data-aero-bg-blend="clear"] {
-  --aero-bg-blur: 1px;
-  --aero-wash-opacity: 0.06;
+  --aero-bg-blur: 0px;
+  --aero-wash-opacity: 0.04;
 }
 
 #aero-aurora-stage {
@@ -991,6 +994,8 @@ body::-webkit-scrollbar,
 }
 
 #sheld {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
   position: fixed !important;
   top: 38px !important;
   left: 0 !important;
@@ -1012,6 +1017,8 @@ body::-webkit-scrollbar,
 }
 
 #chat {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
   flex: 1 1 auto !important;
   min-height: 0 !important;
   height: auto !important;
