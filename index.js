@@ -52,18 +52,20 @@ function applyChromeThemeColor(color = '#075B50') {
  * 实时检测 ST 是否已设置背景图（全局 #bg1 或聊天专属 #bg_custom）
  */
 function syncStBackgroundState() {
-    const bg1 = document.getElementById('bg1');
-    const bgCustom = document.getElementById('bg_custom');
-    const hasImg = (el) => {
+    const ids = ['bg1', 'bg2', 'bg_custom'];
+    const hasImg = ids.some((id) => {
+        const el = document.getElementById(id);
         if (!el) return false;
         const bg = el.style.backgroundImage || getComputedStyle(el).backgroundImage;
         return Boolean(bg && bg !== 'none' && bg.includes('url('));
-    };
-    document.documentElement.setAttribute('data-aero-has-st-bg', String(hasImg(bg1) || hasImg(bgCustom)));
+    });
+    document.documentElement.setAttribute('data-aero-has-st-bg', String(hasImg));
 }
 
 function initBgObserver() {
-    const targets = [document.getElementById('bg1'), document.getElementById('bg_custom')].filter(Boolean);
+    const targets = ['bg1', 'bg2', 'bg_custom']
+        .map((id) => document.getElementById(id))
+        .filter(Boolean);
     if (targets.length === 0) return;
     const obs = new MutationObserver(() => syncStBackgroundState());
     targets.forEach((el) => obs.observe(el, { attributes: true, attributeFilter: ['style', 'class'] }));
