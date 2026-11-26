@@ -213,7 +213,7 @@
   --aero-plane-focus-color: #b8f5ff;
   --aero-plane-shadow: drop-shadow(0 1px 2px rgba(3, 24, 52, 0.65)) drop-shadow(0 0 6px rgba(102, 224, 255, 0.52));
   --aero-stop-color: #ff7a98;
-  --aero-grain-opacity: 0.025;
+  --aero-grain-opacity: 0.15;
 }
 
 /* ---------- 夜间备选方案 ---------- */
@@ -380,7 +380,7 @@
   --aero-plane-focus-color: #a8f2ff;
   --aero-plane-shadow: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.65)) drop-shadow(0 0 6px rgba(72, 208, 255, 0.52));
   --aero-stop-color: #ff6e8e;
-  --aero-grain-opacity: 0.030;
+  --aero-grain-opacity: 0.18;
 }
 
 /* ==========================================================================
@@ -429,38 +429,35 @@ body::-webkit-scrollbar,
 }
 
 /* ==========================================================================
-   B1 + B2 + B3 光学三明治背景舞台
+   B1 + B2 + B3 光学三明治背景舞台（不劫持 #bg1/#bg_custom 双缓冲，清晰透出背景图）
    ========================================================================== */
 
 :root[data-aero-bg-window="false"] #bg1,
 :root[data-aero-bg-window="false"] #bg_custom {
-  opacity: 0 !important;
-  pointer-events: none;
+  display: none !important;
 }
 
+/* 关键：绝不强制写死 opacity !important，让 ST 原生背景切换双缓冲自由工作 */
 :root[data-aero-bg-window="true"] #bg1,
 :root[data-aero-bg-window="true"] #bg_custom {
   z-index: 0 !important;
-  opacity: var(--aero-bg-opacity) !important;
-  filter: blur(var(--aero-bg-blur)) saturate(1.08);
-  transform: scale(1.05);
-  transition: opacity 0.35s ease, filter 0.35s ease;
+  filter: blur(var(--aero-bg-blur)) saturate(1.06);
+  transform: scale(1.04);
+  transition: filter 0.3s ease;
 }
 
+/* 如果 ST 当前聊天没选任何背景图，body 退底仍由极光层承托；选了图则通过薄纱浓淡控制透出度 */
 :root[data-aero-bg-window="true"][data-aero-bg-blend="soft"] {
-  --aero-bg-opacity: 0.50;
-  --aero-bg-blur: 10px;
-  --aero-wash-opacity: 0.82;
+  --aero-bg-blur: 6px;
+  --aero-wash-opacity: 0.54;
 }
 :root[data-aero-bg-window="true"][data-aero-bg-blend="balanced"] {
-  --aero-bg-opacity: 0.72;
-  --aero-bg-blur: 7px;
-  --aero-wash-opacity: 0.68;
+  --aero-bg-blur: 2.5px;
+  --aero-wash-opacity: 0.30;
 }
 :root[data-aero-bg-window="true"][data-aero-bg-blend="clear"] {
-  --aero-bg-opacity: 0.92;
-  --aero-bg-blur: 3px;
-  --aero-wash-opacity: 0.50;
+  --aero-bg-blur: 0px;
+  --aero-wash-opacity: 0.10;
 }
 
 #aero-aurora-stage {
@@ -476,7 +473,7 @@ body::-webkit-scrollbar,
   inset: 0;
   background: var(--aurora-ambient-canvas);
   opacity: var(--aero-wash-opacity);
-  transition: opacity 0.35s ease;
+  transition: opacity 0.3s ease;
 }
 
 .aero-stage-ribbons {
@@ -486,46 +483,16 @@ body::-webkit-scrollbar,
 }
 
 :root[data-aero-ribbons="false"] .aero-stage-ribbons {
-  display: none;
+  display: none !important;
 }
 
 .aero-ribbon {
   position: absolute;
-  left: -18%;
-  top: -12%;
-  width: 136%;
-  height: 124%;
-  will-change: transform, opacity;
-}
-
-.aero-ribbon-1 {
-  animation: aeroRibbonDrift1 11s ease-in-out infinite alternate;
-}
-
-.aero-ribbon-2 {
-  animation: aeroRibbonDrift2 14s ease-in-out infinite alternate;
-}
-
-@keyframes aeroRibbonDrift1 {
-  0% {
-    transform: translate3d(-8%, -5%, 0) rotate(-2.5deg) scale(1);
-    opacity: 0.78;
-  }
-  100% {
-    transform: translate3d(9%, 6%, 0) rotate(2.5deg) scale(1.08);
-    opacity: 1;
-  }
-}
-
-@keyframes aeroRibbonDrift2 {
-  0% {
-    transform: translate3d(8%, 5%, 0) rotate(2.5deg) scale(1.06);
-    opacity: 0.72;
-  }
-  100% {
-    transform: translate3d(-9%, -6%, 0) rotate(-2.5deg) scale(0.98);
-    opacity: 0.96;
-  }
+  left: -20%;
+  top: -15%;
+  width: 140%;
+  height: 130%;
+  will-change: transform;
 }
 
 .aero-stage-grain {
@@ -539,7 +506,7 @@ body::-webkit-scrollbar,
 }
 
 :root[data-aero-grain="false"] .aero-stage-grain {
-  display: none;
+  display: none !important;
 }
 
 /* ==========================================================================
