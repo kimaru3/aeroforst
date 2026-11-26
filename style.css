@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Aero Mobile UI v4.5 - #075B50深极光绿顶栏 + 精准状态发送键 + 全域去滚动条
+   Aero Mobile UI v4.6 - #075B50深极光绿顶 × #073B69→#087DAA深海青蓝底 × 无框角色列表
    ========================================================================== */
 
 :root {
@@ -58,7 +58,8 @@
   --spec-solar-soft: rgba(255, 168, 118, 0.48);
   --spec-solar-ink: #d44d2a;
 
-  --spec-cyan: #1094ec;
+  --spec-cyan: #087DAA;
+  --spec-cyan-bright: #18a8e8;
   --spec-cyan-soft: rgba(68, 192, 255, 0.52);
   --spec-cyan-ink: #0a5a96;
 
@@ -101,7 +102,7 @@
   --aero-panel-bg: #f6f8fb;
   --aero-panel-surface: linear-gradient(180deg, #ffffff 0%, #f1f6fa 48%, #e5eef7 50%, #eef4fa 100%);
   --aero-panel-control-bg: #ffffff;
-  --aero-panel-control-hover: rgba(16, 148, 236, 0.12);
+  --aero-panel-control-hover: rgba(8, 125, 170, 0.12);
   --aero-panel-text: #1f252d;
   --aero-panel-subtext: #566373;
   --aero-panel-border: rgba(94, 126, 158, 0.30);
@@ -109,7 +110,7 @@
   --aero-disabled-row-bg: #ecf0f5;
   --aero-disabled-text: #5a6778;
 
-  /* 顶部：#075B50 深极光绿琉璃冠层（带 46% 折射切面） */
+  /* 顶部：#075B50 深极光绿琉璃冠层 */
   --aero-top-bg: linear-gradient(
     180deg,
     rgba(22, 126, 112, 0.94) 0%,
@@ -152,10 +153,11 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.94),
     inset 0 0 0 1px rgba(102, 186, 245, 0.36),
     0 5px 18px rgba(18, 108, 178, 0.11);
-  --aero-user-spine: linear-gradient(180deg, var(--spec-cyan) 0%, var(--spec-emerald-bright) 100%);
+  --aero-user-spine: linear-gradient(180deg, var(--spec-cyan-bright) 0%, var(--spec-emerald-bright) 100%);
 
   --aero-hairline-ai: linear-gradient(90deg, rgba(255, 128, 96, 0.26) 0%, rgba(124, 92, 230, 0.12) 48%, transparent 92%);
   --aero-hairline-user: linear-gradient(90deg, transparent 8%, rgba(20, 150, 237, 0.22) 55%, rgba(16, 185, 129, 0.30) 100%);
+  --aero-surface-split: rgba(104, 128, 158, 0.18);
 
   --aero-name-color: #1f242c;
   --aero-meta-color: #5b6776;
@@ -167,40 +169,40 @@
   --aero-action-bg: #f8fafe;
   --aero-editbar-bg: linear-gradient(180deg, #eff5fb 0%, #e5eef7 100%);
 
-  /* 底部冷区：冰川天青 Glacier Cyan */
+  /* 底部冷区：深海蓝 #073B69 到 青蓝 #087DAA */
   --aero-dock-idle-bg: linear-gradient(
     180deg,
-    rgba(204, 236, 255, 0.92) 0%,
-    rgba(156, 216, 252, 0.88) 46%,
-    rgba(128, 200, 246, 0.92) 48%,
-    rgba(162, 218, 252, 0.96) 100%
+    rgba(12, 138, 186, 0.94) 0%,
+    rgba(8, 125, 170, 0.92) 45%,
+    rgba(7, 82, 130, 0.96) 48%,
+    rgba(7, 59, 105, 0.98) 100%
   );
   --aero-dock-focus-bg: linear-gradient(
     115deg,
-    rgba(148, 222, 252, 0.95) 0%,
-    rgba(186, 242, 248, 0.94) 28%,
-    rgba(122, 206, 252, 0.95) 56%,
-    rgba(164, 234, 245, 0.95) 80%,
-    rgba(148, 222, 252, 0.95) 100%
+    #073B69 0%,
+    #087DAA 30%,
+    #109cc7 54%,
+    #087DAA 78%,
+    #073B69 100%
   );
-  --aero-dock-border: rgba(34, 134, 204, 0.45);
-  --aero-dock-focus-border: rgba(14, 140, 224, 0.70);
+  --aero-dock-border: rgba(130, 218, 250, 0.42);
+  --aero-dock-focus-border: rgba(140, 232, 255, 0.78);
   --aero-dock-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.94),
-    0 -2px 12px rgba(18, 88, 148, 0.12);
+    inset 0 1px 0 rgba(178, 238, 255, 0.52),
+    0 -3px 14px rgba(5, 36, 72, 0.24);
   --aero-dock-focus-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.98),
-    0 -2px 18px rgba(16, 148, 236, 0.28);
+    inset 0 1px 0 rgba(210, 246, 255, 0.72),
+    0 -3px 20px rgba(8, 125, 170, 0.36);
 
-  --aero-well-bg: rgba(255, 255, 255, 0.92);
+  --aero-well-bg: rgba(250, 253, 255, 0.95);
   --aero-well-focus-bg: #ffffff;
-  --aero-well-border: rgba(42, 122, 186, 0.52);
-  --aero-input-text: #162230;
-  --aero-bottom-icon: rgba(16, 64, 108, 0.88);
-  --aero-plane-color: #097cc6;
-  --aero-plane-focus-color: #0694cc;
-  --aero-plane-shadow: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.92)) drop-shadow(0 2px 4px rgba(12, 108, 168, 0.36));
-  --aero-stop-color: #d62f58;
+  --aero-well-border: rgba(162, 224, 248, 0.72);
+  --aero-input-text: #102438;
+  --aero-bottom-icon: rgba(220, 246, 255, 0.92);
+  --aero-plane-color: #7ee8ff;
+  --aero-plane-focus-color: #b8f5ff;
+  --aero-plane-shadow: drop-shadow(0 1px 2px rgba(3, 24, 52, 0.65)) drop-shadow(0 0 6px rgba(102, 224, 255, 0.52));
+  --aero-stop-color: #ff7a98;
   --aero-grain-opacity: 0.025;
 }
 
@@ -216,7 +218,8 @@
   --spec-solar-soft: rgba(240, 106, 84, 0.26);
   --spec-solar-ink: #ff9472;
 
-  --spec-cyan: #38b6ff;
+  --spec-cyan: #087DAA;
+  --spec-cyan-bright: #38b6ff;
   --spec-cyan-soft: rgba(34, 162, 238, 0.34);
   --spec-cyan-ink: #84d2ff;
 
@@ -267,7 +270,6 @@
   --aero-disabled-row-bg: #141a24;
   --aero-disabled-text: #8492a6;
 
-  /* 夜间顶部：#075B50 深极光绿沉稳夜间玻璃 */
   --aero-top-bg: linear-gradient(
     180deg,
     rgba(13, 108, 95, 0.92) 0%,
@@ -310,10 +312,11 @@
     inset 0 1px 0 rgba(164, 224, 255, 0.28),
     inset 0 0 0 1px rgba(72, 178, 244, 0.28),
     0 6px 20px rgba(0, 0, 0, 0.44);
-  --aero-user-spine: linear-gradient(180deg, var(--spec-cyan) 0%, var(--spec-emerald-bright) 100%);
+  --aero-user-spine: linear-gradient(180deg, var(--spec-cyan-bright) 0%, var(--spec-emerald-bright) 100%);
 
   --aero-hairline-ai: linear-gradient(90deg, rgba(255, 132, 104, 0.30) 0%, rgba(158, 130, 255, 0.16) 48%, transparent 92%);
   --aero-hairline-user: linear-gradient(90deg, transparent 8%, rgba(56, 182, 255, 0.24) 55%, rgba(38, 224, 162, 0.34) 100%);
+  --aero-surface-split: rgba(130, 185, 235, 0.12);
 
   --aero-name-color: #ebf0f7;
   --aero-meta-color: #8a99ad;
@@ -325,44 +328,45 @@
   --aero-action-bg: #1c2634;
   --aero-editbar-bg: linear-gradient(180deg, #1d2735 0%, #17202c 100%);
 
+  /* 夜间底部冷区：深海蓝 #073B69 到 青蓝 #087DAA */
   --aero-dock-idle-bg: linear-gradient(
     180deg,
-    rgba(22, 70, 110, 0.90) 0%,
-    rgba(14, 50, 84, 0.86) 46%,
-    rgba(9, 36, 64, 0.92) 48%,
-    rgba(15, 48, 82, 0.95) 100%
+    rgba(8, 125, 170, 0.92) 0%,
+    rgba(7, 100, 146, 0.90) 45%,
+    rgba(6, 70, 114, 0.94) 48%,
+    rgba(7, 59, 105, 0.98) 100%
   );
   --aero-dock-focus-bg: linear-gradient(
     115deg,
-    rgba(16, 80, 126, 0.94) 0%,
-    rgba(18, 98, 124, 0.92) 28%,
-    rgba(20, 68, 122, 0.94) 56%,
-    rgba(18, 92, 134, 0.94) 80%,
-    rgba(16, 80, 126, 0.94) 100%
+    #073B69 0%,
+    #087DAA 32%,
+    #0e96c2 54%,
+    #087DAA 76%,
+    #073B69 100%
   );
-  --aero-dock-border: rgba(74, 168, 238, 0.34);
-  --aero-dock-focus-border: rgba(74, 198, 255, 0.64);
+  --aero-dock-border: rgba(88, 192, 240, 0.36);
+  --aero-dock-focus-border: rgba(108, 216, 255, 0.68);
   --aero-dock-shadow:
-    inset 0 1px 0 rgba(164, 224, 255, 0.32),
-    0 -3px 16px rgba(0, 0, 0, 0.42);
+    inset 0 1px 0 rgba(148, 224, 255, 0.36),
+    0 -3px 16px rgba(0, 0, 0, 0.45);
   --aero-dock-focus-shadow:
-    inset 0 1px 0 rgba(196, 238, 255, 0.46),
-    0 -3px 22px rgba(42, 178, 255, 0.28);
+    inset 0 1px 0 rgba(186, 236, 255, 0.56),
+    0 -3px 22px rgba(8, 125, 170, 0.42);
 
-  --aero-well-bg: rgba(10, 18, 28, 0.84);
-  --aero-well-focus-bg: rgba(12, 21, 32, 0.95);
-  --aero-well-border: rgba(98, 172, 234, 0.42);
-  --aero-input-text: #e0eaf5;
-  --aero-bottom-icon: rgba(178, 220, 252, 0.88);
-  --aero-plane-color: #3cc6ff;
-  --aero-plane-focus-color: #6ce0ff;
-  --aero-plane-shadow: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.55)) drop-shadow(0 0 6px rgba(56, 198, 255, 0.46));
-  --aero-stop-color: #ff6688;
+  --aero-well-bg: rgba(6, 20, 36, 0.86);
+  --aero-well-focus-bg: rgba(7, 24, 44, 0.95);
+  --aero-well-border: rgba(88, 184, 234, 0.42);
+  --aero-input-text: #e2effb;
+  --aero-bottom-icon: rgba(208, 240, 255, 0.90);
+  --aero-plane-color: #6ce2ff;
+  --aero-plane-focus-color: #a8f2ff;
+  --aero-plane-shadow: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.65)) drop-shadow(0 0 6px rgba(72, 208, 255, 0.52));
+  --aero-stop-color: #ff6e8e;
   --aero-grain-opacity: 0.030;
 }
 
 /* ==========================================================================
-   全域隐藏滚动条 + 精准视口锁定（杜绝页面级溢出滑条）
+   全域隐藏滚动条 + 精准视口锁定
    ========================================================================== */
 
 html,
@@ -520,15 +524,13 @@ body::-webkit-scrollbar,
 }
 
 /* ==========================================================================
-   100% 不透明菜单与设置抽屉 + 预设禁用项可读性修复
+   100% 不透明菜单与设置抽屉 + 无框角色与群聊列表 + 预设可读性修复
    ========================================================================== */
 
 .drawer-content,
 .popup,
 #dialogue_popup,
-#options,
-.list-group,
-.character_select_container {
+#options {
   background: var(--aero-panel-bg) !important;
   background-color: var(--aero-panel-bg) !important;
   color: var(--aero-panel-text) !important;
@@ -580,6 +582,52 @@ body::-webkit-scrollbar,
   color: var(--aero-panel-subtext) !important;
 }
 
+/* 角色卡与群聊界面：彻底去除名字、介绍周边的多余细框，保留清爽无框列表 */
+#rm_print_characters_block .character_select,
+#rm_print_characters_block .group_select,
+#rm_print_characters_block .bogus_folder_select {
+  border: none !important;
+  border-bottom: 1px solid var(--aero-surface-split) !important;
+  border-radius: 8px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 6px 8px !important;
+  margin: 2px 0 !important;
+  transition: background-color 0.14s ease;
+}
+
+#rm_print_characters_block .character_select.character_selected,
+#rm_print_characters_block .group_select.character_selected {
+  background: var(--aero-panel-control-hover) !important;
+  box-shadow: inset 3px 0 0 var(--spec-cyan-bright) !important;
+}
+
+#rm_print_characters_block .character_select_container,
+#rm_print_characters_block .character_name_block,
+#rm_print_characters_block .ch_name,
+#rm_print_characters_block .character_select_container > div,
+#rm_print_characters_block .group_select > div,
+#rm_print_characters_block .character_select_container span,
+#rm_print_characters_block .character_select_container small {
+  border: none !important;
+  outline: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+#rm_print_characters_block .ch_name {
+  color: var(--aero-panel-text) !important;
+  font-weight: 600;
+}
+
+#rm_print_characters_block .tags .tag {
+  border: none !important;
+  background: var(--aero-floor-bg) !important;
+  color: var(--aero-floor-text) !important;
+  border-radius: 4px;
+}
+
+/* 预设提示词列表禁用项可读性 */
 #completion_prompt_manager_list li {
   border-color: var(--aero-panel-border) !important;
   opacity: 1 !important;
@@ -731,7 +779,6 @@ body::-webkit-scrollbar,
   color: var(--aero-top-icon-active) !important;
 }
 
-/* 精确占用剩余视口高度，杜绝上下裁切或溢出 */
 #sheld {
   position: fixed !important;
   top: 38px !important;
@@ -1274,7 +1321,7 @@ body::-webkit-scrollbar,
 }
 
 /* ==========================================================================
-   底部冷区：冰川天青清透矩形底座 + 精准显隐纸飞机
+   底部冷区：深海蓝 #073B69 到 青蓝 #087DAA 清透矩形底座 + 发光纸飞机
    ========================================================================== */
 
 #form_sheld {
@@ -1382,26 +1429,21 @@ body::-webkit-scrollbar,
   vertical-align: middle !important;
   overflow-y: auto !important;
   box-shadow:
-    inset 0 1px 3px rgba(20, 62, 102, 0.12),
-    0 1px 0 rgba(255, 255, 255, 0.55) !important;
+    inset 0 1px 3px rgba(4, 28, 56, 0.16),
+    0 1px 0 rgba(164, 232, 255, 0.35) !important;
   transition: background 0.22s ease, border-color 0.22s ease;
 }
 
 #form_sheld #send_form #nonQRFormItems #send_textarea:focus {
   background: var(--aero-well-focus-bg) !important;
-  border-color: var(--spec-cyan) !important;
-  border-top-color: var(--spec-cyan) !important;
+  border-color: #7ee8ff !important;
+  border-top-color: #7ee8ff !important;
 }
 
 #options_button,
 #leftSendForm .fa-solid {
   color: var(--aero-bottom-icon) !important;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.45);
-}
-
-:root[data-aero-theme="night"] #options_button,
-:root[data-aero-theme="night"] #leftSendForm .fa-solid {
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  text-shadow: 0 1px 2px rgba(2, 22, 48, 0.55);
 }
 
 #options_button {
