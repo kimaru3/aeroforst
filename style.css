@@ -429,35 +429,87 @@ body::-webkit-scrollbar,
 }
 
 /* ==========================================================================
-   B1 + B2 + B3 光学三明治背景舞台（不劫持 #bg1/#bg_custom 双缓冲，清晰透出背景图）
+   B1 + B2 + B3 光学三明治背景舞台（高区分度 · 实时响应开关）
    ========================================================================== */
 
+:root[data-aero-theme="day"],
+:root:not([data-aero-theme]) {
+  --aurora-ambient-canvas: linear-gradient(175deg, #d7ece5 0%, #e4edf2 46%, #cbe1f4 100%);
+  --aero-ribbon-1-bg: linear-gradient(
+    180deg,
+    rgba(18, 214, 158, 0.42) 0%,
+    rgba(24, 168, 232, 0.28) 45%,
+    rgba(120, 86, 232, 0.14) 85%,
+    transparent 100%
+  );
+  --aero-ribbon-2-bg: linear-gradient(
+    0deg,
+    rgba(255, 148, 41, 0.36) 0%,
+    rgba(255, 82, 120, 0.24) 45%,
+    rgba(24, 168, 232, 0.14) 85%,
+    transparent 100%
+  );
+  --aero-ribbon-edge: rgba(255, 255, 255, 0.72);
+  --aero-grain-opacity: 0.11;
+}
+
+:root[data-aero-theme="night"] {
+  --aurora-ambient-canvas: linear-gradient(175deg, #0b1b1c 0%, #0e1722 48%, #091726 100%);
+  --aero-ribbon-1-bg: linear-gradient(
+    180deg,
+    rgba(38, 224, 162, 0.34) 0%,
+    rgba(40, 178, 245, 0.24) 48%,
+    rgba(158, 130, 255, 0.14) 86%,
+    transparent 100%
+  );
+  --aero-ribbon-2-bg: linear-gradient(
+    0deg,
+    rgba(255, 156, 66, 0.28) 0%,
+    rgba(255, 98, 136, 0.20) 48%,
+    rgba(56, 182, 255, 0.14) 86%,
+    transparent 100%
+  );
+  --aero-ribbon-edge: rgba(168, 238, 255, 0.36);
+  --aero-grain-opacity: 0.10;
+}
+
+/* B3：ST 原生背景层显隐与清晰度控制 */
 :root[data-aero-bg-window="false"] #bg1,
 :root[data-aero-bg-window="false"] #bg_custom {
-  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none;
 }
 
-/* 关键：绝不强制写死 opacity !important，让 ST 原生背景切换双缓冲自由工作 */
-:root[data-aero-bg-window="true"] #bg1,
-:root[data-aero-bg-window="true"] #bg_custom {
+:root[data-aero-bg-window="true"][data-aero-has-st-bg="true"] #bg1,
+:root[data-aero-bg-window="true"][data-aero-has-st-bg="true"] #bg_custom {
+  display: block !important;
+  visibility: visible !important;
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
   z-index: 0 !important;
-  filter: blur(var(--aero-bg-blur)) saturate(1.06);
-  transform: scale(1.04);
-  transition: filter 0.3s ease;
+  opacity: 1 !important;
+  background-color: transparent !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  filter: blur(var(--aero-bg-blur)) saturate(1.1);
+  transform: scale(1.06);
+  transition: opacity 0.3s ease, filter 0.3s ease;
 }
 
-/* 如果 ST 当前聊天没选任何背景图，body 退底仍由极光层承托；选了图则通过薄纱浓淡控制透出度 */
-:root[data-aero-bg-window="true"][data-aero-bg-blend="soft"] {
-  --aero-bg-blur: 6px;
-  --aero-wash-opacity: 0.54;
+/* 无 ST 背景图时底纱满铺；有 ST 背景图时底纱按 3 档让路透窗 */
+:root[data-aero-bg-window="true"][data-aero-has-st-bg="true"][data-aero-bg-blend="soft"] {
+  --aero-bg-blur: 10px;
+  --aero-wash-opacity: 0.38;
 }
-:root[data-aero-bg-window="true"][data-aero-bg-blend="balanced"] {
-  --aero-bg-blur: 2.5px;
-  --aero-wash-opacity: 0.30;
+:root[data-aero-bg-window="true"][data-aero-has-st-bg="true"][data-aero-bg-blend="balanced"] {
+  --aero-bg-blur: 5px;
+  --aero-wash-opacity: 0.20;
 }
-:root[data-aero-bg-window="true"][data-aero-bg-blend="clear"] {
-  --aero-bg-blur: 0px;
-  --aero-wash-opacity: 0.10;
+:root[data-aero-bg-window="true"][data-aero-has-st-bg="true"][data-aero-bg-blend="clear"] {
+  --aero-bg-blur: 1px;
+  --aero-wash-opacity: 0.06;
 }
 
 #aero-aurora-stage {
@@ -476,9 +528,11 @@ body::-webkit-scrollbar,
   transition: opacity 0.3s ease;
 }
 
+/* B1：真正有亮边缘的 Vista Aurora 流动光弧丝带 */
 .aero-stage-ribbons {
   position: absolute;
   inset: 0;
+  overflow: hidden;
   pointer-events: none;
 }
 
@@ -488,19 +542,59 @@ body::-webkit-scrollbar,
 
 .aero-ribbon {
   position: absolute;
-  left: -20%;
-  top: -15%;
-  width: 140%;
-  height: 130%;
-  will-change: transform;
+  left: -30vw;
+  width: 165vw;
+  height: 56vh;
+  border-radius: 50%;
+  will-change: transform, opacity;
 }
 
+.aero-ribbon-1 {
+  top: 12vh;
+  background: var(--aero-ribbon-1-bg);
+  border-top: 2px solid var(--aero-ribbon-edge);
+  box-shadow: 0 -10px 30px rgba(18, 214, 158, 0.25);
+  animation: aeroRibbonWave1 10s ease-in-out infinite alternate;
+}
+
+.aero-ribbon-2 {
+  bottom: 8vh;
+  background: var(--aero-ribbon-2-bg);
+  border-bottom: 2px solid var(--aero-ribbon-edge);
+  box-shadow: 0 10px 30px rgba(24, 168, 232, 0.24);
+  animation: aeroRibbonWave2 13s ease-in-out infinite alternate;
+}
+
+@keyframes aeroRibbonWave1 {
+  0% {
+    transform: translate3d(-10vw, -4vh, 0) rotate(-14deg) scale(1);
+    opacity: 0.78;
+  }
+  100% {
+    transform: translate3d(12vw, 7vh, 0) rotate(-4deg) scale(1.08);
+    opacity: 1;
+  }
+}
+
+@keyframes aeroRibbonWave2 {
+  0% {
+    transform: translate3d(10vw, 4vh, 0) rotate(12deg) scale(1.06);
+    opacity: 0.72;
+  }
+  100% {
+    transform: translate3d(-12vw, -6vh, 0) rotate(2deg) scale(0.98);
+    opacity: 0.96;
+  }
+}
+
+/* B2：可见的物理微噪点质感 */
 .aero-stage-grain {
   position: absolute;
   inset: 0;
   background-image: var(--aero-grain-img);
   background-repeat: repeat;
   background-size: 128px 128px;
+  mix-blend-mode: overlay;
   opacity: var(--aero-grain-opacity);
   pointer-events: none;
 }

@@ -29,9 +29,6 @@ function getSettings() {
     return extensionSettings[MODULE_NAME];
 }
 
-/**
- * 同步 Android Chrome 地址栏与状态栏颜色为固定 #075B50
- */
 function applyChromeThemeColor(color = '#075B50') {
     const existing = document.querySelectorAll('meta[name="theme-color"]');
     if (existing.length > 0) {
@@ -49,6 +46,28 @@ function applyChromeThemeColor(color = '#075B50') {
         meta.content = color;
         document.head.appendChild(meta);
     }
+}
+
+/**
+ * 实时检测 ST 是否已设置背景图（全局 #bg1 或聊天专属 #bg_custom）
+ */
+function syncStBackgroundState() {
+    const bg1 = document.getElementById('bg1');
+    const bgCustom = document.getElementById('bg_custom');
+    const hasImg = (el) => {
+        if (!el) return false;
+        const bg = el.style.backgroundImage || getComputedStyle(el).backgroundImage;
+        return Boolean(bg && bg !== 'none' && bg.includes('url('));
+    };
+    document.documentElement.setAttribute('data-aero-has-st-bg', String(hasImg(bg1) || hasImg(bgCustom)));
+}
+
+function initBgObserver() {
+    const targets = [document.getElementById('bg1'), document.getElementById('bg_custom')].filter(Boolean);
+    if (targets.length === 0) return;
+    const obs = new MutationObserver(() => syncStBackgroundState());
+    targets.forEach((el) => obs.observe(el, { attributes: true, attributeFilter: ['style', 'class'] }));
+    syncStBackgroundState();
 }
 
 function applyAppearance() {
@@ -69,9 +88,13 @@ function applyAppearance() {
         blendWrap.style.display = s.enableBgWindow ? 'flex' : 'none';
     }
 
+    syncStBackgroundState();
     applyChromeThemeColor('#075B50');
 }
 
+/**
+ * 修复 B2 透明度乘法归零问题：提升离屏噪点切片自身对比度
+ */
 function initStaticGrainTexture() {
     const size = 128;
     const canvas = document.createElement('canvas');
@@ -87,12 +110,15 @@ function initStaticGrainTexture() {
         data[i] = v;
         data[i + 1] = v;
         data[i + 2] = v;
-        data[i + 3] = Math.floor(Math.random() * 24);
+        data[i + 3] = Math.floor(40 + Math.random() * 90);
     }
     ctx.putImageData(img, 0, 0);
     document.documentElement.style.setProperty('--aero-grain-img', `url(${canvas.toDataURL('image/png')})`);
 }
 
+/**
+ * 改用纯 CSS 极光光弧实体（彻底摆脱 SVG stop 变量兼容性问题）
+ */
 function mountAuroraStage() {
     if (document.getElementById('aero-aurora-stage')) return;
 
@@ -102,26 +128,8 @@ function mountAuroraStage() {
     stage.innerHTML = `
       <div class="aero-stage-wash"></div>
       <div class="aero-stage-ribbons">
-        <svg class="aero-ribbon aero-ribbon-1" viewBox="0 0 400 800" preserveAspectRatio="none">
-          <defs>
-            <linearGradient id="aeroGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="var(--spec-emerald-bright)" stop-opacity="0.46" />
-              <stop offset="48%" stop-color="var(--spec-cyan-bright)" stop-opacity="0.38" />
-              <stop offset="100%" stop-color="var(--spec-violet)" stop-opacity="0.32" />
-            </linearGradient>
-          </defs>
-          <path d="M-60,110 C110,20 260,320 460,200 L460,380 C250,480 90,190 -60,310 Z" fill="url(#aeroGrad1)" />
-        </svg>
-        <svg class="aero-ribbon aero-ribbon-2" viewBox="0 0 400 800" preserveAspectRatio="none">
-          <defs>
-            <linearGradient id="aeroGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="var(--spec-solar)" stop-opacity="0.38" />
-              <stop offset="50%" stop-color="var(--spec-coral)" stop-opacity="0.32" />
-              <stop offset="100%" stop-color="var(--spec-cyan-bright)" stop-opacity="0.36" />
-            </linearGradient>
-          </defs>
-          <path d="M-50,490 C130,380 270,640 470,460 L470,630 C260,790 110,550 -50,670 Z" fill="url(#aeroGrad2)" />
-        </svg>
+        <div class="aero-ribbon aero-ribbon-1"></div>
+        <div class="aero-ribbon aero-ribbon-2"></div>
       </div>
       <div class="aero-stage-grain"></div>
     `;
@@ -323,6 +331,7 @@ jQuery(async () => {
     applyChromeThemeColor('#075B50');
     initStaticGrainTexture();
     mountAuroraStage();
+    initBgObserver();
     applyAppearance();
     initAndroidViewportFix();
     injectJumpToBottomMenuItem();
@@ -332,7 +341,10 @@ jQuery(async () => {
 
     eventSource.on(event_types.CHAT_CHANGED, () => {
         document.documentElement.setAttribute('data-aero-generating', 'false');
-        requestAnimationFrame(scanChatMessages);
+        requestAnimationFrame(() => {
+            scanChatMessages();
+            syncStBackgroundState();
+        });
     });
 
     eventSource.on(event_types.USER_MESSAGE_RENDERED, (mesId) => {
