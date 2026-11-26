@@ -1229,68 +1229,213 @@ body {
 }
 
 /* ==========================================================================
-   底部冷区：纯净极简接缝 + 输入框胶囊自身发光感应
+   底部冷区：悬浮流线胶囊底座 + 全栏极光终端感应 + 清透宝石发送球
    ========================================================================== */
 
+:root[data-aero-theme="day"],
+:root:not([data-aero-theme]) {
+  --aero-dock-idle-bg: linear-gradient(
+    180deg,
+    rgba(240, 250, 255, 0.78) 0%,
+    rgba(210, 236, 252, 0.70) 46%,
+    rgba(192, 224, 248, 0.74) 50%,
+    rgba(212, 236, 254, 0.82) 100%
+  );
+  --aero-dock-focus-bg: linear-gradient(
+    120deg,
+    rgba(198, 248, 230, 0.86) 0%,
+    rgba(255, 234, 218, 0.84) 26%,
+    rgba(226, 218, 255, 0.86) 52%,
+    rgba(196, 236, 255, 0.88) 76%,
+    rgba(198, 248, 230, 0.86) 100%
+  );
+  --aero-dock-border: rgba(108, 168, 216, 0.44);
+  --aero-dock-focus-border: rgba(34, 162, 236, 0.65);
+  --aero-dock-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.94),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.42),
+    0 6px 22px rgba(24, 68, 112, 0.16);
+  --aero-dock-focus-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.98),
+    inset 0 0 12px rgba(255, 255, 255, 0.50),
+    0 6px 24px rgba(20, 150, 237, 0.24),
+    0 0 18px rgba(16, 185, 129, 0.22);
+
+  --aero-capsule-well-bg: rgba(255, 255, 255, 0.78);
+  --aero-capsule-well-focus: rgba(255, 255, 255, 0.90);
+  --aero-capsule-well-border: rgba(96, 150, 198, 0.28);
+
+  /* 清透宝石发送键（半透焦散核心，而非不透明油漆） */
+  --aero-gem-bg:
+    radial-gradient(circle at 50% 82%, rgba(126, 255, 224, 0.88) 0%, rgba(36, 186, 245, 0.68) 46%, rgba(16, 102, 184, 0.80) 100%);
+  --aero-gem-border: rgba(255, 255, 255, 0.72);
+  --aero-gem-shadow:
+    inset 0 -3px 6px rgba(10, 82, 140, 0.42),
+    inset 0 1px 1px rgba(255, 255, 255, 0.92),
+    0 2px 8px rgba(20, 138, 212, 0.34),
+    0 0 0 1px rgba(28, 126, 196, 0.38);
+
+  --aero-stop-gem-bg:
+    radial-gradient(circle at 50% 82%, rgba(255, 196, 168, 0.88) 0%, rgba(246, 98, 124, 0.72) 48%, rgba(186, 38, 72, 0.84) 100%);
+}
+
+:root[data-aero-theme="night"] {
+  --aero-dock-idle-bg: linear-gradient(
+    180deg,
+    rgba(30, 58, 86, 0.78) 0%,
+    rgba(20, 42, 66, 0.72) 46%,
+    rgba(13, 30, 50, 0.80) 50%,
+    rgba(18, 38, 62, 0.84) 100%
+  );
+  --aero-dock-focus-bg: linear-gradient(
+    120deg,
+    rgba(22, 86, 76, 0.86) 0%,
+    rgba(74, 42, 60, 0.82) 26%,
+    rgba(48, 42, 92, 0.84) 52%,
+    rgba(22, 66, 108, 0.88) 76%,
+    rgba(22, 86, 76, 0.86) 100%
+  );
+  --aero-dock-border: rgba(112, 186, 245, 0.32);
+  --aero-dock-focus-border: rgba(68, 192, 255, 0.62);
+  --aero-dock-shadow:
+    inset 0 1px 0 rgba(178, 226, 255, 0.32),
+    inset 0 0 0 1px rgba(140, 206, 255, 0.12),
+    0 8px 24px rgba(0, 0, 0, 0.45);
+  --aero-dock-focus-shadow:
+    inset 0 1px 0 rgba(196, 236, 255, 0.48),
+    inset 0 0 14px rgba(56, 182, 255, 0.18),
+    0 8px 26px rgba(0, 0, 0, 0.50),
+    0 0 20px rgba(38, 224, 162, 0.24);
+
+  --aero-capsule-well-bg: rgba(10, 17, 26, 0.56);
+  --aero-capsule-well-focus: rgba(11, 18, 28, 0.72);
+  --aero-capsule-well-border: rgba(128, 184, 236, 0.22);
+
+  --aero-gem-bg:
+    radial-gradient(circle at 50% 82%, rgba(92, 248, 212, 0.85) 0%, rgba(36, 168, 235, 0.68) 46%, rgba(16, 78, 152, 0.82) 100%);
+  --aero-gem-border: rgba(188, 236, 255, 0.58);
+  --aero-gem-shadow:
+    inset 0 -3px 6px rgba(6, 48, 96, 0.55),
+    inset 0 1px 1px rgba(210, 244, 255, 0.72),
+    0 2px 10px rgba(24, 158, 235, 0.38),
+    0 0 0 1px rgba(68, 186, 248, 0.34);
+
+  --aero-stop-gem-bg:
+    radial-gradient(circle at 50% 82%, rgba(255, 168, 146, 0.86) 0%, rgba(236, 78, 108, 0.72) 48%, rgba(154, 24, 56, 0.85) 100%);
+}
+
+/* 外层留白让胶囊真正悬浮起来 */
 #form_sheld {
   margin: 0 !important;
   width: 100% !important;
   max-width: 100% !important;
-  padding: 0 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  padding: 4px 10px calc(8px + env(safe-area-inset-bottom)) 10px !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  box-sizing: border-box !important;
+  overflow: visible !important;
 }
 
+/* 悬浮流线胶囊底座 */
 #send_form {
   position: relative;
-  background: var(--aero-bottom-bg) !important;
-  backdrop-filter: blur(18px) saturate(150%);
-  -webkit-backdrop-filter: blur(18px) saturate(150%);
-  border-top: 1px solid var(--aero-bottom-border) !important;
-  border-left: none !important;
-  border-right: none !important;
-  border-bottom: none !important;
-  border-radius: 0 !important;
-  box-shadow:
-    inset 0 1px 0 var(--aero-bottom-specular),
-    0 -3px 14px rgba(24, 58, 92, 0.10) !important;
-  padding: 8px 8px calc(7px + env(safe-area-inset-bottom)) 8px !important;
-  margin: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
   width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 5px 7px !important;
+  box-sizing: border-box !important;
+  border-radius: 26px !important;
+  background: var(--aero-dock-idle-bg) !important;
+  background-size: 100% 100%;
+  backdrop-filter: blur(18px) saturate(155%);
+  -webkit-backdrop-filter: blur(18px) saturate(155%);
+  border: 1px solid var(--aero-dock-border) !important;
+  box-shadow: var(--aero-dock-shadow) !important;
+  overflow: visible !important;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.3s ease;
 }
 
-/* 能量胶囊输入框：常态微凹玻璃，聚焦时胶囊内部流淌极光背景光效 */
-#send_textarea {
-  background: var(--aero-input-bg) !important;
-  border: 1px solid var(--aero-input-border) !important;
-  color: var(--aero-input-text) !important;
-  border-radius: 18px !important;
-  padding: 8px 14px !important;
-  font-size: 15px !important;
-  line-height: 1.45 !important;
-  box-shadow:
-    inset 0 2px 5px rgba(28, 62, 98, 0.09),
-    0 1px 0 var(--aero-bottom-specular) !important;
-  transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+/* 聚焦终端感应：动态极光流光作用于整个胶囊底栏 */
+#send_form:has(#send_textarea:focus) {
+  background: var(--aero-dock-focus-bg) !important;
+  background-size: 240% 240% !important;
+  border-color: var(--aero-dock-focus-border) !important;
+  box-shadow: var(--aero-dock-focus-shadow) !important;
+  animation: aeroDockAurora 5s ease-in-out infinite alternate;
 }
 
-#send_textarea:focus {
-  background: var(--aero-input-focus-bg) !important;
-  background-size: 240% 100% !important;
-  border-color: rgba(20, 150, 237, 0.62) !important;
-  box-shadow:
-    inset 0 1px 3px rgba(28, 62, 98, 0.06),
-    inset 0 0 10px rgba(16, 185, 129, 0.16),
-    0 0 12px rgba(20, 150, 237, 0.24),
-    0 0 22px rgba(124, 92, 230, 0.12) !important;
-  animation: aeroCapsuleAurora 4.5s ease-in-out infinite alternate;
-}
-
-@keyframes aeroCapsuleAurora {
+@keyframes aeroDockAurora {
   0% {
     background-position: 0% 50%;
   }
   100% {
     background-position: 100% 50%;
   }
+}
+
+/* 彻底解除 #nonQRFormItems 垂直裁切，修复输入框上部被吞问题 */
+#nonQRFormItems {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  gap: 6px !important;
+  overflow: visible !important;
+  box-sizing: border-box !important;
+}
+
+#leftSendForm,
+#rightSendForm {
+  flex: 0 0 auto !important;
+  display: flex !important;
+  align-items: center !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  gap: 2px;
+}
+
+/* 内部输入槽：完整无裁切、温和微凹玻璃槽 */
+#send_textarea {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+  height: auto !important;
+  min-height: 38px !important;
+  max-height: 140px !important;
+  margin: 0 !important;
+  padding: 8px 13px !important;
+  border-radius: 19px !important;
+  background: var(--aero-capsule-well-bg) !important;
+  border: 1px solid var(--aero-capsule-well-border) !important;
+  color: var(--aero-input-text) !important;
+  font-size: 15px !important;
+  line-height: 1.45 !important;
+  vertical-align: middle !important;
+  overflow-y: auto !important;
+  box-shadow:
+    inset 0 1px 4px rgba(24, 58, 92, 0.10),
+    0 1px 0 rgba(255, 255, 255, 0.45) !important;
+  transition: background 0.22s ease, border-color 0.22s ease;
+}
+
+#send_textarea:focus {
+  background: var(--aero-capsule-well-focus) !important;
+  border-color: rgba(20, 150, 237, 0.35) !important;
+  box-shadow:
+    inset 0 1px 3px rgba(24, 58, 92, 0.08),
+    0 1px 0 rgba(255, 255, 255, 0.65) !important;
 }
 
 #options_button,
@@ -1306,33 +1451,79 @@ body {
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
 }
 
-#send_but {
-  background: var(--aero-send-bg) !important;
-  color: var(--aero-send-text) !important;
-  border: 1px solid rgba(14, 108, 128, 0.62) !important;
-  border-radius: 14px !important;
-  min-width: 38px !important;
-  height: 34px !important;
+#options_button {
+  width: 34px !important;
+  height: 36px !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.70),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.18),
-    0 1px 4px rgba(14, 92, 118, 0.30) !important;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25) !important;
+  border-radius: 50%;
+}
+
+/* 清透水滴宝石发送球（与 26px 外胶囊弧度同心嵌套） */
+#send_but,
+#mes_stop {
+  position: relative !important;
+  overflow: hidden !important;
+  width: 38px !important;
+  min-width: 38px !important;
+  height: 38px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: 1px solid var(--aero-gem-border) !important;
+  color: #ffffff !important;
+  box-shadow: var(--aero-gem-shadow) !important;
   transition: transform 0.14s ease, filter 0.2s ease, box-shadow 0.2s ease;
 }
 
-#send_form:has(#send_textarea:focus) #send_but {
-  filter: brightness(1.08);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.85),
-    0 0 12px rgba(20, 150, 237, 0.45) !important;
+#send_but {
+  background: var(--aero-gem-bg) !important;
 }
 
-#send_but:active {
-  transform: scale(0.94);
+#mes_stop {
+  background: var(--aero-stop-gem-bg) !important;
+}
+
+/* 保留 ::before 作为 FontAwesome 图标，并提升层级置于反光层之上 */
+#send_but::before,
+#mes_stop::before {
+  position: relative;
+  z-index: 2;
+  font-size: 14px;
+  color: #ffffff !important;
+  text-shadow: 0 1px 2px rgba(0, 42, 86, 0.45);
+}
+
+/* 用 ::after 制作 Vista 水晶球上半部月牙形玻璃穹顶反射 */
+#send_but::after,
+#mes_stop::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 16%;
+  right: 16%;
+  height: 44%;
+  border-radius: 999px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.90) 0%,
+    rgba(255, 255, 255, 0.18) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+#send_form:has(#send_textarea:focus) #send_but {
+  filter: brightness(1.08) saturate(1.12);
+}
+
+#send_but:active,
+#mes_stop:active {
+  transform: scale(0.92);
 }
 
 :root[data-aero-hide-wand="true"] #extensionsMenuButton {
