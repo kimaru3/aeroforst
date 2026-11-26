@@ -29,6 +29,28 @@ function getSettings() {
     return extensionSettings[MODULE_NAME];
 }
 
+/**
+ * 同步 Android Chrome 地址栏与状态栏颜色为固定 #075B50
+ */
+function applyChromeThemeColor(color = '#075B50') {
+    const existing = document.querySelectorAll('meta[name="theme-color"]');
+    if (existing.length > 0) {
+        existing.forEach((el, idx) => {
+            if (idx === 0) {
+                el.removeAttribute('media');
+                el.setAttribute('content', color);
+            } else {
+                el.remove();
+            }
+        });
+    } else {
+        const meta = document.createElement('meta');
+        meta.name = 'theme-color';
+        meta.content = color;
+        document.head.appendChild(meta);
+    }
+}
+
 function applyAppearance() {
     const s = getSettings();
     const root = document.documentElement;
@@ -46,6 +68,8 @@ function applyAppearance() {
     if (blendWrap) {
         blendWrap.style.display = s.enableBgWindow ? 'flex' : 'none';
     }
+
+    applyChromeThemeColor('#075B50');
 }
 
 function initStaticGrainTexture() {
@@ -82,7 +106,7 @@ function mountAuroraStage() {
           <defs>
             <linearGradient id="aeroGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stop-color="var(--spec-emerald-bright)" stop-opacity="0.46" />
-              <stop offset="48%" stop-color="var(--spec-cyan)" stop-opacity="0.38" />
+              <stop offset="48%" stop-color="var(--spec-cyan-bright)" stop-opacity="0.38" />
               <stop offset="100%" stop-color="var(--spec-violet)" stop-opacity="0.32" />
             </linearGradient>
           </defs>
@@ -93,7 +117,7 @@ function mountAuroraStage() {
             <linearGradient id="aeroGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
               <stop offset="0%" stop-color="var(--spec-solar)" stop-opacity="0.38" />
               <stop offset="50%" stop-color="var(--spec-coral)" stop-opacity="0.32" />
-              <stop offset="100%" stop-color="var(--spec-cyan)" stop-opacity="0.36" />
+              <stop offset="100%" stop-color="var(--spec-cyan-bright)" stop-opacity="0.36" />
             </linearGradient>
           </defs>
           <path d="M-50,490 C130,380 270,640 470,460 L470,630 C260,790 110,550 -50,670 Z" fill="url(#aeroGrad2)" />
@@ -296,6 +320,7 @@ async function mountSettingsPanel() {
 }
 
 jQuery(async () => {
+    applyChromeThemeColor('#075B50');
     initStaticGrainTexture();
     mountAuroraStage();
     applyAppearance();
@@ -330,7 +355,6 @@ jQuery(async () => {
         if (el) restructureMessage(el, false);
     });
 
-    // 过滤 dryRun 和 quiet 静默后台任务，只响应真实前台生成
     eventSource.on(event_types.GENERATION_STARTED, (type, _options, dryRun) => {
         if (dryRun || type === 'quiet') return;
         document.documentElement.setAttribute('data-aero-generating', 'true');

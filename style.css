@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Aero Mobile UI v4.6 - #075B50深极光绿顶 × #073B69→#087DAA深海青蓝底 × 无框角色列表
+   Aero Mobile UI v5.0 - 全界面深翠海蓝统一配色版（Android Chrome）
    ========================================================================== */
 
 :root {
@@ -43,7 +43,7 @@
 }
 
 /* ==========================================================================
-   第一层：环境光光谱体系
+   第一层：环境光光谱与全菜单协同变量
    ========================================================================== */
 
 :root[data-aero-theme="day"],
@@ -79,36 +79,45 @@
   --prose-ai-em: #596370;
   --prose-user-ink: #152536;
 
-  --SmartThemeBodyColor: #22272e;
-  --SmartThemeEmColor: #596370;
-  --SmartThemeUnderlineColor: var(--spec-cyan-ink);
-  --SmartThemeQuoteColor: var(--spec-cyan-ink);
-  --SmartThemeBlurTintColor: #f6f8fb;
+  --SmartThemeBodyColor: #13242a;
+  --SmartThemeEmColor: #4a656d;
+  --SmartThemeUnderlineColor: #087DAA;
+  --SmartThemeQuoteColor: #0a5a96;
+  --SmartThemeBlurTintColor: #edf5f4;
   --SmartThemeChatTintColor: #e2ecf2;
   --SmartThemeUserMesBlurTintColor: #e8f4fd;
   --SmartThemeBotMesBlurTintColor: #fbfaf8;
-  --SmartThemeShadowColor: rgba(24, 52, 78, 0.12);
-  --SmartThemeBorderColor: rgba(88, 124, 156, 0.28);
-  --black30a: rgba(88, 118, 146, 0.08);
-  --black50a: rgba(88, 118, 146, 0.14);
-  --black70a: #edf3f8;
+  --SmartThemeShadowColor: rgba(7, 45, 58, 0.16);
+  --SmartThemeBorderColor: rgba(8, 125, 170, 0.28);
+  --black30a: rgba(7, 91, 80, 0.08);
+  --black50a: rgba(8, 125, 170, 0.14);
+  --black70a: #e2efef;
   --white20a: rgba(255, 255, 255, 0.72);
   --white30a: rgba(255, 255, 255, 0.85);
-  --grey30: #7f8c9b;
-  --grey50: #5d6a79;
-  --grey70: #465260;
-  --greyCAI: #515e6d;
+  --grey30: #6b858d;
+  --grey50: #4c6770;
+  --grey70: #385159;
+  --greyCAI: #46616a;
 
-  --aero-panel-bg: #f6f8fb;
-  --aero-panel-surface: linear-gradient(180deg, #ffffff 0%, #f1f6fa 48%, #e5eef7 50%, #eef4fa 100%);
+  /* 全菜单统一：海雾翡翠玉白底板 + 琉璃水青折叠条 + 翠蓝宝石强调钮 */
+  --aero-panel-bg: #edf5f4;
+  --aero-panel-top-edge: #0c8a7a;
+  --aero-panel-surface: linear-gradient(180deg, #ffffff 0%, #e9f4f3 46%, #d9ecec 48%, #e6f3f4 100%);
+  --aero-panel-header-bg: linear-gradient(180deg, #f8fcfb 0%, #e4f2f0 46%, #d4eae8 48%, #e2f1f0 100%);
+  --aero-panel-accent-btn: linear-gradient(180deg, #16a4c9 0%, #087DAA 46%, #075B50 52%, #0a7467 100%);
+  --aero-panel-danger-btn: linear-gradient(180deg, #ff8ca3 0%, #e6496d 46%, #bf264a 52%, #d9365c 100%);
   --aero-panel-control-bg: #ffffff;
   --aero-panel-control-hover: rgba(8, 125, 170, 0.12);
-  --aero-panel-text: #1f252d;
-  --aero-panel-subtext: #566373;
-  --aero-panel-border: rgba(94, 126, 158, 0.30);
+  --aero-panel-text: #13242a;
+  --aero-panel-subtext: #4c6770;
+  --aero-panel-border: rgba(11, 114, 120, 0.26);
   --aero-inner-bevel: rgba(255, 255, 255, 0.94);
-  --aero-disabled-row-bg: #ecf0f5;
-  --aero-disabled-text: #5a6778;
+  --aero-disabled-row-bg: #e1ecec;
+  --aero-disabled-text: #4f6a72;
+  --aero-ui-accent: #075B50;
+  --aero-ui-accent-bright: #0ca884;
+  --aero-slider-track: linear-gradient(90deg, rgba(7, 91, 80, 0.24) 0%, rgba(8, 125, 170, 0.34) 100%);
+  --aero-slider-thumb: radial-gradient(circle at 35% 30%, #ffffff 0%, #72f2de 30%, #087DAA 76%, #075B50 100%);
 
   /* 顶部：#075B50 深极光绿琉璃冠层 */
   --aero-top-bg: linear-gradient(
@@ -124,6 +133,7 @@
   --aero-top-icon-active: #7effd4;
   --aero-top-pill-active: linear-gradient(180deg, rgba(160, 255, 232, 0.28) 0%, rgba(16, 168, 136, 0.22) 100%);
 
+  /* 对话卡片 */
   --aero-ai-slate-bg: linear-gradient(
     145deg,
     rgba(255, 252, 249, var(--aero-ai-alpha-top)) 0%,
@@ -157,17 +167,17 @@
 
   --aero-hairline-ai: linear-gradient(90deg, rgba(255, 128, 96, 0.26) 0%, rgba(124, 92, 230, 0.12) 48%, transparent 92%);
   --aero-hairline-user: linear-gradient(90deg, transparent 8%, rgba(20, 150, 237, 0.22) 55%, rgba(16, 185, 129, 0.30) 100%);
-  --aero-surface-split: rgba(104, 128, 158, 0.18);
+  --aero-surface-split: rgba(14, 114, 118, 0.16);
 
-  --aero-name-color: #1f242c;
-  --aero-meta-color: #5b6776;
+  --aero-name-color: #13242a;
+  --aero-meta-color: #536a72;
   --aero-floor-bg: linear-gradient(180deg, #ffffff 0%, #efeaff 48%, #dfd5fc 52%, #ebe4fe 100%);
   --aero-floor-border: rgba(124, 92, 230, 0.42);
   --aero-floor-text: var(--spec-violet-ink);
   --aero-avatar-bezel: linear-gradient(135deg, #ffffff 0%, #d2f3e8 48%, #d2e4fa 100%);
-  --aero-action-muted: rgba(74, 90, 110, 0.58);
-  --aero-action-bg: #f8fafe;
-  --aero-editbar-bg: linear-gradient(180deg, #eff5fb 0%, #e5eef7 100%);
+  --aero-action-muted: rgba(56, 86, 98, 0.62);
+  --aero-action-bg: #eef6f6;
+  --aero-editbar-bg: linear-gradient(180deg, #e7f3f3 0%, #dcebeb 100%);
 
   /* 底部冷区：深海蓝 #073B69 到 青蓝 #087DAA */
   --aero-dock-idle-bg: linear-gradient(
@@ -227,48 +237,57 @@
   --spec-violet-soft: rgba(132, 98, 238, 0.26);
   --spec-violet-ink: #bfaaff;
 
-  --aero-base-bg: #0f1620;
+  --aero-base-bg: #0b161d;
   --aurora-ambient-canvas:
     radial-gradient(100% 26% at 50% 0%, var(--spec-emerald-soft) 0%, transparent 74%),
     radial-gradient(85% 34% at 6% 28%, var(--spec-solar-soft) 0%, transparent 72%),
     radial-gradient(80% 34% at 8% 68%, var(--spec-violet-soft) 0%, transparent 72%),
     radial-gradient(115% 38% at 86% 100%, var(--spec-cyan-soft) 0%, transparent 72%),
-    linear-gradient(180deg, #0f191a 0%, #111620 48%, #0d1725 100%);
+    linear-gradient(180deg, #0b1919 0%, #0e1720 48%, #0a1724 100%);
 
-  --prose-ai-ink: #d4dae3;
-  --prose-ai-em: #8e9aab;
+  --prose-ai-ink: #d4dce3;
+  --prose-ai-em: #8a9daa;
   --prose-user-ink: #dceaf8;
 
-  --SmartThemeBodyColor: var(--prose-ai-ink);
-  --SmartThemeEmColor: var(--prose-ai-em);
-  --SmartThemeUnderlineColor: var(--spec-cyan-ink);
-  --SmartThemeQuoteColor: var(--spec-cyan-ink);
-  --SmartThemeBlurTintColor: #18202b;
-  --SmartThemeChatTintColor: #101620;
+  --SmartThemeBodyColor: #dcecf0;
+  --SmartThemeEmColor: #86a3ae;
+  --SmartThemeUnderlineColor: #38b6ff;
+  --SmartThemeQuoteColor: #84d2ff;
+  --SmartThemeBlurTintColor: #0d1b22;
+  --SmartThemeChatTintColor: #0b161d;
   --SmartThemeUserMesBlurTintColor: #142234;
-  --SmartThemeBotMesBlurTintColor: #191d25;
-  --SmartThemeShadowColor: rgba(0, 0, 0, 0.48);
-  --SmartThemeBorderColor: rgba(128, 174, 224, 0.22);
+  --SmartThemeBotMesBlurTintColor: #182028;
+  --SmartThemeShadowColor: rgba(0, 0, 0, 0.52);
+  --SmartThemeBorderColor: rgba(32, 152, 178, 0.28);
   --black30a: rgba(0, 0, 0, 0.30);
   --black50a: rgba(0, 0, 0, 0.45);
-  --black70a: #151b24;
-  --white20a: rgba(160, 210, 255, 0.14);
-  --white30a: rgba(160, 210, 255, 0.20);
-  --grey30: #6e7a8c;
-  --grey50: #8794a8;
-  --grey70: #a5b2c4;
-  --greyCAI: #8e9bad;
+  --black70a: #0a141a;
+  --white20a: rgba(160, 224, 245, 0.14);
+  --white30a: rgba(160, 224, 245, 0.20);
+  --grey30: #66828e;
+  --grey50: #809da8;
+  --grey70: #9eb9c4;
+  --greyCAI: #88a4b0;
 
-  --aero-panel-bg: #18202b;
-  --aero-panel-surface: linear-gradient(180deg, #273344 0%, #1e2836 49%, #18212e 51%, #1f2938 100%);
-  --aero-panel-control-bg: #10161f;
-  --aero-panel-control-hover: #243950;
-  --aero-panel-text: #dce3ed;
-  --aero-panel-subtext: #8e9cb0;
-  --aero-panel-border: #2e435b;
-  --aero-inner-bevel: rgba(180, 220, 255, 0.14);
-  --aero-disabled-row-bg: #141a24;
-  --aero-disabled-text: #8492a6;
+  /* 夜间全菜单统一：深海渊翠蓝黑底板 + 深海玻璃条 + 极光翡翠亮色交互 */
+  --aero-panel-bg: #0d1b22;
+  --aero-panel-top-edge: #18a692;
+  --aero-panel-surface: linear-gradient(180deg, #1a3742 0%, #132a34 46%, #0e2029 48%, #142c36 100%);
+  --aero-panel-header-bg: linear-gradient(180deg, #15343c 0%, #10272e 46%, #0b1e24 48%, #102730 100%);
+  --aero-panel-accent-btn: linear-gradient(180deg, #1cb2d8 0%, #087DAA 46%, #075B50 52%, #0b7c6d 100%);
+  --aero-panel-danger-btn: linear-gradient(180deg, #ff7a96 0%, #d93c60 46%, #a81e40 52%, #c42950 100%);
+  --aero-panel-control-bg: #081218;
+  --aero-panel-control-hover: rgba(18, 168, 178, 0.18);
+  --aero-panel-text: #dcecf0;
+  --aero-panel-subtext: #83a4b0;
+  --aero-panel-border: rgba(34, 156, 178, 0.28);
+  --aero-inner-bevel: rgba(168, 232, 248, 0.16);
+  --aero-disabled-row-bg: #0a151b;
+  --aero-disabled-text: #74929e;
+  --aero-ui-accent: #26e0a2;
+  --aero-ui-accent-bright: #26e0a2;
+  --aero-slider-track: linear-gradient(90deg, rgba(7, 91, 80, 0.72) 0%, rgba(8, 125, 170, 0.78) 100%);
+  --aero-slider-thumb: radial-gradient(circle at 35% 30%, #ffffff 0%, #64ffd8 30%, #14a6dc 76%, #075B50 100%);
 
   --aero-top-bg: linear-gradient(
     180deg,
@@ -285,9 +304,9 @@
 
   --aero-ai-slate-bg: linear-gradient(
     145deg,
-    rgba(36, 36, 46, var(--aero-ai-alpha-top)) 0%,
-    rgba(25, 29, 37, var(--aero-ai-alpha-bot)) 58%,
-    rgba(20, 26, 36, var(--aero-ai-alpha-bot)) 100%
+    rgba(30, 36, 44, var(--aero-ai-alpha-top)) 0%,
+    rgba(21, 28, 36, var(--aero-ai-alpha-bot)) 58%,
+    rgba(16, 24, 34, var(--aero-ai-alpha-bot)) 100%
   );
   --aero-ai-shadow:
     inset 0 1px 0 rgba(255, 226, 205, 0.15),
@@ -305,8 +324,8 @@
     ),
     linear-gradient(
       165deg,
-      rgba(22, 42, 66, var(--aero-user-alpha-top)) 0%,
-      rgba(16, 31, 50, var(--aero-user-alpha-bot)) 100%
+      rgba(20, 42, 64, var(--aero-user-alpha-top)) 0%,
+      rgba(14, 31, 50, var(--aero-user-alpha-bot)) 100%
     );
   --aero-user-shadow:
     inset 0 1px 0 rgba(164, 224, 255, 0.28),
@@ -316,19 +335,18 @@
 
   --aero-hairline-ai: linear-gradient(90deg, rgba(255, 132, 104, 0.30) 0%, rgba(158, 130, 255, 0.16) 48%, transparent 92%);
   --aero-hairline-user: linear-gradient(90deg, transparent 8%, rgba(56, 182, 255, 0.24) 55%, rgba(38, 224, 162, 0.34) 100%);
-  --aero-surface-split: rgba(130, 185, 235, 0.12);
+  --aero-surface-split: rgba(72, 168, 194, 0.16);
 
-  --aero-name-color: #ebf0f7;
-  --aero-meta-color: #8a99ad;
+  --aero-name-color: #e6f2f5;
+  --aero-meta-color: #849fa9;
   --aero-floor-bg: linear-gradient(180deg, rgba(158, 130, 255, 0.26) 0%, rgba(116, 88, 220, 0.18) 50%, rgba(76, 54, 168, 0.26) 100%);
   --aero-floor-border: rgba(158, 130, 255, 0.38);
   --aero-floor-text: var(--spec-violet-ink);
   --aero-avatar-bezel: linear-gradient(135deg, rgba(190, 232, 255, 0.44) 0%, rgba(76, 198, 178, 0.30) 50%, rgba(132, 108, 230, 0.36) 100%);
-  --aero-action-muted: rgba(198, 214, 232, 0.62);
-  --aero-action-bg: #1c2634;
-  --aero-editbar-bg: linear-gradient(180deg, #1d2735 0%, #17202c 100%);
+  --aero-action-muted: rgba(192, 218, 228, 0.62);
+  --aero-action-bg: #11222b;
+  --aero-editbar-bg: linear-gradient(180deg, #132833 0%, #0e1e26 100%);
 
-  /* 夜间底部冷区：深海蓝 #073B69 到 青蓝 #087DAA */
   --aero-dock-idle-bg: linear-gradient(
     180deg,
     rgba(8, 125, 170, 0.92) 0%,
@@ -379,6 +397,7 @@ body {
   overscroll-behavior: none;
   background: var(--aero-base-bg) !important;
   color: var(--aero-panel-text);
+  accent-color: var(--aero-ui-accent);
 }
 
 html,
@@ -524,7 +543,7 @@ body::-webkit-scrollbar,
 }
 
 /* ==========================================================================
-   100% 不透明菜单与设置抽屉 + 无框角色与群聊列表 + 预设可读性修复
+   全界面菜单、抽屉、按钮、滑块、开关统一至深翠海蓝体系（100% 不透明）
    ========================================================================== */
 
 .drawer-content,
@@ -539,12 +558,24 @@ body::-webkit-scrollbar,
   -webkit-backdrop-filter: none !important;
 }
 
+/* 顶部抽屉顺承 #075B50 顶栏，带深极光绿衔接顶边 */
 .drawer-content {
+  border-top: 2px solid var(--aero-panel-top-edge) !important;
   box-shadow:
-    inset 0 2px 0 rgba(255, 255, 255, 0.35),
+    inset 0 1px 0 var(--aero-inner-bevel),
     0 12px 32px var(--SmartThemeShadowColor) !important;
 }
 
+/* 弹窗带深海青蓝→翠绿顶冠 */
+.popup,
+#dialogue_popup {
+  border-top: 3px solid var(--spec-cyan) !important;
+  box-shadow:
+    inset 0 1px 0 var(--aero-inner-bevel),
+    0 14px 36px var(--SmartThemeShadowColor) !important;
+}
+
+/* 凹嵌输入槽与下拉框 */
 .drawer-content .text_pole,
 .drawer-content textarea,
 .drawer-content select,
@@ -558,31 +589,139 @@ body::-webkit-scrollbar,
   border: 1px solid var(--aero-panel-border) !important;
   border-radius: 5px;
   box-shadow:
-    inset 0 1px 3px rgba(0, 0, 0, 0.08),
+    inset 0 1px 3px rgba(7, 45, 58, 0.10),
     0 1px 0 var(--aero-inner-bevel);
 }
 
-.drawer-content .menu_button,
-.popup .menu_button,
+.drawer-content .text_pole:focus,
+.drawer-content select:focus,
+.drawer-content textarea:focus {
+  border-color: var(--spec-cyan) !important;
+  outline: none;
+}
+
+/* Vista 玻璃折叠标题条 */
 .drawer-content .inline-drawer-toggle.inline-drawer-header,
 #user-settings-block h4,
 .standoutHeader {
+  background: var(--aero-panel-header-bg) !important;
+  color: var(--aero-panel-text) !important;
+  border: 1px solid var(--aero-panel-border) !important;
+  border-radius: 6px;
+  box-shadow:
+    inset 3.5px 0 0 var(--spec-cyan),
+    inset 0 1px 0 var(--aero-inner-bevel),
+    0 1px 2px rgba(7, 45, 58, 0.06);
+  padding-left: 10px !important;
+}
+
+/* 琉璃普通按钮 */
+.drawer-content .menu_button,
+.popup .menu_button {
   background: var(--aero-panel-surface) !important;
   color: var(--aero-panel-text) !important;
   border: 1px solid var(--aero-panel-border) !important;
   border-radius: 6px;
   box-shadow:
     inset 0 1px 0 var(--aero-inner-bevel),
-    0 1px 2px rgba(0, 0, 0, 0.06);
+    0 1px 2px rgba(7, 45, 58, 0.08);
+  transition: transform 0.12s ease, filter 0.15s ease;
 }
 
+.drawer-content .menu_button:active,
+.popup .menu_button:active {
+  transform: scale(0.97);
+}
+
+/* 主确认与激活按钮：#075B50 -> #087DAA 翠蓝宝石 */
+.popup .popup-button-ok,
+.drawer-content .menu_button.active,
+.drawer-content .menu_button.toggleEnabled,
+.drawer-content .menu_button_icon.active {
+  background: var(--aero-panel-accent-btn) !important;
+  color: #ffffff !important;
+  border-color: rgba(7, 91, 80, 0.72) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(186, 255, 240, 0.50),
+    0 2px 6px rgba(7, 59, 105, 0.28) !important;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+
+/* 危险按钮：珊瑚红宝石切面 */
+.drawer-content .menu_button.redOverlay,
+.drawer-content .menu_button.redWarningBG,
+.popup .menu_button.redOverlay,
+.popup .menu_button.redWarningBG {
+  background: var(--aero-panel-danger-btn) !important;
+  color: #ffffff !important;
+  border-color: rgba(168, 30, 64, 0.72) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 210, 220, 0.45),
+    0 2px 6px rgba(168, 30, 64, 0.25) !important;
+}
+
+/* 分割线与提示次级文字 */
 .drawer-content small,
 .drawer-content .notes,
 .drawer-content .subtle {
   color: var(--aero-panel-subtext) !important;
 }
 
-/* 角色卡与群聊界面：彻底去除名字、介绍周边的多余细框，保留清爽无框列表 */
+.drawer-content hr.sysHR {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--aero-panel-border), transparent);
+}
+
+/* 自定义 Neo-Aero 滑块（深海凹槽 + 发光翠蓝水晶珠） */
+.drawer-content input[type="range"],
+.popup input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  height: 22px;
+  cursor: pointer;
+}
+
+.drawer-content input[type="range"]::-webkit-slider-runnable-track,
+.popup input[type="range"]::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--aero-slider-track);
+  border: 1px solid var(--aero-panel-border);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.14);
+}
+
+.drawer-content input[type="range"]::-webkit-slider-thumb,
+.popup input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  margin-top: -6px;
+  border-radius: 50%;
+  background: var(--aero-slider-thumb);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow:
+    0 1px 4px rgba(7, 59, 105, 0.40),
+    0 0 6px rgba(18, 196, 150, 0.35);
+}
+
+/* 开关与复选框 */
+.drawer-content input[type="checkbox"],
+.drawer-content input[type="radio"],
+.popup input[type="checkbox"],
+.popup input[type="radio"] {
+  accent-color: var(--aero-ui-accent);
+}
+
+.drawer-content .fa-toggle-on {
+  color: var(--aero-ui-accent-bright) !important;
+}
+
+/* 角色卡与群聊界面：无框清爽列表 + 海雾水青高亮 */
 #rm_print_characters_block .character_select,
 #rm_print_characters_block .group_select,
 #rm_print_characters_block .bogus_folder_select {
@@ -599,7 +738,7 @@ body::-webkit-scrollbar,
 #rm_print_characters_block .character_select.character_selected,
 #rm_print_characters_block .group_select.character_selected {
   background: var(--aero-panel-control-hover) !important;
-  box-shadow: inset 3px 0 0 var(--spec-cyan-bright) !important;
+  box-shadow: inset 3px 0 0 var(--spec-cyan) !important;
 }
 
 #rm_print_characters_block .character_select_container,
@@ -627,7 +766,7 @@ body::-webkit-scrollbar,
   border-radius: 4px;
 }
 
-/* 预设提示词列表禁用项可读性 */
+/* 预设提示词列表禁用项清晰度 */
 #completion_prompt_manager_list li {
   border-color: var(--aero-panel-border) !important;
   opacity: 1 !important;
@@ -663,8 +802,11 @@ body::-webkit-scrollbar,
   opacity: 1 !important;
 }
 
+/* 左下角横菜单 #options（100% 不透明 + 青蓝深海呼应边） */
 #options {
-  border-radius: 9px !important;
+  border: 1px solid var(--spec-cyan) !important;
+  border-bottom: 3px solid #073B69 !important;
+  border-radius: 10px !important;
   box-shadow:
     inset 0 1px 0 var(--aero-inner-bevel),
     0 10px 28px var(--SmartThemeShadowColor) !important;
@@ -678,6 +820,10 @@ body::-webkit-scrollbar,
   gap: 10px;
 }
 
+#options .options-content a i {
+  color: var(--spec-cyan);
+}
+
 #options .options-content a:active {
   background: var(--aero-panel-control-hover) !important;
 }
@@ -685,7 +831,11 @@ body::-webkit-scrollbar,
 #aero_jump_to_bottom {
   border-bottom: 1px solid var(--aero-panel-border);
   font-weight: 600;
-  color: var(--spec-cyan-ink) !important;
+  color: var(--aero-ui-accent) !important;
+}
+
+#aero_jump_to_bottom i {
+  color: var(--aero-ui-accent-bright) !important;
 }
 
 /* ==========================================================================
@@ -1130,6 +1280,7 @@ body::-webkit-scrollbar,
   transform: scale(0.92);
 }
 
+/* 消息 ... 悬浮菜单：100% 不透明，与深翠海蓝体系同步 */
 .aero-actions-wrap .mes_buttons .extraMesButtons {
   position: absolute !important;
   left: 0 !important;
@@ -1146,6 +1297,7 @@ body::-webkit-scrollbar,
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
   border: 1px solid var(--aero-panel-border) !important;
+  border-bottom: 2px solid var(--spec-cyan) !important;
   border-bottom-left-radius: 12px !important;
   border-bottom-right-radius: 12px !important;
   padding: 7px 10px !important;
@@ -1167,7 +1319,7 @@ body::-webkit-scrollbar,
 }
 
 .aero-actions-wrap .mes_buttons .extraMesButtons .mes_button {
-  color: var(--aero-name-color) !important;
+  color: var(--aero-panel-text) !important;
   opacity: 0.94 !important;
   font-size: 15px !important;
   min-width: 34px !important;
@@ -1206,15 +1358,16 @@ body::-webkit-scrollbar,
   justify-content: center !important;
   font-size: 15px !important;
   border-radius: 5px;
-  color: var(--aero-name-color) !important;
+  color: var(--aero-panel-text) !important;
   background: var(--aero-panel-surface);
   border: 1px solid var(--aero-panel-border);
   box-shadow: inset 0 1px 0 var(--aero-inner-bevel);
 }
 
 .mes_block > .mes_edit_buttons .mes_edit_done {
-  color: var(--spec-emerald-ink) !important;
-  border-color: var(--spec-emerald-bright) !important;
+  background: var(--aero-panel-accent-btn) !important;
+  color: #ffffff !important;
+  border-color: rgba(7, 91, 80, 0.72) !important;
 }
 
 .aero-row-meta {
@@ -1453,7 +1606,6 @@ body::-webkit-scrollbar,
   text-align: center !important;
 }
 
-/* 交由 ST 原生显隐控制：仅当停止键未显示时确保纸飞机可见；停止键完全不覆写 display */
 #rightSendForm:not(:has(#mes_stop[style*="display: flex"])) #send_but:not(.displayNone) {
   display: inline-flex !important;
   align-items: center !important;
