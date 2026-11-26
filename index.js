@@ -2,7 +2,8 @@ const MODULE_NAME = 'aero_mobile_ui';
 
 const DEFAULT_SETTINGS = Object.freeze({
     theme: 'day',
-    fontStyle: 'serif',
+    proseGlass: 'balanced', // 'airy' | 'balanced' | 'solid'
+    fontStyle: 'sans',      // 默认回归系统字体
     enableRibbons: true,
     enableGrain: true,
     enableBgWindow: true,
@@ -32,7 +33,8 @@ function applyAppearance() {
     const s = getSettings();
     const root = document.documentElement;
     root.setAttribute('data-aero-theme', s.theme);
-    root.setAttribute('data-aero-font', s.fontStyle);
+    root.setAttribute('data-aero-prose-glass', s.proseGlass || 'balanced');
+    root.setAttribute('data-aero-font', s.fontStyle || 'sans');
     root.setAttribute('data-aero-ribbons', String(Boolean(s.enableRibbons)));
     root.setAttribute('data-aero-grain', String(Boolean(s.enableGrain)));
     root.setAttribute('data-aero-bg-window', String(Boolean(s.enableBgWindow)));
@@ -46,9 +48,6 @@ function applyAppearance() {
     }
 }
 
-/**
- * 一次性生成 128x128 静态物理颗粒纹理（零运行时 GPU/CPU 负担）
- */
 function initStaticGrainTexture() {
     const size = 128;
     const canvas = document.createElement('canvas');
@@ -64,15 +63,12 @@ function initStaticGrainTexture() {
         data[i] = v;
         data[i + 1] = v;
         data[i + 2] = v;
-        data[i + 3] = Math.floor(Math.random() * 26);
+        data[i + 3] = Math.floor(Math.random() * 24);
     }
     ctx.putImageData(img, 0, 0);
     document.documentElement.style.setProperty('--aero-grain-img', `url(${canvas.toDataURL('image/png')})`);
 }
 
-/**
- * 注入极光三明治光学舞台（位于 ST 背景图 #bg1 之上、#sheld 之下）
- */
 function mountAuroraStage() {
     if (document.getElementById('aero-aurora-stage')) return;
 
@@ -85,9 +81,9 @@ function mountAuroraStage() {
         <svg class="aero-ribbon aero-ribbon-1" viewBox="0 0 400 800" preserveAspectRatio="none">
           <defs>
             <linearGradient id="aeroGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="var(--spec-emerald)" stop-opacity="0.34" />
-              <stop offset="48%" stop-color="var(--spec-cyan)" stop-opacity="0.28" />
-              <stop offset="100%" stop-color="var(--spec-violet)" stop-opacity="0.22" />
+              <stop offset="0%" stop-color="var(--spec-emerald)" stop-opacity="0.36" />
+              <stop offset="48%" stop-color="var(--spec-cyan)" stop-opacity="0.30" />
+              <stop offset="100%" stop-color="var(--spec-violet)" stop-opacity="0.24" />
             </linearGradient>
           </defs>
           <path d="M-60,120 C110,40 260,310 460,210 L460,360 C250,450 90,190 -60,290 Z" fill="url(#aeroGrad1)" />
@@ -95,9 +91,9 @@ function mountAuroraStage() {
         <svg class="aero-ribbon aero-ribbon-2" viewBox="0 0 400 800" preserveAspectRatio="none">
           <defs>
             <linearGradient id="aeroGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="var(--spec-solar)" stop-opacity="0.28" />
-              <stop offset="50%" stop-color="var(--spec-coral)" stop-opacity="0.22" />
-              <stop offset="100%" stop-color="var(--spec-cyan)" stop-opacity="0.26" />
+              <stop offset="0%" stop-color="var(--spec-solar)" stop-opacity="0.30" />
+              <stop offset="50%" stop-color="var(--spec-coral)" stop-opacity="0.24" />
+              <stop offset="100%" stop-color="var(--spec-cyan)" stop-opacity="0.28" />
             </linearGradient>
           </defs>
           <path d="M-50,510 C130,410 270,630 470,480 L470,620 C260,760 110,550 -50,650 Z" fill="url(#aeroGrad2)" />
@@ -283,6 +279,7 @@ async function mountSettingsPanel() {
         $(container).append(cleanHtml);
 
         bindSettingSelect('aero_theme_mode', 'theme');
+        bindSettingSelect('aero_prose_glass', 'proseGlass');
         bindSettingSelect('aero_font_style', 'fontStyle');
         bindSettingSelect('aero_bg_blend', 'bgBlend');
 
@@ -333,7 +330,6 @@ jQuery(async () => {
         if (el) restructureMessage(el, false);
     });
 
-    // 生成呼吸态闭环
     eventSource.on(event_types.GENERATION_STARTED, () => {
         document.documentElement.setAttribute('data-aero-generating', 'true');
     });

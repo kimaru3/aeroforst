@@ -14,10 +14,19 @@
       </div>
 
       <div class="aero-setting-row" style="margin-top: 8px;">
-        <label for="aero_font_style">叙事正文与角色名字体气质</label>
+        <label for="aero_prose_glass">正文背景通透度（呼吸感调节）</label>
+        <select id="aero_prose_glass" class="text_pole">
+          <option value="airy">通透呼吸（74% 磨砂 · 背后光影更鲜活）</option>
+          <option value="balanced">均衡琉璃（82% 磨砂 · 推荐）</option>
+          <option value="solid">高遮盖纸面（92% · 适合超花哨背景图）</option>
+        </select>
+      </div>
+
+      <div class="aero-setting-row" style="margin-top: 8px;">
+        <label for="aero_font_style">字体风格</label>
         <select id="aero_font_style" class="text_pole">
-          <option value="serif">人文温润衬线（默认 · 适合长篇叙事）</option>
-          <option value="sans">清爽现代无衬线（系统黑体）</option>
+          <option value="sans">系统默认字体（推荐 · 清爽原生）</option>
+          <option value="serif">人文衬线字体（仅AI叙事与角色名）</option>
         </select>
       </div>
 
@@ -30,7 +39,7 @@
 
       <div class="aero-setting-row checkbox_label" style="margin-top: 6px;">
         <input id="aero_enable_grain" type="checkbox" />
-        <label for="aero_enable_grain">B2 · 物理晶体/纸纹微噪点（去电子冷感）</label>
+        <label for="aero_enable_grain">B2 · 物理晶体/纸纹微噪点</label>
       </div>
 
       <div class="aero-setting-row checkbox_label" style="margin-top: 6px;">
@@ -41,8 +50,8 @@
       <div class="aero-setting-row" id="aero_bg_blend_wrap" style="margin-top: 6px;">
         <label for="aero_bg_blend">B3 · 背景图透窗显露程度</label>
         <select id="aero_bg_blend" class="text_pole">
-          <option value="soft">轻柔剪影（推荐 · 极光为主）</option>
-          <option value="balanced">均衡融合（极光与场景并重）</option>
+          <option value="soft">轻柔剪影（极光为主）</option>
+          <option value="balanced">均衡融合（推荐）</option>
           <option value="clear">通透剧场（更清晰看见背景细节）</option>
         </select>
       </div>
