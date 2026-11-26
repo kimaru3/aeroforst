@@ -1,239 +1,241 @@
 /* ==========================================================================
-   Aero Mobile UI v1.3 - Neo-Aero / Vista 光学质感精修版（Android Chrome）
-   核心增量：三区大气底光 + 双层琉璃倒角 + 46% 折射切线 + Z轴凹凸控件 + Vista立绘晶框
+   Aero Mobile UI v1.4 - 清冽通透 Neo-Aero 版（Android Chrome）
+   改进：告别沉闷灰褐，引入 Vista 珍珠白/天水青/暖香槟；所有菜单 100% 不透明
    ========================================================================== */
 
 :root {
   --aero-vvh: 100dvh;
-  --aero-radius-card: 9px;
+  --aero-radius-card: 10px;
   --aero-radius-avatar: 5px;
   --aero-font-sans: system-ui, -apple-system, "PingFang SC", "Noto Sans SC", sans-serif;
 }
 
-/* ---------- 气候方案 1（主方案）：日间浅/中明度 Neo Aero ---------- */
+/* ---------- 气候方案 1（主方案）：日间水晶晨光（清透灵动，不发闷）---------- */
 :root[data-aero-theme="day"],
 :root:not([data-aero-theme]) {
-  --SmartThemeBodyColor: #302c27;
-  --SmartThemeEmColor: #696259;
-  --SmartThemeUnderlineColor: #245d8c;
-  --SmartThemeQuoteColor: #18517d;
-  --SmartThemeBlurTintColor: rgba(238, 234, 226, 0.94);
-  --SmartThemeChatTintColor: #d7d3cb;
-  --SmartThemeUserMesBlurTintColor: #eaeef2;
-  --SmartThemeBotMesBlurTintColor: #f3f1ec;
-  --SmartThemeShadowColor: rgba(38, 32, 26, 0.16);
-  --SmartThemeBorderColor: rgba(88, 78, 66, 0.28);
-  --black30a: rgba(96, 86, 74, 0.10);
-  --black50a: rgba(96, 86, 74, 0.16);
-  --black70a: rgba(232, 227, 218, 0.92);
-  --white20a: rgba(255, 255, 255, 0.65);
-  --white30a: rgba(255, 255, 255, 0.78);
+  --SmartThemeBodyColor: #262a30;
+  --SmartThemeEmColor: #66707c;
+  --SmartThemeUnderlineColor: #1474b8;
+  --SmartThemeQuoteColor: #115f99;
+  --SmartThemeBlurTintColor: #f5f7fa;
+  --SmartThemeChatTintColor: #dce8f2;
+  --SmartThemeUserMesBlurTintColor: #f1f6fb;
+  --SmartThemeBotMesBlurTintColor: #faf9f6;
+  --SmartThemeShadowColor: rgba(24, 48, 74, 0.12);
+  --SmartThemeBorderColor: rgba(84, 122, 158, 0.26);
+  --black30a: rgba(96, 128, 160, 0.08);
+  --black50a: rgba(96, 128, 160, 0.14);
+  --black70a: #eef3f8;
+  --white20a: rgba(255, 255, 255, 0.72);
+  --white30a: rgba(255, 255, 255, 0.85);
 
-  /* 空间环境光画布（暖顶微光 -> 中性石灰 -> 冷底湖光，玻璃折射的来源） */
+  /* 清冽空气感画布：暖晨光上缘 -> 淡银空雾 -> 冰湖水青底光 */
   --aero-canvas-bg:
-    radial-gradient(120% 36% at 20% 0%, rgba(216, 188, 156, 0.42) 0%, transparent 72%),
-    radial-gradient(120% 40% at 85% 100%, rgba(154, 186, 216, 0.46) 0%, transparent 72%),
-    linear-gradient(180deg, #dad4ca 0%, #d5d2cc 50%, #cdd5dd 100%);
+    radial-gradient(115% 34% at 15% 0%, rgba(255, 228, 188, 0.58) 0%, transparent 70%),
+    radial-gradient(125% 42% at 85% 100%, rgba(120, 198, 245, 0.45) 0%, transparent 72%),
+    linear-gradient(180deg, #e7edf2 0%, #dfeaf3 50%, #d1e4f3 100%);
 
-  /* 设置抽屉与悬浮面板 */
-  --aero-panel-bg: rgba(237, 234, 228, 0.90);
-  --aero-panel-surface: linear-gradient(180deg, rgba(253, 251, 248, 0.92) 0%, rgba(242, 239, 233, 0.88) 48%, rgba(235, 231, 224, 0.90) 50%, rgba(241, 238, 231, 0.94) 100%);
-  --aero-panel-control-bg: rgba(255, 255, 255, 0.88);
-  --aero-panel-control-hover: rgba(46, 103, 150, 0.14);
-  --aero-panel-text: #282420;
-  --aero-panel-subtext: #686157;
-  --aero-panel-border: rgba(88, 78, 66, 0.26);
-  --aero-inner-bevel: rgba(255, 255, 255, 0.72);
+  /* 所有菜单与设置抽屉：100% 不透明纯净珍珠底 */
+  --aero-panel-bg: #f6f8fb;
+  --aero-panel-surface: linear-gradient(180deg, #ffffff 0%, #f1f5f9 48%, #e6edf5 50%, #eef3f8 100%);
+  --aero-panel-control-bg: #ffffff;
+  --aero-panel-control-hover: #e2effa;
+  --aero-panel-text: #1f252d;
+  --aero-panel-subtext: #5f6c7b;
+  --aero-panel-border: #bdd0e2;
+  --aero-inner-bevel: rgba(255, 255, 255, 0.92);
 
-  /* 1. 顶部暖区（熏茶琉璃：低存在感，但有晶体切面与内倒角） */
+  /* 1. 顶部暖区（轻盈香槟珍珠玻璃：保持低存在感但不沉重） */
   --aero-top-bg: linear-gradient(
     180deg,
-    rgba(232, 223, 211, 0.82) 0%,
-    rgba(222, 212, 199, 0.76) 46%,
-    rgba(210, 199, 185, 0.80) 48%,
-    rgba(216, 206, 193, 0.86) 100%
+    rgba(252, 246, 237, 0.80) 0%,
+    rgba(246, 236, 222, 0.70) 46%,
+    rgba(238, 226, 210, 0.74) 48%,
+    rgba(244, 234, 220, 0.82) 100%
   );
-  --aero-top-specular: rgba(255, 252, 247, 0.72);
-  --aero-top-border: rgba(98, 82, 65, 0.24);
-  --aero-top-icon: rgba(70, 58, 46, 0.60);
-  --aero-top-icon-active: #96521f;
-  --aero-top-pill-active: linear-gradient(180deg, rgba(255, 248, 240, 0.55) 0%, rgba(186, 126, 74, 0.18) 100%);
+  --aero-top-specular: rgba(255, 255, 255, 0.88);
+  --aero-top-border: rgba(156, 132, 102, 0.22);
+  --aero-top-icon: rgba(96, 78, 58, 0.56);
+  --aero-top-icon-active: #c2691d;
+  --aero-top-pill-active: linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, rgba(242, 206, 164, 0.45) 100%);
 
-  /* 2. 中部卡片：双层倒角玻璃铭牌 + 稳重纸感正文 */
+  /* 2. 对话卡片：通透晶边 + 轻盈明净纸面 */
   --aero-card-shadow:
-    0 3px 10px rgba(42, 36, 30, 0.10),
-    0 1px 2px rgba(42, 36, 30, 0.08);
-  --aero-card-border: rgba(86, 78, 68, 0.26);
+    0 3px 12px rgba(32, 62, 92, 0.09),
+    0 1px 3px rgba(32, 62, 92, 0.06);
+  --aero-card-border: rgba(108, 140, 170, 0.30);
 
-  /* AI 铭牌：46% 棱镜光泽切线 */
+  /* AI 铭牌：明净珍珠白 + 暖金珀微光切线 */
   --aero-ai-header-bg: linear-gradient(
     180deg,
-    rgba(253, 251, 248, 0.96) 0%,
-    rgba(241, 236, 228, 0.90) 46%,
-    rgba(230, 224, 214, 0.92) 48%,
-    rgba(236, 231, 222, 0.95) 100%
+    rgba(255, 255, 255, 0.98) 0%,
+    rgba(248, 246, 242, 0.92) 46%,
+    rgba(240, 236, 230, 0.94) 48%,
+    rgba(246, 243, 238, 0.98) 100%
   );
-  --aero-ai-bevel: rgba(255, 255, 255, 0.82);
-  --aero-ai-accent: rgba(172, 110, 58, 0.62);
-  --aero-ai-body-bg: #f4f2ed;
-  --aero-ai-text: #302c27;
-  --aero-ai-quote: #18517d;
-  --aero-ai-em: #696259;
+  --aero-ai-bevel: rgba(255, 255, 255, 0.95);
+  --aero-ai-accent: rgba(218, 136, 62, 0.76);
+  --aero-ai-body-bg: #faf9f6;
+  --aero-ai-text: #262a30;
+  --aero-ai-quote: #115f99;
+  --aero-ai-em: #66707c;
 
-  /* 用户铭牌：46% 冷雾光泽切线 */
+  /* 用户铭牌：清透 Vista 冰蓝水光切线 */
   --aero-user-header-bg: linear-gradient(
     180deg,
-    rgba(245, 249, 253, 0.96) 0%,
-    rgba(229, 237, 245, 0.90) 46%,
-    rgba(216, 226, 237, 0.92) 48%,
-    rgba(223, 232, 242, 0.95) 100%
+    rgba(248, 252, 255, 0.98) 0%,
+    rgba(232, 244, 255, 0.92) 46%,
+    rgba(216, 235, 252, 0.94) 48%,
+    rgba(228, 242, 254, 0.98) 100%
   );
-  --aero-user-bevel: rgba(255, 255, 255, 0.78);
-  --aero-user-accent: rgba(66, 112, 152, 0.64);
-  --aero-user-body-bg: #eaeef3;
-  --aero-user-text: #222931;
+  --aero-user-bevel: rgba(255, 255, 255, 0.95);
+  --aero-user-accent: rgba(34, 148, 224, 0.82);
+  --aero-user-body-bg: #f1f6fb;
+  --aero-user-text: #1d2733;
 
-  --aero-surface-split: rgba(86, 78, 68, 0.18);
-  --aero-name-color: #23201c;
-  --aero-meta-color: #676158;
+  --aero-surface-split: rgba(112, 142, 172, 0.18);
+  --aero-name-color: #1e242c;
+  --aero-meta-color: #627080;
 
-  /* 宝石感楼层徽标 */
-  --aero-floor-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.78) 0%, rgba(224, 220, 212, 0.75) 50%, rgba(212, 207, 198, 0.85) 100%);
-  --aero-floor-border: rgba(92, 82, 70, 0.28);
-  --aero-floor-text: #443d35;
+  /* Vista 冰蓝水晶楼层徽标（画龙点睛的灵动微件） */
+  --aero-floor-bg: linear-gradient(180deg, #ffffff 0%, #e5f2fc 48%, #cde4f8 52%, #dff0fd 100%);
+  --aero-floor-border: rgba(82, 148, 204, 0.45);
+  --aero-floor-text: #155588;
 
-  /* Vista 头像水晶相框 */
-  --aero-avatar-bezel: linear-gradient(145deg, rgba(255, 255, 255, 0.92) 0%, rgba(216, 222, 230, 0.72) 55%, rgba(185, 192, 202, 0.80) 100%);
+  /* Vista 晶莹相框 */
+  --aero-avatar-bezel: linear-gradient(145deg, #ffffff 0%, #d8e8f6 55%, #b4cde4 100%);
 
-  --aero-action-muted: rgba(66, 58, 50, 0.62);
-  --aero-action-bg: rgba(246, 244, 240, 0.96);
-  --aero-editbar-bg: linear-gradient(180deg, rgba(232, 227, 218, 0.88) 0%, rgba(225, 219, 209, 0.94) 100%);
+  --aero-action-muted: rgba(74, 92, 112, 0.58);
+  --aero-action-bg: #f7fafe; /* 100% 不透明 */
+  --aero-editbar-bg: linear-gradient(180deg, #eef4fa 0%, #e5eef7 100%);
 
-  /* 3. 底部冷区（冰湖琉璃控制台） */
+  /* 3. 底部冷区（经典 Vista 冰湖水青玻璃坞） */
   --aero-bottom-bg: linear-gradient(
     180deg,
-    rgba(220, 231, 241, 0.82) 0%,
-    rgba(202, 216, 230, 0.78) 44%,
-    rgba(186, 203, 221, 0.88) 46%,
-    rgba(196, 212, 228, 0.94) 100%
+    rgba(222, 240, 254, 0.82) 0%,
+    rgba(196, 226, 250, 0.76) 44%,
+    rgba(174, 214, 246, 0.86) 46%,
+    rgba(192, 224, 250, 0.92) 100%
   );
-  --aero-bottom-specular: rgba(255, 255, 255, 0.82);
-  --aero-bottom-border: rgba(62, 88, 114, 0.28);
-  --aero-input-bg: rgba(251, 253, 255, 0.94);
-  --aero-input-border: rgba(74, 98, 124, 0.30);
-  --aero-input-text: #1b222a;
-  --aero-bottom-icon: rgba(42, 62, 84, 0.84);
-  --aero-send-bg: linear-gradient(180deg, #5c98c8 0%, #3d79aa 49%, #2c6594 51%, #3571a2 100%);
+  --aero-bottom-specular: rgba(255, 255, 255, 0.90);
+  --aero-bottom-border: rgba(78, 138, 190, 0.34);
+  --aero-input-bg: #ffffff;
+  --aero-input-border: rgba(92, 144, 192, 0.38);
+  --aero-input-text: #1b2430;
+  --aero-bottom-icon: rgba(30, 68, 104, 0.85);
+  --aero-send-bg: linear-gradient(180deg, #6cc0f8 0%, #2b92dc 49%, #197ac4 51%, #288bd6 100%);
   --aero-send-text: #ffffff;
 }
 
-/* ---------- 气候方案 2（备选）：夜间深色 Neo Aero（黑曜石琉璃）---------- */
+/* ---------- 气候方案 2（备选）：夜间极光深海琉璃 ---------- */
 :root[data-aero-theme="night"] {
-  --SmartThemeBodyColor: #c8c3bb;
-  --SmartThemeEmColor: #8d877e;
-  --SmartThemeUnderlineColor: #6ea8d8;
-  --SmartThemeQuoteColor: #93c4e8;
-  --SmartThemeBlurTintColor: rgba(24, 27, 33, 0.92);
-  --SmartThemeChatTintColor: #141518;
-  --SmartThemeUserMesBlurTintColor: #191e24;
-  --SmartThemeBotMesBlurTintColor: #1f1f22;
+  --SmartThemeBodyColor: #cdd3dc;
+  --SmartThemeEmColor: #8994a3;
+  --SmartThemeUnderlineColor: #66b8f2;
+  --SmartThemeQuoteColor: #8cd0ff;
+  --SmartThemeBlurTintColor: #19202b;
+  --SmartThemeChatTintColor: #101620;
+  --SmartThemeUserMesBlurTintColor: #151e2a;
+  --SmartThemeBotMesBlurTintColor: #1a1f27;
   --SmartThemeShadowColor: rgba(0, 0, 0, 0.45);
-  --SmartThemeBorderColor: rgba(180, 198, 220, 0.16);
+  --SmartThemeBorderColor: rgba(116, 174, 224, 0.22);
   --black30a: rgba(0, 0, 0, 0.30);
   --black50a: rgba(0, 0, 0, 0.45);
-  --black70a: rgba(18, 20, 24, 0.90);
-  --white20a: rgba(255, 255, 255, 0.12);
-  --white30a: rgba(255, 255, 255, 0.18);
+  --black70a: #151b24;
+  --white20a: rgba(160, 210, 255, 0.14);
+  --white30a: rgba(160, 210, 255, 0.20);
 
+  /* 深海夜空极光画布：微暖余晖顶 -> 极光深海蓝底 */
   --aero-canvas-bg:
-    radial-gradient(120% 36% at 20% 0%, rgba(112, 74, 46, 0.30) 0%, transparent 72%),
-    radial-gradient(120% 42% at 85% 100%, rgba(44, 78, 114, 0.38) 0%, transparent 72%),
-    linear-gradient(180deg, #171516 0%, #131518 50%, #11161d 100%);
+    radial-gradient(115% 34% at 15% 0%, rgba(146, 86, 48, 0.26) 0%, transparent 70%),
+    radial-gradient(125% 44% at 85% 100%, rgba(28, 128, 184, 0.34) 0%, transparent 72%),
+    linear-gradient(180deg, #13161e 0%, #101620 50%, #0d1724 100%);
 
-  --aero-panel-bg: rgba(24, 27, 33, 0.90);
-  --aero-panel-surface: linear-gradient(180deg, rgba(44, 49, 58, 0.88) 0%, rgba(33, 37, 45, 0.88) 49%, rgba(27, 30, 37, 0.92) 51%, rgba(33, 37, 45, 0.92) 100%);
-  --aero-panel-control-bg: rgba(14, 17, 22, 0.88);
-  --aero-panel-control-hover: rgba(110, 168, 216, 0.18);
-  --aero-panel-text: #dcd8d2;
-  --aero-panel-subtext: #959aa3;
-  --aero-panel-border: rgba(175, 195, 218, 0.16);
-  --aero-inner-bevel: rgba(255, 255, 255, 0.11);
+  /* 所有菜单与设置抽屉：100% 不透明深海石板底 */
+  --aero-panel-bg: #18202b;
+  --aero-panel-surface: linear-gradient(180deg, #273344 0%, #1e2836 49%, #18212e 51%, #1f2938 100%);
+  --aero-panel-control-bg: #10161f;
+  --aero-panel-control-hover: #243950;
+  --aero-panel-text: #dce3ed;
+  --aero-panel-subtext: #8e9cb0;
+  --aero-panel-border: #2e435b;
+  --aero-inner-bevel: rgba(180, 220, 255, 0.14);
 
   --aero-top-bg: linear-gradient(
     180deg,
-    rgba(50, 42, 37, 0.84) 0%,
-    rgba(38, 32, 29, 0.78) 46%,
-    rgba(28, 24, 22, 0.84) 48%,
-    rgba(32, 28, 25, 0.88) 100%
+    rgba(48, 41, 38, 0.84) 0%,
+    rgba(36, 31, 30, 0.76) 46%,
+    rgba(26, 23, 24, 0.82) 48%,
+    rgba(31, 27, 27, 0.88) 100%
   );
-  --aero-top-specular: rgba(255, 228, 200, 0.16);
+  --aero-top-specular: rgba(255, 224, 192, 0.20);
   --aero-top-border: rgba(0, 0, 0, 0.55);
-  --aero-top-icon: rgba(214, 203, 192, 0.58);
-  --aero-top-icon-active: #e09f67;
-  --aero-top-pill-active: linear-gradient(180deg, rgba(255, 210, 170, 0.18) 0%, rgba(190, 120, 60, 0.10) 100%);
+  --aero-top-icon: rgba(224, 212, 198, 0.58);
+  --aero-top-icon-active: #f0a868;
+  --aero-top-pill-active: linear-gradient(180deg, rgba(255, 206, 160, 0.22) 0%, rgba(196, 122, 58, 0.12) 100%);
 
-  --aero-card-shadow: 0 4px 14px rgba(0, 0, 0, 0.48), 0 1px 2px rgba(0, 0, 0, 0.35);
-  --aero-card-border: rgba(0, 0, 0, 0.65);
+  --aero-card-shadow: 0 4px 16px rgba(0, 0, 0, 0.45), 0 1px 2px rgba(0, 0, 0, 0.35);
+  --aero-card-border: rgba(110, 166, 218, 0.20);
 
   --aero-ai-header-bg: linear-gradient(
     180deg,
-    rgba(58, 52, 48, 0.94) 0%,
-    rgba(45, 41, 38, 0.90) 46%,
-    rgba(35, 32, 30, 0.94) 48%,
-    rgba(40, 37, 34, 0.95) 100%
+    rgba(50, 52, 60, 0.96) 0%,
+    rgba(38, 40, 48, 0.92) 46%,
+    rgba(29, 32, 39, 0.96) 48%,
+    rgba(34, 37, 45, 0.98) 100%
   );
-  --aero-ai-bevel: rgba(255, 238, 220, 0.13);
-  --aero-ai-accent: rgba(206, 138, 82, 0.62);
-  --aero-ai-body-bg: #1f1f22;
-  --aero-ai-text: #c8c3bb;
-  --aero-ai-quote: #93c4e8;
-  --aero-ai-em: #8d877e;
+  --aero-ai-bevel: rgba(255, 240, 224, 0.14);
+  --aero-ai-accent: rgba(226, 148, 76, 0.75);
+  --aero-ai-body-bg: #1a1f27;
+  --aero-ai-text: #cdd3dc;
+  --aero-ai-quote: #8cd0ff;
+  --aero-ai-em: #8994a3;
 
   --aero-user-header-bg: linear-gradient(
     180deg,
-    rgba(44, 54, 65, 0.94) 0%,
-    rgba(34, 42, 51, 0.90) 46%,
-    rgba(25, 32, 40, 0.94) 48%,
-    rgba(30, 38, 46, 0.95) 100%
+    rgba(36, 58, 84, 0.96) 0%,
+    rgba(26, 46, 68, 0.92) 46%,
+    rgba(19, 36, 56, 0.96) 48%,
+    rgba(24, 42, 64, 0.98) 100%
   );
-  --aero-user-bevel: rgba(200, 228, 255, 0.14);
-  --aero-user-accent: rgba(96, 152, 198, 0.64);
-  --aero-user-body-bg: #191e24;
-  --aero-user-text: #cdd6df;
+  --aero-user-bevel: rgba(160, 218, 255, 0.18);
+  --aero-user-accent: rgba(68, 178, 242, 0.84);
+  --aero-user-body-bg: #151e2a;
+  --aero-user-text: #d4e2f0;
 
-  --aero-surface-split: rgba(255, 255, 255, 0.08);
-  --aero-name-color: #e6e2db;
-  --aero-meta-color: #90959c;
+  --aero-surface-split: rgba(130, 185, 235, 0.12);
+  --aero-name-color: #ebf0f7;
+  --aero-meta-color: #8a99ad;
 
-  --aero-floor-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(0, 0, 0, 0.16) 100%);
-  --aero-floor-border: rgba(255, 255, 255, 0.14);
-  --aero-floor-text: #c4bfb6;
+  --aero-floor-bg: linear-gradient(180deg, rgba(112, 188, 248, 0.24) 0%, rgba(56, 134, 200, 0.16) 50%, rgba(28, 78, 128, 0.24) 100%);
+  --aero-floor-border: rgba(112, 188, 248, 0.34);
+  --aero-floor-text: #a2d4fc;
 
-  --aero-avatar-bezel: linear-gradient(145deg, rgba(210, 225, 240, 0.34) 0%, rgba(120, 135, 150, 0.18) 55%, rgba(40, 48, 56, 0.45) 100%);
+  --aero-avatar-bezel: linear-gradient(145deg, rgba(190, 226, 255, 0.42) 0%, rgba(92, 136, 178, 0.24) 55%, rgba(24, 40, 58, 0.6) 100%);
 
-  --aero-action-muted: rgba(212, 212, 218, 0.58);
-  --aero-action-bg: rgba(31, 36, 44, 0.96);
-  --aero-editbar-bg: linear-gradient(180deg, rgba(28, 31, 36, 0.92) 0%, rgba(22, 24, 28, 0.96) 100%);
+  --aero-action-muted: rgba(198, 214, 232, 0.60);
+  --aero-action-bg: #1c2634; /* 100% 不透明 */
+  --aero-editbar-bg: linear-gradient(180deg, #1d2735 0%, #17202c 100%);
 
   --aero-bottom-bg: linear-gradient(
     180deg,
-    rgba(34, 44, 56, 0.84) 0%,
-    rgba(24, 32, 42, 0.80) 44%,
-    rgba(16, 23, 31, 0.90) 46%,
-    rgba(20, 28, 37, 0.94) 100%
+    rgba(30, 56, 84, 0.84) 0%,
+    rgba(20, 42, 66, 0.78) 44%,
+    rgba(13, 30, 50, 0.88) 46%,
+    rgba(17, 36, 58, 0.94) 100%
   );
-  --aero-bottom-specular: rgba(175, 215, 255, 0.20);
-  --aero-bottom-border: rgba(0, 0, 0, 0.60);
-  --aero-input-bg: rgba(13, 17, 23, 0.90);
-  --aero-input-border: rgba(130, 170, 210, 0.22);
-  --aero-input-text: #dce3eb;
-  --aero-bottom-icon: rgba(186, 208, 230, 0.82);
-  --aero-send-bg: linear-gradient(180deg, #4b86b8 0%, #346896 49%, #26547d 51%, #2d608c 100%);
-  --aero-send-text: #edf5fc;
+  --aero-bottom-specular: rgba(160, 218, 255, 0.28);
+  --aero-bottom-border: rgba(82, 152, 214, 0.24);
+  --aero-input-bg: #0f151e;
+  --aero-input-border: rgba(98, 158, 214, 0.28);
+  --aero-input-text: #e0eaf5;
+  --aero-bottom-icon: rgba(178, 216, 250, 0.86);
+  --aero-send-bg: linear-gradient(180deg, #5cb2f0 0%, #2a82c4 49%, #1b69a6 51%, #2376b8 100%);
+  --aero-send-text: #f2f8ff;
 }
 
 /* ==========================================================================
-   全局环境光画布、抽屉面板与 Neo-Aero 按钮控件
+   全局画布 & 100% 不透明菜单/设置面板
    ========================================================================== */
 
 body {
@@ -242,6 +244,7 @@ body {
   font-family: var(--aero-font-sans);
 }
 
+/* 所有设置抽屉、弹窗、列表、横菜单强制 100% 不透明，文字锐利无透底干扰 */
 .drawer-content,
 .popup,
 #dialogue_popup,
@@ -249,20 +252,19 @@ body {
 .list-group,
 .character_select_container {
   background: var(--aero-panel-bg) !important;
+  background-color: var(--aero-panel-bg) !important;
   color: var(--aero-panel-text) !important;
   border: 1px solid var(--aero-panel-border) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
 }
 
 .drawer-content {
-  backdrop-filter: blur(18px) saturate(135%);
-  -webkit-backdrop-filter: blur(18px) saturate(135%);
   box-shadow:
     inset 0 1px 0 var(--aero-inner-bevel),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
-    0 10px 30px var(--SmartThemeShadowColor) !important;
+    0 12px 32px var(--SmartThemeShadowColor) !important;
 }
 
-/* 凹嵌玻璃输入槽 */
 .drawer-content .text_pole,
 .drawer-content textarea,
 .drawer-content select,
@@ -276,11 +278,10 @@ body {
   border: 1px solid var(--aero-panel-border) !important;
   border-radius: 5px;
   box-shadow:
-    inset 0 1px 3px rgba(0, 0, 0, 0.10),
+    inset 0 1px 3px rgba(0, 0, 0, 0.08),
     0 1px 0 var(--aero-inner-bevel);
 }
 
-/* 凸起亚克力按钮与折叠条 */
 .drawer-content .menu_button,
 .popup .menu_button,
 .drawer-content .inline-drawer-toggle.inline-drawer-header,
@@ -292,7 +293,7 @@ body {
   border-radius: 6px;
   box-shadow:
     inset 0 1px 0 var(--aero-inner-bevel),
-    0 1px 2px rgba(0, 0, 0, 0.08);
+    0 1px 2px rgba(0, 0, 0, 0.06);
 }
 
 .drawer-content small,
@@ -302,12 +303,10 @@ body {
 }
 
 #options {
-  backdrop-filter: blur(16px) saturate(130%);
-  -webkit-backdrop-filter: blur(16px) saturate(130%);
   border-radius: 9px !important;
   box-shadow:
     inset 0 1px 0 var(--aero-inner-bevel),
-    0 8px 24px var(--SmartThemeShadowColor) !important;
+    0 10px 28px var(--SmartThemeShadowColor) !important;
 }
 
 #options .options-content a {
@@ -354,21 +353,21 @@ body {
 }
 
 /* ==========================================================================
-   1. 顶部暖区：退隐式熏茶琉璃冠层
+   1. 顶部暖区（轻盈香槟珍珠玻璃冠层）
    ========================================================================== */
 
 #top-bar {
   height: 38px !important;
   min-height: 38px !important;
   background: var(--aero-top-bg) !important;
-  backdrop-filter: blur(16px) saturate(135%);
-  -webkit-backdrop-filter: blur(16px) saturate(135%);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
   border-top: 1px solid var(--aero-top-specular) !important;
   border-bottom: 1px solid var(--aero-top-border) !important;
   border-radius: 0 !important;
   box-shadow:
-    inset 0 -1px 0 rgba(255, 255, 255, 0.14),
-    0 2px 8px rgba(0, 0, 0, 0.08) !important;
+    inset 0 -1px 0 rgba(255, 255, 255, 0.25),
+    0 2px 8px rgba(24, 48, 74, 0.06) !important;
   padding: 0 4px !important;
   display: flex;
   align-items: center;
@@ -427,7 +426,7 @@ body {
   vertical-align: top !important;
   color: var(--aero-top-icon) !important;
   opacity: 1 !important;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.45) !important;
   filter: none !important;
   background: transparent !important;
 }
@@ -441,7 +440,7 @@ body {
 }
 
 /* ==========================================================================
-   2. 对话区：双层倒角玻璃铭牌 + Vista 水晶相框 + 独立正文平面
+   2. 对话区：清冽双表面卡片
    ========================================================================== */
 
 #chat > .mes {
@@ -485,25 +484,25 @@ body {
 .mes:not([is_user="true"]) > .mes_block {
   background: var(--aero-ai-body-bg);
   color: var(--aero-ai-text);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.45);
 }
 
 :root[data-aero-theme="night"] .mes[is_user="false"] > .mes_block,
 :root[data-aero-theme="night"] .mes:not([is_user="true"]) > .mes_block {
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+  box-shadow: inset 0 0 0 1px rgba(180, 215, 255, 0.05);
 }
 
 .mes[is_user="true"] > .mes_block {
   background: var(--aero-user-body-bg);
   color: var(--aero-user-text);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.55);
 }
 
 :root[data-aero-theme="night"] .mes[is_user="true"] > .mes_block {
-  box-shadow: inset 0 0 0 1px rgba(190, 220, 255, 0.05);
+  box-shadow: inset 0 0 0 1px rgba(130, 200, 255, 0.07);
 }
 
-/* ----- 表面 A：带双层倒角与46%光泽切线的玻璃铭牌 ----- */
+/* ----- 表面 A：信息铭牌 ----- */
 .aero-mes-header {
   display: flex;
   align-items: center;
@@ -527,7 +526,7 @@ body {
   background: var(--aero-ai-header-bg);
   box-shadow:
     inset 0 1px 0 var(--aero-ai-bevel),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.16),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.25),
     inset 3px 0 0 var(--aero-ai-accent);
 }
 
@@ -535,25 +534,25 @@ body {
   background: var(--aero-user-header-bg);
   box-shadow:
     inset 0 1px 0 var(--aero-user-bevel),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.16),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.28),
     inset 3px 0 0 var(--aero-user-accent);
 }
 
 :root[data-aero-theme="night"] .aero-mes-header {
   box-shadow:
     inset 0 1px 0 var(--aero-ai-bevel),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+    inset 0 0 0 1px rgba(190, 220, 255, 0.05),
     inset 3px 0 0 var(--aero-ai-accent) !important;
 }
 
 :root[data-aero-theme="night"] .mes[is_user="true"] .aero-mes-header {
   box-shadow:
     inset 0 1px 0 var(--aero-user-bevel),
-    inset 0 0 0 1px rgba(200, 225, 255, 0.05),
+    inset 0 0 0 1px rgba(150, 210, 255, 0.07),
     inset 3px 0 0 var(--aero-user-accent) !important;
 }
 
-/* Vista 经典水晶相框（3:4 竖图 + 2px 琉璃包边 + 对角反光膜） */
+/* Vista 水晶相框 */
 .aero-avatar-slot {
   flex: 0 0 auto;
   display: flex;
@@ -574,13 +573,13 @@ body {
   background: var(--aero-avatar-bezel) !important;
   border: 1px solid var(--aero-card-border) !important;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.72),
-    0 2px 5px rgba(0, 0, 0, 0.16) !important;
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    0 2px 6px rgba(24, 52, 82, 0.14) !important;
 }
 
 :root[data-aero-theme="night"] .aero-avatar-slot .avatar {
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 1px 0 rgba(190, 226, 255, 0.28),
     0 2px 6px rgba(0, 0, 0, 0.45) !important;
 }
 
@@ -600,7 +599,6 @@ body {
   display: block;
 }
 
-/* Vista 右上角斜向琉璃反光 */
 .aero-avatar-slot .avatar::after {
   content: "";
   position: absolute;
@@ -608,8 +606,8 @@ body {
   pointer-events: none;
   background: linear-gradient(
     132deg,
-    rgba(255, 255, 255, 0.34) 0%,
-    rgba(255, 255, 255, 0.08) 38%,
+    rgba(255, 255, 255, 0.40) 0%,
+    rgba(255, 255, 255, 0.10) 38%,
     transparent 40%
   );
   border-radius: inherit;
@@ -640,7 +638,7 @@ body {
   flex: 1 1 0;
 }
 
-/* 宝石感微缩楼层定位标 */
+/* Vista 冰蓝宝石楼层定位标 */
 .aero-identity-main .mesIDDisplay {
   flex: 0 0 auto;
   font-size: 11px !important;
@@ -652,8 +650,8 @@ body {
   background: var(--aero-floor-bg);
   border: 1px solid var(--aero-floor-border);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.55),
-    0 1px 1px rgba(0, 0, 0, 0.08);
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    0 1px 2px rgba(24, 68, 108, 0.10);
   color: var(--aero-floor-text) !important;
   opacity: 1 !important;
   margin: 0 !important;
@@ -661,8 +659,8 @@ body {
 
 :root[data-aero-theme="night"] .aero-identity-main .mesIDDisplay {
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.14),
-    0 1px 2px rgba(0, 0, 0, 0.32);
+    inset 0 1px 0 rgba(160, 216, 255, 0.22),
+    0 1px 2px rgba(0, 0, 0, 0.35);
 }
 
 .aero-identity-main .name_text {
@@ -704,6 +702,7 @@ body {
   border-radius: 5px;
 }
 
+/* ... 展开菜单：100% 不透明 */
 .aero-actions-wrap .mes_buttons .extraMesButtons {
   position: absolute !important;
   left: 0 !important;
@@ -717,18 +716,18 @@ body {
   box-sizing: border-box !important;
   z-index: 60 !important;
   background: var(--aero-action-bg) !important;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
   border-top: none !important;
   border-left: 1px solid var(--aero-card-border) !important;
   border-right: 1px solid var(--aero-card-border) !important;
   border-bottom: 1px solid var(--aero-card-border) !important;
   border-bottom-left-radius: 9px !important;
   border-bottom-right-radius: 9px !important;
-  padding: 6px 10px !important;
+  padding: 7px 10px !important;
   box-shadow:
     inset 0 1px 0 var(--aero-inner-bevel),
-    0 8px 20px rgba(0, 0, 0, 0.22) !important;
+    0 8px 22px var(--SmartThemeShadowColor) !important;
   flex-direction: row !important;
   flex-wrap: wrap !important;
   justify-content: flex-end !important;
@@ -755,8 +754,8 @@ body {
   padding: 0 4px !important;
   margin: 0 !important;
   border-radius: 5px;
-  background: var(--aero-floor-bg);
-  border: 1px solid var(--aero-floor-border);
+  background: var(--aero-panel-surface);
+  border: 1px solid var(--aero-panel-border);
   box-shadow: inset 0 1px 0 var(--aero-inner-bevel);
 }
 
@@ -838,7 +837,7 @@ body {
   border-left: 3px solid var(--aero-ai-quote);
   padding: 4px 10px;
   margin: 6px 0;
-  background: rgba(128, 128, 128, 0.06);
+  background: rgba(60, 130, 195, 0.07);
   color: var(--aero-ai-quote);
 }
 
@@ -855,7 +854,7 @@ body {
   border: 1px solid var(--aero-panel-border) !important;
   border-radius: 6px !important;
   padding: 8px 10px !important;
-  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.10);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.08);
 }
 
 .mes_block > .mes_reasoning_details {
@@ -863,13 +862,13 @@ body {
   border: 1px solid var(--aero-surface-split);
   border-radius: 6px;
   padding: 5px 9px;
-  background: rgba(128, 128, 128, 0.06);
+  background: rgba(110, 150, 190, 0.07);
   box-shadow: inset 0 1px 0 var(--aero-inner-bevel);
   font-size: 13px;
 }
 
 /* ==========================================================================
-   3. 底部冷区：冰湖琉璃控制台 + 凹嵌玻璃输入槽 + 宝石发送钮
+   3. 底部冷区：Vista 冰湖琉璃控制台
    ========================================================================== */
 
 #form_sheld {
@@ -881,8 +880,8 @@ body {
 
 #send_form {
   background: var(--aero-bottom-bg) !important;
-  backdrop-filter: blur(18px) saturate(140%);
-  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  backdrop-filter: blur(18px) saturate(145%);
+  -webkit-backdrop-filter: blur(18px) saturate(145%);
   border-top: 1px solid var(--aero-bottom-border) !important;
   border-left: none !important;
   border-right: none !important;
@@ -890,13 +889,12 @@ body {
   border-radius: 0 !important;
   box-shadow:
     inset 0 1px 0 var(--aero-bottom-specular),
-    0 -3px 12px rgba(0, 0, 0, 0.12) !important;
+    0 -3px 14px rgba(24, 58, 92, 0.10) !important;
   padding: 7px 8px calc(7px + env(safe-area-inset-bottom)) 8px !important;
   margin: 0 !important;
   width: 100% !important;
 }
 
-/* 凹嵌玻璃输入槽 */
 #send_textarea {
   background: var(--aero-input-bg) !important;
   border: 1px solid var(--aero-input-border) !important;
@@ -906,7 +904,7 @@ body {
   font-size: 15px !important;
   line-height: 1.45 !important;
   box-shadow:
-    inset 0 2px 5px rgba(0, 0, 0, 0.11),
+    inset 0 2px 5px rgba(28, 62, 98, 0.10),
     0 1px 0 var(--aero-bottom-specular) !important;
 }
 
@@ -914,7 +912,7 @@ body {
 #leftSendForm .fa-solid,
 #rightSendForm .fa-solid {
   color: var(--aero-bottom-icon) !important;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.45);
 }
 
 :root[data-aero-theme="night"] #options_button,
@@ -923,11 +921,10 @@ body {
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
 }
 
-/* 宝石质感发送按钮 */
 #send_but {
   background: var(--aero-send-bg) !important;
   color: var(--aero-send-text) !important;
-  border: 1px solid rgba(25, 62, 96, 0.55) !important;
+  border: 1px solid rgba(18, 86, 146, 0.65) !important;
   border-radius: 6px !important;
   min-width: 38px !important;
   height: 34px !important;
@@ -935,10 +932,10 @@ body {
   align-items: center !important;
   justify-content: center !important;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.48),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.14),
-    0 1px 3px rgba(0, 0, 0, 0.22) !important;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3) !important;
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.18),
+    0 1px 4px rgba(18, 72, 122, 0.28) !important;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25) !important;
 }
 
 :root[data-aero-hide-wand="true"] #extensionsMenuButton {
