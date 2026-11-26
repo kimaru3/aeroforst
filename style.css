@@ -468,39 +468,39 @@ body::-webkit-scrollbar,
 
 .aero-ribbon {
   position: absolute;
-  left: -12%;
-  top: -8%;
-  width: 124%;
-  height: 116%;
+  left: -18%;
+  top: -12%;
+  width: 136%;
+  height: 124%;
   will-change: transform, opacity;
 }
 
 .aero-ribbon-1 {
-  animation: aeroRibbonDrift1 24s ease-in-out infinite alternate;
+  animation: aeroRibbonDrift1 11s ease-in-out infinite alternate;
 }
 
 .aero-ribbon-2 {
-  animation: aeroRibbonDrift2 30s ease-in-out infinite alternate;
+  animation: aeroRibbonDrift2 14s ease-in-out infinite alternate;
 }
 
 @keyframes aeroRibbonDrift1 {
   0% {
-    transform: translate3d(-2%, -1.5%, 0) scale(1);
-    opacity: 0.85;
+    transform: translate3d(-8%, -5%, 0) rotate(-2.5deg) scale(1);
+    opacity: 0.78;
   }
   100% {
-    transform: translate3d(3%, 2.5%, 0) scale(1.04);
+    transform: translate3d(9%, 6%, 0) rotate(2.5deg) scale(1.08);
     opacity: 1;
   }
 }
 
 @keyframes aeroRibbonDrift2 {
   0% {
-    transform: translate3d(2.5%, 1.5%, 0) scale(1.03);
-    opacity: 0.78;
+    transform: translate3d(8%, 5%, 0) rotate(2.5deg) scale(1.06);
+    opacity: 0.72;
   }
   100% {
-    transform: translate3d(-3%, -2%, 0) scale(0.99);
+    transform: translate3d(-9%, -6%, 0) rotate(-2.5deg) scale(0.98);
     opacity: 0.96;
   }
 }
@@ -1411,25 +1411,15 @@ body::-webkit-scrollbar,
   text-align: center !important;
 }
 
-/* 状态精确分流：平时必显发送纸飞机（即使未连API测试）、生成中切为停止键 */
-:root:not([data-aero-generating="true"]) #rightSendForm #send_but:not(.displayNone) {
+/* 交由 ST 原生显隐控制：仅当停止键未显示时确保纸飞机可见；停止键完全不覆写 display */
+#rightSendForm:not(:has(#mes_stop[style*="display: flex"])) #send_but:not(.displayNone) {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
 }
 
-:root:not([data-aero-generating="true"]) #rightSendForm #mes_stop {
+#rightSendForm:has(#mes_stop[style*="display: flex"]) #send_but {
   display: none !important;
-}
-
-:root[data-aero-generating="true"] #rightSendForm #send_but {
-  display: none !important;
-}
-
-:root[data-aero-generating="true"] #rightSendForm #mes_stop {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
 }
 
 #rightSendForm #send_but,
