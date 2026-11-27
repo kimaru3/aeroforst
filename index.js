@@ -121,15 +121,44 @@ function mountAuroraStage() {
     stage.innerHTML = `
       <div class="aero-stage-wash"></div>
       <div class="aero-stage-ribbons">
-        <div class="aero-ribbon aero-ribbon-1"></div>
-        <div class="aero-ribbon aero-ribbon-2"></div>
+        <svg class="aero-eco-wallpaper" viewBox="0 0 400 840" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <!-- 植物水光波：荧光草绿 -> 薄荷绿 -> 晴空蓝 -->
+            <linearGradient id="neoBioWave" x1="0%" y1="100%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#64FF36" stop-opacity="0.48" />
+              <stop offset="48%" stop-color="#12EEB2" stop-opacity="0.44" />
+              <stop offset="100%" stop-color="#22C4FF" stop-opacity="0.38" />
+            </linearGradient>
+            <!-- 阳光果味波：阳光黄 -> 橘子橙 -> 珊瑚粉 -->
+            <linearGradient id="neoSolarWave" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#FFE838" stop-opacity="0.48" />
+              <stop offset="48%" stop-color="#FF8618" stop-opacity="0.42" />
+              <stop offset="100%" stop-color="#FF4888" stop-opacity="0.38" />
+            </linearGradient>
+            <!-- 棱镜细光丝 -->
+            <linearGradient id="neoLightThread" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.05" />
+              <stop offset="45%" stop-color="#FFFFFF" stop-opacity="0.88" />
+              <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.10" />
+            </linearGradient>
+          </defs>
+
+          <g class="aero-wave-group aero-wave-bio">
+            <path d="M-80,760 C60,640 120,420 240,340 C340,275 410,190 480,60 L480,290 C390,390 290,440 200,540 C105,645 30,780 -80,880 Z" fill="url(#neoBioWave)" />
+            <path d="M-80,760 C60,640 120,420 240,340 C340,275 410,190 480,60" fill="none" stroke="url(#neoLightThread)" stroke-width="1.6" />
+            <path d="M-60,790 C80,665 145,450 265,370 C360,305 425,220 490,95" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="0.8" />
+          </g>
+
+          <g class="aero-wave-group aero-wave-solar">
+            <path d="M-70,170 C70,120 180,260 270,350 C355,435 415,490 490,520 L490,710 C385,665 290,575 190,465 C95,360 15,275 -70,320 Z" fill="url(#neoSolarWave)" />
+            <path d="M-70,170 C70,120 180,260 270,350 C355,435 415,490 490,520" fill="none" stroke="url(#neoLightThread)" stroke-width="1.5" />
+            <path d="M-70,198 C65,152 168,288 258,378 C345,462 405,516 490,548" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width="0.8" />
+          </g>
+        </svg>
+
         <div class="aero-orb aero-orb-1"></div>
         <div class="aero-orb aero-orb-2"></div>
         <div class="aero-orb aero-orb-3"></div>
-        <div class="aero-orb aero-orb-4"></div>
-        <div class="aero-bubble aero-bubble-1"></div>
-        <div class="aero-bubble aero-bubble-2"></div>
-        <div class="aero-bubble aero-bubble-3"></div>
       </div>
       <div class="aero-stage-grain"></div>
     `;
