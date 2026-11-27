@@ -1698,6 +1698,21 @@ body::-webkit-scrollbar,
   font-size: 20px !important;
   transition: transform 0.14s ease, color 0.2s ease, filter 0.2s ease;
 }
+#rightSendForm #mes_stop {
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+#rightSendForm #send_but::before,
+#rightSendForm #mes_stop::before,
+#rightSendForm #mes_stop i {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
 
 #rightSendForm #send_but,
 #rightSendForm #send_but i,
