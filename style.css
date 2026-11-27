@@ -977,9 +977,10 @@ body::-webkit-scrollbar,
 #top-settings-holder .drawer-icon {
   margin: 0 !important;
   padding: 0 !important;
-  width: auto !important;
+  width: 100% !important;
   height: 30px !important;
   line-height: 30px !important;
+  text-align: center !important;
   font-size: 16.5px !important;
   vertical-align: top !important;
   color: var(--aero-top-icon) !important;
