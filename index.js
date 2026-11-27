@@ -123,36 +123,35 @@ function mountAuroraStage() {
       <div class="aero-stage-ribbons">
         <svg class="aero-eco-wallpaper" viewBox="0 0 400 840" preserveAspectRatio="xMidYMid slice">
           <defs>
-            <!-- 植物水光波：荧光草绿 -> 薄荷绿 -> 晴空蓝 -->
+            <!-- 浅色系高明度植物水光波：荧光草绿 -> 冰薄荷 -> 晴空蓝 -->
             <linearGradient id="neoBioWave" x1="0%" y1="100%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#64FF36" stop-opacity="0.48" />
-              <stop offset="48%" stop-color="#12EEB2" stop-opacity="0.44" />
-              <stop offset="100%" stop-color="#22C4FF" stop-opacity="0.38" />
+              <stop offset="0%" stop-color="#98FF66" stop-opacity="0.56" />
+              <stop offset="48%" stop-color="#5CFFE0" stop-opacity="0.50" />
+              <stop offset="100%" stop-color="#6ED8FF" stop-opacity="0.46" />
             </linearGradient>
-            <!-- 阳光果味波：阳光黄 -> 橘子橙 -> 珊瑚粉 -->
+            <!-- 浅色系高明度阳光果味波：柠檬阳光黄 -> 蜜橘橙 -> 樱花珊瑚粉 -->
             <linearGradient id="neoSolarWave" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#FFE838" stop-opacity="0.48" />
-              <stop offset="48%" stop-color="#FF8618" stop-opacity="0.42" />
-              <stop offset="100%" stop-color="#FF4888" stop-opacity="0.38" />
+              <stop offset="0%" stop-color="#FFF266" stop-opacity="0.58" />
+              <stop offset="48%" stop-color="#FFB052" stop-opacity="0.46" />
+              <stop offset="100%" stop-color="#FF85B3" stop-opacity="0.42" />
             </linearGradient>
-            <!-- 棱镜细光丝 -->
             <linearGradient id="neoLightThread" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.05" />
-              <stop offset="45%" stop-color="#FFFFFF" stop-opacity="0.88" />
-              <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.10" />
+              <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.15" />
+              <stop offset="48%" stop-color="#FFFFFF" stop-opacity="0.95" />
+              <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.20" />
             </linearGradient>
           </defs>
 
           <g class="aero-wave-group aero-wave-bio">
-            <path d="M-80,760 C60,640 120,420 240,340 C340,275 410,190 480,60 L480,290 C390,390 290,440 200,540 C105,645 30,780 -80,880 Z" fill="url(#neoBioWave)" />
-            <path d="M-80,760 C60,640 120,420 240,340 C340,275 410,190 480,60" fill="none" stroke="url(#neoLightThread)" stroke-width="1.6" />
-            <path d="M-60,790 C80,665 145,450 265,370 C360,305 425,220 490,95" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="0.8" />
+            <path d="M-80,780 C45,670 110,490 245,410 C350,348 415,245 480,100 L480,320 C395,435 290,485 195,585 C95,690 20,805 -80,895 Z" fill="url(#neoBioWave)" />
+            <path d="M-80,780 C45,670 110,490 245,410 C350,348 415,245 480,100" fill="none" stroke="url(#neoLightThread)" stroke-width="1.8" />
+            <path d="M-60,810 C65,695 135,520 270,440 C370,378 430,275 490,135" fill="none" stroke="rgba(255,255,255,0.65)" stroke-width="0.9" />
           </g>
 
           <g class="aero-wave-group aero-wave-solar">
-            <path d="M-70,170 C70,120 180,260 270,350 C355,435 415,490 490,520 L490,710 C385,665 290,575 190,465 C95,360 15,275 -70,320 Z" fill="url(#neoSolarWave)" />
-            <path d="M-70,170 C70,120 180,260 270,350 C355,435 415,490 490,520" fill="none" stroke="url(#neoLightThread)" stroke-width="1.5" />
-            <path d="M-70,198 C65,152 168,288 258,378 C345,462 405,516 490,548" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width="0.8" />
+            <path d="M-70,130 C75,85 185,205 275,285 C365,365 425,405 495,435 L495,625 C390,585 285,500 185,395 C90,295 15,220 -70,265 Z" fill="url(#neoSolarWave)" />
+            <path d="M-70,130 C75,85 185,205 275,285 C365,365 425,405 495,435" fill="none" stroke="url(#neoLightThread)" stroke-width="1.6" />
+            <path d="M-70,158 C70,115 175,232 265,312 C352,390 415,432 495,462" fill="none" stroke="rgba(255,255,255,0.60)" stroke-width="0.9" />
           </g>
         </svg>
 
