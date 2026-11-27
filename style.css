@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Aero Mobile UI v7.5 - 精工级 Neo Frutiger（菲涅尔玻璃 + 5色矢量生态壁纸）
+   Aero Mobile UI v8.0 - 完整正式版（Android Chrome）
    ========================================================================== */
 
 :root {
@@ -11,7 +11,6 @@
   --aero-humanist-font: inherit;
   --aero-grain-img: none;
   --aero-wash-opacity: 1;
-  --aero-bg-opacity: 0;
   --aero-bg-blur: 3px;
   --aero-ai-alpha-top: 0.74;
   --aero-ai-alpha-bot: 0.64;
@@ -43,7 +42,7 @@
 }
 
 /* ==========================================================================
-   第一层：精工高光光谱体系
+   第一层：浅色日光高饱和糖果光谱体系
    ========================================================================== */
 
 :root[data-aero-theme="day"],
@@ -53,7 +52,7 @@
   --spec-emerald-ink: #08845B;
 
   --spec-sun: #FFE838;
-  --spec-orange: #FF6A00;
+  --spec-orange: #FF6E00;
   --spec-coral: #FF4888;
   --spec-coral-ink: #D42862;
 
@@ -64,20 +63,19 @@
   --spec-violet: #8C62FF;
   --spec-violet-ink: #6A3EE0;
 
-  /* 更清澈的日光白空底布：用高净度衬托 5 色生态壁纸的贵气 */
   --aero-base-bg: #f3fcff;
-  --aurora-ambient-canvas: linear-gradient(168deg, #effff9 0%, #f3fbff 52%, #fffef4 100%);
+  --aurora-ambient-canvas: linear-gradient(168deg, #eefff9 0%, #f3fbff 52%, #fffef4 100%);
 
   --aero-prism-rim: linear-gradient(
     90deg,
-    rgba(100, 255, 54, 0.75) 0%,
-    rgba(22, 224, 168, 0.75) 22%,
-    rgba(255, 232, 56, 0.80) 44%,
-    rgba(255, 106, 0, 0.80) 64%,
-    rgba(255, 72, 136, 0.78) 82%,
+    rgba(116, 255, 77, 0.78) 0%,
+    rgba(22, 224, 168, 0.78) 22%,
+    rgba(255, 232, 56, 0.82) 44%,
+    rgba(255, 110, 0, 0.82) 64%,
+    rgba(255, 72, 136, 0.80) 82%,
     rgba(30, 182, 248, 0.85) 100%
   );
-  --aero-grain-opacity: 0.06;
+  --aero-grain-opacity: 0.08;
 
   --prose-ai-ink: #14202b;
   --prose-ai-em: #4c6272;
@@ -103,7 +101,6 @@
   --grey70: #36575e;
   --greyCAI: #44666c;
 
-  /* 菜单：100% 不透明精工白玉 */
   --aero-panel-bg: #f4fcf9;
   --aero-panel-surface: linear-gradient(180deg, #ffffff 0%, #e8faf4 100%);
   --aero-panel-header-bg: linear-gradient(90deg, rgba(206, 250, 236, 0.78) 0%, rgba(244, 252, 249, 0.3) 100%);
@@ -123,7 +120,7 @@
   --aero-slider-track: linear-gradient(90deg, rgba(100, 255, 54, 0.34) 0%, rgba(22, 190, 142, 0.40) 50%, rgba(30, 182, 248, 0.45) 100%);
   --aero-slider-thumb: radial-gradient(circle at 35% 30%, #ffffff 0%, #ffe848 28%, #ff6a00 78%, #ff4888 100%);
 
-  /* 顶部：明亮薄荷玻璃（无模糊防闪动，依然清透） */
+  /* 顶部：明亮薄荷玻璃（无模糊防闪动） */
   --aero-top-bg: linear-gradient(
     135deg,
     rgba(255, 255, 255, 0.36) 0%,
@@ -138,7 +135,6 @@
   --aero-top-icon-active: #FFF566;
   --aero-top-pill-active: linear-gradient(180deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 232, 56, 0.30) 100%);
 
-  /* 正文卡片：精工斜切镜面 + 菲涅尔 0.5px 双面反射玻璃 */
   --aero-ai-slate-bg:
     linear-gradient(
       126deg,
@@ -156,7 +152,7 @@
     inset 0 -1px 0 rgba(255, 255, 255, 0.55),
     inset 0 0 0 0.5px rgba(255, 255, 255, 0.72),
     0 6px 24px rgba(18, 152, 196, 0.08);
-  --aero-ai-spine: linear-gradient(180deg, #FFE838 0%, #FF6A00 48%, #FF4888 100%);
+  --aero-ai-spine: linear-gradient(180deg, #FFE838 0%, #FF6E00 48%, #FF4888 100%);
 
   --aero-user-slate-bg:
     linear-gradient(
@@ -210,26 +206,28 @@
     0 -4px 26px rgba(255, 132, 32, 0.24),
     0 -2px 18px rgba(28, 224, 188, 0.22);
 
-  --aero-well-bg: rgba(255, 255, 255, 0.78);
-  --aero-well-focus-bg: rgba(255, 255, 255, 0.94);
+  --aero-well-bg: rgba(255, 255, 255, 0.80);
+  --aero-well-focus-bg: rgba(255, 255, 255, 0.95);
   --aero-input-text: #0b2436;
   --aero-input-placeholder: rgba(18, 78, 112, 0.56);
   --aero-bottom-icon: rgba(255, 255, 255, 0.96);
 
-  /* 极亮电光荧光橘橙纸飞机 */
-  --aero-plane-color: #FF8814;
-  --aero-plane-focus-color: #FFA024;
-  --aero-plane-shadow: 0 1px 0 rgba(255, 255, 255, 0.96), 0 0 6px rgba(255, 255, 255, 0.88);
-  --aero-stop-color: #FF5288;
+  /* 高荧光橘子橙纸飞机 + 白色聚光光垫（零杂边串色） */
+  --aero-plane-color: #FF6E00;
+  --aero-plane-focus-color: #FF5500;
+  --aero-plane-halo-bg: radial-gradient(circle, rgba(255, 255, 255, 0.92) 0%, rgba(255, 250, 242, 0.45) 52%, transparent 74%);
+  --aero-plane-shadow: 0 0 8px rgba(255, 132, 0, 0.55);
+  --aero-stop-color: #FF3370;
+}
 
-/* ---------- 夜间备选方案（深海精工荧光珊瑚礁）---------- */
+/* ---------- 夜间备选方案 ---------- */
 :root[data-aero-theme="night"] {
   --spec-mint: #16BE8E;
   --spec-lime: #7CFF38;
   --spec-emerald-ink: #42FFB8;
 
   --spec-sun: #FFE838;
-  --spec-orange: #FF7810;
+  --spec-orange: #FF7B00;
   --spec-coral: #FF4888;
   --spec-coral-ink: #FF80AB;
 
@@ -252,7 +250,7 @@
     rgba(255, 72, 136, 0.75) 84%,
     rgba(44, 200, 255, 0.80) 100%
   );
-  --aero-grain-opacity: 0.06;
+  --aero-grain-opacity: 0.08;
 
   --prose-ai-ink: #dde8f0;
   --prose-ai-em: #92b0c2;
@@ -300,8 +298,8 @@
   --aero-top-bg: linear-gradient(
     135deg,
     rgba(255, 255, 255, 0.12) 0%,
-    rgba(28, 196, 148, 0.54) 38%,
-    rgba(16, 152, 114, 0.58) 100%
+    rgba(28, 196, 148, 0.62) 38%,
+    rgba(16, 152, 114, 0.68) 100%
   );
   --aero-top-halo:
     inset 0 1px 0 rgba(196, 255, 236, 0.54),
@@ -359,17 +357,17 @@
   --aero-dock-idle-bg: linear-gradient(
     135deg,
     rgba(255, 255, 255, 0.12) 0%,
-    rgba(24, 166, 224, 0.56) 38%,
-    rgba(16, 134, 196, 0.60) 72%,
-    rgba(18, 162, 168, 0.62) 100%
+    rgba(24, 166, 224, 0.64) 38%,
+    rgba(16, 134, 196, 0.68) 72%,
+    rgba(18, 162, 168, 0.70) 100%
   );
   --aero-dock-focus-bg: linear-gradient(
     115deg,
-    rgba(24, 162, 224, 0.68) 0%,
-    rgba(22, 198, 168, 0.66) 30%,
-    rgba(196, 128, 48, 0.60) 56%,
-    rgba(186, 62, 128, 0.62) 78%,
-    rgba(24, 162, 224, 0.68) 100%
+    rgba(24, 162, 224, 0.74) 0%,
+    rgba(22, 198, 168, 0.72) 30%,
+    rgba(196, 128, 48, 0.64) 56%,
+    rgba(186, 62, 128, 0.66) 78%,
+    rgba(24, 162, 224, 0.74) 100%
   );
   --aero-dock-halo:
     inset 0 1px 0 rgba(196, 244, 255, 0.52),
@@ -381,25 +379,24 @@
     0 -4px 28px rgba(255, 120, 16, 0.26),
     0 -2px 18px rgba(36, 240, 200, 0.22);
 
-  --aero-well-bg: rgba(8, 26, 44, 0.52);
+  --aero-well-bg: rgba(8, 26, 44, 0.54);
   --aero-well-focus-bg: rgba(8, 26, 44, 0.74);
   --aero-input-text: #eef8ff;
   --aero-input-placeholder: rgba(196, 234, 252, 0.62);
   --aero-bottom-icon: rgba(235, 252, 255, 0.94);
 
-  /* 夜间高荧光橘橙纸飞机 */
-  --aero-plane-color: #FFA229;
-  --aero-plane-focus-color: #FFC04D;
-  --aero-plane-shadow: 0 1px 2px rgba(4, 18, 36, 0.72), 0 0 7px rgba(255, 255, 255, 0.45);
-  --aero-stop-color: #FF6E9A;
+  --aero-plane-color: #FF8C1A;
+  --aero-plane-focus-color: #FFAC33;
+  --aero-plane-halo-bg: radial-gradient(circle, rgba(255, 140, 26, 0.28) 0%, rgba(255, 120, 16, 0.10) 52%, transparent 74%);
+  --aero-plane-shadow: 0 0 10px rgba(255, 148, 43, 0.85);
+  --aero-stop-color: #FF4888;
 }
 
 /* ==========================================================================
-   全域隐藏滚动条 + 精准视口锁定
+   全域隐藏滚动条 + 透明 body（彻底放行底层 #bg1 与极光舞台）
    ========================================================================== */
 
-html,
-body {
+html {
   height: var(--aero-vvh) !important;
   max-height: var(--aero-vvh) !important;
   overflow: hidden !important;
@@ -407,6 +404,17 @@ body {
   padding: 0 !important;
   overscroll-behavior: none;
   background: var(--aero-base-bg) !important;
+  accent-color: var(--aero-ui-accent);
+}
+
+body {
+  height: var(--aero-vvh) !important;
+  max-height: var(--aero-vvh) !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overscroll-behavior: none;
+  background: transparent !important;
   color: var(--aero-panel-text);
   accent-color: var(--aero-ui-accent);
 }
@@ -440,7 +448,7 @@ body::-webkit-scrollbar,
 }
 
 /* ==========================================================================
-   B1 + B2 + B3 精工 5 色矢量生态壁纸舞台
+   B1 + B2 + B3 浅色糖果生态背景舞台
    ========================================================================== */
 
 :root[data-aero-bg-window="false"] #bg1,
@@ -466,7 +474,7 @@ body::-webkit-scrollbar,
   background-position: center center !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
-  filter: blur(var(--aero-bg-blur)) saturate(1.12) !important;
+  filter: blur(var(--aero-bg-blur)) saturate(1.10) !important;
   transform: scale(1.03);
   transition: opacity 0.28s ease, filter 0.28s ease;
 }
@@ -563,7 +571,6 @@ body::-webkit-scrollbar,
   }
 }
 
-/* 3 枚柔焦高光散景光晕（无生硬圆边框，纯光学弥散） */
 .aero-orb {
   position: absolute;
   border-radius: 50%;
@@ -576,7 +583,7 @@ body::-webkit-scrollbar,
   height: 220px;
   top: 6vh;
   right: -35px;
-  background: radial-gradient(circle, rgba(152, 255, 102, 0.42) 0%, rgba(92, 255, 224, 0.18) 52%, transparent 72%);
+  background: radial-gradient(circle, rgba(152, 255, 102, 0.44) 0%, rgba(92, 255, 224, 0.20) 52%, transparent 72%);
   animation: aeroOrbFloat1 15s ease-in-out infinite alternate;
 }
 
@@ -585,7 +592,7 @@ body::-webkit-scrollbar,
   height: 200px;
   top: 38vh;
   left: -35px;
-  background: radial-gradient(circle, rgba(255, 242, 102, 0.46) 0%, rgba(255, 176, 82, 0.18) 54%, transparent 72%);
+  background: radial-gradient(circle, rgba(255, 242, 102, 0.48) 0%, rgba(255, 176, 82, 0.20) 54%, transparent 72%);
   animation: aeroOrbFloat2 18s ease-in-out infinite alternate;
 }
 
@@ -594,7 +601,7 @@ body::-webkit-scrollbar,
   height: 195px;
   bottom: 8vh;
   right: 2vw;
-  background: radial-gradient(circle, rgba(255, 133, 179, 0.36) 0%, rgba(110, 216, 255, 0.20) 54%, transparent 72%);
+  background: radial-gradient(circle, rgba(255, 133, 179, 0.38) 0%, rgba(110, 216, 255, 0.22) 54%, transparent 72%);
   animation: aeroOrbFloat1 16s ease-in-out infinite alternate-reverse;
 }
 
@@ -636,7 +643,7 @@ body::-webkit-scrollbar,
 }
 
 /* ==========================================================================
-   全菜单（修复全宽 fixed + 100% 不透明 + 去嵌套盒）
+   全菜单（100% 不透明防穿透正文，去嵌套盒）
    ========================================================================== */
 
 #top-settings-holder .drawer-content {
@@ -933,7 +940,7 @@ body::-webkit-scrollbar,
 }
 
 /* ==========================================================================
-   顶部：精工薄荷绿光学水晶（高饱和折射 + 菲涅尔双面反光）
+   顶部：明亮薄荷玻璃（无模糊防闪动）
    ========================================================================== */
 
 #top-bar {
@@ -1058,8 +1065,6 @@ body::-webkit-scrollbar,
 }
 
 #chat {
-  overscroll-behavior-y: contain;
-  transform: translateZ(0);
   flex: 1 1 auto !important;
   min-height: 0 !important;
   height: auto !important;
@@ -1071,6 +1076,8 @@ body::-webkit-scrollbar,
   padding: 13px 10px 18px 10px !important;
   overflow-y: auto !important;
   overflow-x: hidden !important;
+  overscroll-behavior-y: contain;
+  transform: translateZ(0);
   -webkit-overflow-scrolling: touch;
 }
 
@@ -1163,7 +1170,7 @@ body::-webkit-scrollbar,
   width: 3px;
   border-radius: 3px;
   background: var(--aero-ai-spine);
-  box-shadow: 0 0 10px rgba(255, 106, 0, 0.36);
+  box-shadow: 0 0 10px rgba(255, 110, 0, 0.36);
   pointer-events: none;
   transition: box-shadow 0.25s ease, width 0.25s ease;
 }
@@ -1178,18 +1185,18 @@ body::-webkit-scrollbar,
 :root[data-aero-generating="true"] #chat > .mes:not([is_user="true"]):last-of-type {
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.98),
-    0 4px 28px rgba(255, 106, 0, 0.24),
+    0 4px 28px rgba(255, 110, 0, 0.24),
     0 0 18px rgba(255, 72, 136, 0.16) !important;
 }
 
 @keyframes aeroSpineBreathe {
   0%, 100% {
     opacity: 0.74;
-    box-shadow: 0 0 8px rgba(255, 106, 0, 0.45);
+    box-shadow: 0 0 8px rgba(255, 110, 0, 0.45);
   }
   50% {
     opacity: 1;
-    box-shadow: 0 0 16px rgba(255, 106, 0, 0.90), 0 0 26px rgba(255, 72, 136, 0.50);
+    box-shadow: 0 0 16px rgba(255, 110, 0, 0.90), 0 0 26px rgba(255, 72, 136, 0.50);
   }
 }
 
@@ -1575,7 +1582,7 @@ body::-webkit-scrollbar,
 }
 
 /* ==========================================================================
-   底部：精工晴空水蓝水晶底座 + 冰冻奶白光槽 + 电光荧光橙纸飞机
+   底部：晴空水蓝透明玻璃（无模糊防闪动）+ 白光聚光荧光橘橙纸飞机
    ========================================================================== */
 
 #form_sheld {
@@ -1735,24 +1742,29 @@ body::-webkit-scrollbar,
   display: none !important;
 }
 
+/* 无按钮框，但用柔和白色聚光光垫把荧光橙纸飞机托起来，彻底隔绝蓝底串色 */
 #rightSendForm #send_but,
 #rightSendForm #mes_stop {
-  width: 36px !important;
-  min-width: 36px !important;
-  height: 36px !important;
-  line-height: 36px !important;
+  width: 38px !important;
+  min-width: 38px !important;
+  height: 38px !important;
+  line-height: 38px !important;
   text-align: center !important;
   margin: 0 !important;
   padding: 0 !important;
-  background: transparent !important;
   border: none !important;
   box-shadow: none !important;
-  border-radius: 0 !important;
+  border-radius: 50% !important;
   font-size: 21px !important;
-  transition: transform 0.14s ease, color 0.2s ease, filter 0.2s ease;
+  transition: transform 0.14s ease, color 0.2s ease;
+}
+
+#rightSendForm #send_but {
+  background: var(--aero-plane-halo-bg) !important;
 }
 
 #rightSendForm #mes_stop {
+  background: transparent !important;
   align-items: center !important;
   justify-content: center !important;
 }
@@ -1783,15 +1795,13 @@ body::-webkit-scrollbar,
   color: var(--aero-stop-color) !important;
   -webkit-text-fill-color: currentColor !important;
   filter: none !important;
-  text-shadow: var(--aero-plane-shadow) !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9), 0 0 8px rgba(255, 51, 112, 0.55) !important;
 }
 
 #send_form:has(#send_textarea:focus) #rightSendForm #send_but,
 #send_form:has(#send_textarea:focus) #rightSendForm #send_but i,
 #send_form:has(#send_textarea:focus) #rightSendForm #send_but::before {
   color: var(--aero-plane-focus-color) !important;
-  filter: none !important;
-  text-shadow: var(--aero-plane-shadow) !important;
 }
 
 #rightSendForm #send_but:active,
