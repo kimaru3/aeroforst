@@ -1348,7 +1348,7 @@ body::-webkit-scrollbar,
   transform: scale(0.92);
 }
 
-/* 消息 ... 悬浮菜单：100% 不透明，与深翠海蓝体系同步 */
+/* 消息 ... 展开菜单：与铅笔编辑条一致的内嵌下拉条，推开正文不遮挡 */
 .aero-actions-wrap .mes_buttons .extraMesButtons {
   position: absolute !important;
   left: 0 !important;
@@ -1360,18 +1360,16 @@ body::-webkit-scrollbar,
   max-height: none !important;
   overflow: visible !important;
   box-sizing: border-box !important;
-  z-index: 60 !important;
-  background: var(--aero-action-bg) !important;
+  z-index: 20 !important;
+  background: var(--aero-editbar-bg) !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
-  border: 1px solid var(--aero-panel-border) !important;
-  border-bottom: 2px solid var(--spec-cyan) !important;
-  border-bottom-left-radius: 12px !important;
-  border-bottom-right-radius: 12px !important;
-  padding: 7px 10px !important;
-  box-shadow:
-    inset 0 1px 0 var(--aero-inner-bevel),
-    0 8px 22px var(--SmartThemeShadowColor) !important;
+  border: none !important;
+  border-top: 1px solid var(--aero-surface-split) !important;
+  border-bottom: 1px solid var(--aero-panel-border) !important;
+  border-radius: 0 !important;
+  padding: 6px 14px !important;
+  box-shadow: none !important;
   flex-direction: row !important;
   flex-wrap: wrap !important;
   justify-content: flex-end !important;
