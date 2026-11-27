@@ -217,13 +217,10 @@
   --aero-bottom-icon: rgba(255, 255, 255, 0.96);
 
   /* 极亮电光荧光橘橙纸飞机 */
-  --aero-plane-color: #FF9A1F;
-  --aero-plane-focus-color: #FFB636;
-  --aero-plane-shadow:
-    drop-shadow(0 0 2px rgba(255, 255, 255, 0.98))
-    drop-shadow(0 0 8px rgba(255, 214, 108, 0.92))
-    drop-shadow(0 0 12px rgba(255, 136, 18, 0.72));
-  --aero-stop-color: #FF5C8D;
+  --aero-plane-color: #FF8814;
+  --aero-plane-focus-color: #FFA024;
+  --aero-plane-shadow: 0 1px 0 rgba(255, 255, 255, 0.96), 0 0 6px rgba(255, 255, 255, 0.88);
+  --aero-stop-color: #FF5288;
 
 /* ---------- 夜间备选方案（深海精工荧光珊瑚礁）---------- */
 :root[data-aero-theme="night"] {
@@ -393,9 +390,7 @@
   /* 夜间高荧光橘橙纸飞机 */
   --aero-plane-color: #FFA229;
   --aero-plane-focus-color: #FFC04D;
-  --aero-plane-shadow:
-    drop-shadow(0 1px 1px rgba(4, 18, 36, 0.75))
-    drop-shadow(0 0 9px rgba(255, 125, 20, 0.85));
+  --aero-plane-shadow: 0 1px 2px rgba(4, 18, 36, 0.72), 0 0 7px rgba(255, 255, 255, 0.45);
   --aero-stop-color: #FF6E9A;
 }
 
@@ -518,50 +513,52 @@ body::-webkit-scrollbar,
   display: none !important;
 }
 
-.aero-eco-wallpaper {
+.aero-wave-layer {
   position: absolute;
-  inset: -4%;
-  width: 108%;
-  height: 108%;
+  inset: -12%;
+  width: 124%;
+  height: 124%;
   pointer-events: none;
-}
-
-:root[data-aero-theme="night"] .aero-eco-wallpaper {
-  opacity: 0.62;
-  filter: saturate(1.18);
-}
-
-.aero-wave-group {
-  transform-origin: center center;
   will-change: transform, opacity;
 }
 
+.aero-wave-layer > svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+:root[data-aero-theme="night"] .aero-wave-layer {
+  opacity: 0.65;
+  filter: saturate(1.16);
+}
+
 .aero-wave-bio {
-  animation: aeroWaveBio 14s ease-in-out infinite alternate;
+  animation: aeroWaveBio 11s ease-in-out infinite alternate;
 }
 
 .aero-wave-solar {
-  animation: aeroWaveSolar 18s ease-in-out infinite alternate;
+  animation: aeroWaveSolar 14s ease-in-out infinite alternate;
 }
 
 @keyframes aeroWaveBio {
   0% {
-    transform: translate3d(-16px, 12px, 0) scale(1);
+    transform: translate3d(-5%, 4%, 0) scale(1);
     opacity: 0.88;
   }
   100% {
-    transform: translate3d(18px, -16px, 0) scale(1.04);
+    transform: translate3d(5%, -5%, 0) scale(1.06);
     opacity: 1;
   }
 }
 
 @keyframes aeroWaveSolar {
   0% {
-    transform: translate3d(14px, -12px, 0) scale(1.03);
+    transform: translate3d(4%, -4%, 0) scale(1.04);
     opacity: 0.84;
   }
   100% {
-    transform: translate3d(-18px, 14px, 0) scale(0.99);
+    transform: translate3d(-5%, 4%, 0) scale(0.98);
     opacity: 0.98;
   }
 }
@@ -1776,7 +1773,8 @@ body::-webkit-scrollbar,
 #rightSendForm #send_but::before {
   color: var(--aero-plane-color) !important;
   -webkit-text-fill-color: currentColor !important;
-  filter: var(--aero-plane-shadow);
+  filter: none !important;
+  text-shadow: var(--aero-plane-shadow) !important;
 }
 
 #rightSendForm #mes_stop,
@@ -1784,14 +1782,16 @@ body::-webkit-scrollbar,
 #rightSendForm #mes_stop::before {
   color: var(--aero-stop-color) !important;
   -webkit-text-fill-color: currentColor !important;
-  filter: var(--aero-plane-shadow);
+  filter: none !important;
+  text-shadow: var(--aero-plane-shadow) !important;
 }
 
 #send_form:has(#send_textarea:focus) #rightSendForm #send_but,
 #send_form:has(#send_textarea:focus) #rightSendForm #send_but i,
 #send_form:has(#send_textarea:focus) #rightSendForm #send_but::before {
   color: var(--aero-plane-focus-color) !important;
-  filter: var(--aero-plane-shadow) brightness(1.08);
+  filter: none !important;
+  text-shadow: var(--aero-plane-shadow) !important;
 }
 
 #rightSendForm #send_but:active,
