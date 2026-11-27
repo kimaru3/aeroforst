@@ -4,10 +4,6 @@ const DEFAULT_SETTINGS = Object.freeze({
     theme: 'day',
     proseGlass: 'balanced',
     fontStyle: 'sans',
-    enableRibbons: true,
-    enableGrain: true,
-    enableBgWindow: true,
-    bgBlend: 'balanced',
     hideWand: true,
     compactMeta: false,
 });
@@ -48,127 +44,16 @@ function applyChromeThemeColor(color = '#16BE8E') {
     }
 }
 
-function syncStBackgroundState() {
-    const ids = ['bg1', 'bg2', 'bg_custom'];
-    const hasImg = ids.some((id) => {
-        const el = document.getElementById(id);
-        if (!el) return false;
-        const bg = el.style.backgroundImage || getComputedStyle(el).backgroundImage;
-        return Boolean(bg && bg !== 'none' && bg.includes('url('));
-    });
-    document.documentElement.setAttribute('data-aero-has-st-bg', String(hasImg));
-}
-
-function initBgObserver() {
-    const targets = ['bg1', 'bg2', 'bg_custom']
-        .map((id) => document.getElementById(id))
-        .filter(Boolean);
-    if (targets.length > 0) {
-        const obs = new MutationObserver(() => syncStBackgroundState());
-        targets.forEach((el) => obs.observe(el, { attributes: true, attributeFilter: ['style', 'class'] }));
-    }
-
-    // 兜底：点击背景面板选项后异步复检，防止 ST 过渡动画延迟
-    document.addEventListener('click', (e) => {
-        if (e.target?.closest?.('#Backgrounds, #bg_menu_content, .bg_example')) {
-            setTimeout(syncStBackgroundState, 120);
-            setTimeout(syncStBackgroundState, 500);
-        }
-    }, true);
-
-    syncStBackgroundState();
-}
-
 function applyAppearance() {
     const s = getSettings();
     const root = document.documentElement;
     root.setAttribute('data-aero-theme', s.theme);
     root.setAttribute('data-aero-prose-glass', s.proseGlass || 'balanced');
     root.setAttribute('data-aero-font', s.fontStyle || 'sans');
-    root.setAttribute('data-aero-ribbons', String(Boolean(s.enableRibbons)));
-    root.setAttribute('data-aero-grain', String(Boolean(s.enableGrain)));
-    root.setAttribute('data-aero-bg-window', String(Boolean(s.enableBgWindow)));
-    root.setAttribute('data-aero-bg-blend', s.bgBlend || 'balanced');
     root.setAttribute('data-aero-hide-wand', String(Boolean(s.hideWand)));
     root.setAttribute('data-aero-compact', String(Boolean(s.compactMeta)));
 
-    const blendWrap = document.getElementById('aero_bg_blend_wrap');
-    if (blendWrap) {
-        blendWrap.style.display = s.enableBgWindow ? 'flex' : 'none';
-    }
-
-    syncStBackgroundState();
     applyChromeThemeColor('#16BE8E');
-}
-
-function initStaticGrainTexture() {
-    const size = 128;
-    const canvas = document.createElement('canvas');
-    canvas.width = size;
-    canvas.height = size;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    const img = ctx.createImageData(size, size);
-    const data = img.data;
-    for (let i = 0; i < data.length; i += 4) {
-        const v = Math.random() > 0.5 ? 255 : 0;
-        data[i] = v;
-        data[i + 1] = v;
-        data[i + 2] = v;
-        data[i + 3] = Math.floor(40 + Math.random() * 90);
-    }
-    ctx.putImageData(img, 0, 0);
-    document.documentElement.style.setProperty('--aero-grain-img', `url(${canvas.toDataURL('image/png')})`);
-}
-
-function mountAuroraStage() {
-    if (document.getElementById('aero-aurora-stage')) return;
-
-    const stage = document.createElement('div');
-    stage.id = 'aero-aurora-stage';
-    stage.setAttribute('aria-hidden', 'true');
-    stage.innerHTML = `
-      <div class="aero-stage-wash"></div>
-      <div class="aero-stage-ribbons">
-        <div class="aero-wave-layer aero-wave-bio">
-          <svg viewBox="0 0 400 840" preserveAspectRatio="none">
-            <defs>
-              <linearGradient id="neoBioWave" x1="0%" y1="100%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#74FF4D" stop-opacity="0.54" />
-                <stop offset="48%" stop-color="#24F0BA" stop-opacity="0.48" />
-                <stop offset="100%" stop-color="#3BCBFF" stop-opacity="0.44" />
-              </linearGradient>
-            </defs>
-            <path d="M-80,780 C45,670 110,490 245,410 C350,348 415,245 480,100 L480,320 C395,435 290,485 195,585 C95,690 20,805 -80,895 Z" fill="url(#neoBioWave)" />
-            <path d="M-80,780 C45,670 110,490 245,410 C350,348 415,245 480,100" fill="none" stroke="rgba(255,255,255,0.92)" stroke-width="1.8" />
-            <path d="M-60,810 C65,695 135,520 270,440 C370,378 430,275 490,135" fill="none" stroke="rgba(255,255,255,0.62)" stroke-width="0.9" />
-          </svg>
-        </div>
-
-        <div class="aero-wave-layer aero-wave-solar">
-          <svg viewBox="0 0 400 840" preserveAspectRatio="none">
-            <defs>
-              <linearGradient id="neoSolarWave" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#FFE642" stop-opacity="0.56" />
-                <stop offset="48%" stop-color="#FF9A38" stop-opacity="0.46" />
-                <stop offset="100%" stop-color="#FF68A0" stop-opacity="0.42" />
-              </linearGradient>
-            </defs>
-            <path d="M-70,130 C75,85 185,205 275,285 C365,365 425,405 495,435 L495,625 C390,585 285,500 185,395 C90,295 15,220 -70,265 Z" fill="url(#neoSolarWave)" />
-            <path d="M-70,130 C75,85 185,205 275,285 C365,365 425,405 495,435" fill="none" stroke="rgba(255,255,255,0.90)" stroke-width="1.6" />
-            <path d="M-70,158 C70,115 175,232 265,312 C352,390 415,432 495,462" fill="none" stroke="rgba(255,255,255,0.58)" stroke-width="0.9" />
-          </svg>
-        </div>
-
-        <div class="aero-orb aero-orb-1"></div>
-        <div class="aero-orb aero-orb-2"></div>
-        <div class="aero-orb aero-orb-3"></div>
-      </div>
-      <div class="aero-stage-grain"></div>
-    `;
-
-    document.body.prepend(stage);
 }
 
 function getSelfExtensionFolder() {
@@ -244,7 +129,7 @@ async function checkAndUpdateExtension() {
                 }
             }
         } catch (_) {
-            // 忽略 discover 探测失败
+            // 忽略 discover 探测异常
         }
 
         const candidates = [
@@ -269,7 +154,7 @@ async function checkAndUpdateExtension() {
         const updCheck = await postExtensionEndpoint('api/extensions/update', candidates, jsonHeaders);
         if (!updCheck.ok) {
             if (mgrBtn) mgrBtn.style.display = 'inline-flex';
-            throw new Error(`HTTP ${updCheck.status}，请点右侧「管理扩展」按钮更新`);
+            throw new Error(`HTTP ${updCheck.status}，请点右侧「管理扩展」更新`);
         }
 
         const updText = await updCheck.res.text();
@@ -459,7 +344,6 @@ function initAndroidViewportFix() {
             const curH = window.visualViewport ? window.visualViewport.height : window.innerHeight;
             document.documentElement.style.setProperty('--aero-vvh', `${curH}px`);
 
-            // 仅在横竖屏切换（宽度变化）或可视高度变更大（地址栏收起）时更新背景锁定高度，弹出键盘绝不缩小背景
             if (Math.abs(curW - fullWidth) > 20) {
                 fullWidth = curW;
                 fullHeight = Math.max(window.innerHeight, curH);
@@ -520,11 +404,7 @@ async function mountSettingsPanel() {
         bindSettingSelect('aero_theme_mode', 'theme');
         bindSettingSelect('aero_prose_glass', 'proseGlass');
         bindSettingSelect('aero_font_style', 'fontStyle');
-        bindSettingSelect('aero_bg_blend', 'bgBlend');
 
-        bindSettingCheckbox('aero_enable_ribbons', 'enableRibbons');
-        bindSettingCheckbox('aero_enable_grain', 'enableGrain');
-        bindSettingCheckbox('aero_enable_bg_window', 'enableBgWindow');
         bindSettingCheckbox('aero_hide_wand', 'hideWand');
         bindSettingCheckbox('aero_compact_meta', 'compactMeta');
 
@@ -543,9 +423,6 @@ async function mountSettingsPanel() {
 
 jQuery(async () => {
     applyChromeThemeColor('#16BE8E');
-    initStaticGrainTexture();
-    mountAuroraStage();
-    initBgObserver();
     applyAppearance();
     initAndroidViewportFix();
     injectJumpToBottomMenuItem();
@@ -555,10 +432,7 @@ jQuery(async () => {
 
     eventSource.on(event_types.CHAT_CHANGED, () => {
         document.documentElement.setAttribute('data-aero-generating', 'false');
-        requestAnimationFrame(() => {
-            scanChatMessages();
-            syncStBackgroundState();
-        });
+        requestAnimationFrame(scanChatMessages);
     });
 
     eventSource.on(event_types.USER_MESSAGE_RENDERED, (mesId) => {

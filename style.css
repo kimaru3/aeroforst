@@ -1,21 +1,19 @@
 /* ==========================================================================
-   Aero Mobile UI v8.0 - 完整正式版（Android Chrome）
+   Aero Mobile UI v9.0 - 纯净精工 Neo Frutiger（完全兼容 ST 原生全局/自定义壁纸）
    ========================================================================== */
 
 :root {
   --aero-vvh: 100dvh;
+  --aero-full-h: 100lvh;
   --aero-radius-card: 16px;
   --aero-radius-avatar: 8px;
   --aero-font-sans: inherit;
   --aero-font-serif: "Noto Serif SC", "Source Han Serif SC", "Songti SC", Georgia, serif;
   --aero-humanist-font: inherit;
-  --aero-grain-img: none;
-  --aero-wash-opacity: 1;
-  --aero-bg-blur: 3px;
-  --aero-ai-alpha-top: 0.74;
-  --aero-ai-alpha-bot: 0.64;
-  --aero-user-alpha-top: 0.66;
-  --aero-user-alpha-bot: 0.56;
+  --aero-ai-alpha-top: 0.76;
+  --aero-ai-alpha-bot: 0.66;
+  --aero-user-alpha-top: 0.68;
+  --aero-user-alpha-bot: 0.58;
 }
 
 :root[data-aero-font="serif"] {
@@ -23,16 +21,16 @@
 }
 
 :root[data-aero-prose-glass="airy"] {
-  --aero-ai-alpha-top: 0.64;
-  --aero-ai-alpha-bot: 0.52;
-  --aero-user-alpha-top: 0.56;
-  --aero-user-alpha-bot: 0.46;
+  --aero-ai-alpha-top: 0.66;
+  --aero-ai-alpha-bot: 0.54;
+  --aero-user-alpha-top: 0.58;
+  --aero-user-alpha-bot: 0.48;
 }
 :root[data-aero-prose-glass="balanced"] {
-  --aero-ai-alpha-top: 0.74;
-  --aero-ai-alpha-bot: 0.64;
-  --aero-user-alpha-top: 0.66;
-  --aero-user-alpha-bot: 0.56;
+  --aero-ai-alpha-top: 0.76;
+  --aero-ai-alpha-bot: 0.66;
+  --aero-user-alpha-top: 0.68;
+  --aero-user-alpha-bot: 0.58;
 }
 :root[data-aero-prose-glass="solid"] {
   --aero-ai-alpha-top: 0.90;
@@ -42,7 +40,7 @@
 }
 
 /* ==========================================================================
-   第一层：浅色日光高饱和糖果光谱体系
+   第一层：Neo Frutiger 光谱体系
    ========================================================================== */
 
 :root[data-aero-theme="day"],
@@ -52,7 +50,7 @@
   --spec-emerald-ink: #08845B;
 
   --spec-sun: #FFE838;
-  --spec-orange: #FF6E00;
+  --spec-orange: #FF8800;
   --spec-coral: #FF4888;
   --spec-coral-ink: #D42862;
 
@@ -63,19 +61,18 @@
   --spec-violet: #8C62FF;
   --spec-violet-ink: #6A3EE0;
 
-  --aero-base-bg: #f3fcff;
-  --aurora-ambient-canvas: linear-gradient(168deg, #eefff9 0%, #f3fbff 52%, #fffef4 100%);
+  /* 无壁纸时的静态日光轻盈底色（有壁纸时由 ST 原生 #bg1 / #bg_custom 覆盖其上） */
+  --aero-base-bg: linear-gradient(168deg, #dffdf3 0%, #eaf7ff 52%, #fff9e3 100%);
 
   --aero-prism-rim: linear-gradient(
     90deg,
     rgba(116, 255, 77, 0.78) 0%,
     rgba(22, 224, 168, 0.78) 22%,
     rgba(255, 232, 56, 0.82) 44%,
-    rgba(255, 110, 0, 0.82) 64%,
+    rgba(255, 136, 0, 0.82) 64%,
     rgba(255, 72, 136, 0.80) 82%,
     rgba(30, 182, 248, 0.85) 100%
   );
-  --aero-grain-opacity: 0.08;
 
   --prose-ai-ink: #14202b;
   --prose-ai-em: #4c6272;
@@ -118,14 +115,13 @@
   --aero-ui-accent: #16BE8E;
   --aero-ui-accent-bright: #16BE8E;
   --aero-slider-track: linear-gradient(90deg, rgba(100, 255, 54, 0.34) 0%, rgba(22, 190, 142, 0.40) 50%, rgba(30, 182, 248, 0.45) 100%);
-  --aero-slider-thumb: radial-gradient(circle at 35% 30%, #ffffff 0%, #ffe848 28%, #ff6a00 78%, #ff4888 100%);
+  --aero-slider-thumb: radial-gradient(circle at 35% 30%, #ffffff 0%, #ffe848 28%, #ff8800 78%, #ff4888 100%);
 
-  /* 顶部：明亮薄荷玻璃（无模糊防闪动） */
   --aero-top-bg: linear-gradient(
     135deg,
     rgba(255, 255, 255, 0.36) 0%,
-    rgba(64, 232, 180, 0.62) 40%,
-    rgba(22, 198, 148, 0.68) 100%
+    rgba(64, 232, 180, 0.64) 40%,
+    rgba(22, 198, 148, 0.72) 100%
   );
   --aero-top-halo:
     inset 0 1px 0 rgba(255, 255, 255, 0.92),
@@ -152,7 +148,7 @@
     inset 0 -1px 0 rgba(255, 255, 255, 0.55),
     inset 0 0 0 0.5px rgba(255, 255, 255, 0.72),
     0 6px 24px rgba(18, 152, 196, 0.08);
-  --aero-ai-spine: linear-gradient(180deg, #FFE838 0%, #FF6E00 48%, #FF4888 100%);
+  --aero-ai-spine: linear-gradient(180deg, #FFE838 0%, #FF8800 48%, #FF4888 100%);
 
   --aero-user-slate-bg:
     linear-gradient(
@@ -180,21 +176,20 @@
   --aero-action-bg: #ebfbf7;
   --aero-editbar-bg: linear-gradient(180deg, rgba(226, 250, 244, 0.97) 0%, rgba(214, 244, 252, 0.97) 100%);
 
-  /* 底部：明亮晴空水蓝玻璃 */
   --aero-dock-idle-bg: linear-gradient(
     135deg,
     rgba(255, 255, 255, 0.34) 0%,
-    rgba(96, 222, 255, 0.64) 40%,
-    rgba(42, 196, 252, 0.68) 74%,
-    rgba(38, 226, 206, 0.68) 100%
+    rgba(96, 222, 255, 0.66) 40%,
+    rgba(42, 196, 252, 0.70) 74%,
+    rgba(38, 226, 206, 0.70) 100%
   );
   --aero-dock-focus-bg: linear-gradient(
     115deg,
-    rgba(48, 204, 255, 0.72) 0%,
-    rgba(44, 232, 198, 0.70) 28%,
-    rgba(255, 238, 92, 0.66) 54%,
-    rgba(255, 146, 152, 0.66) 78%,
-    rgba(48, 204, 255, 0.72) 100%
+    rgba(48, 204, 255, 0.74) 0%,
+    rgba(44, 232, 198, 0.72) 28%,
+    rgba(255, 238, 92, 0.68) 54%,
+    rgba(255, 146, 152, 0.68) 78%,
+    rgba(48, 204, 255, 0.74) 100%
   );
   --aero-dock-halo:
     inset 0 1px 0 rgba(255, 255, 255, 0.94),
@@ -203,7 +198,7 @@
   --aero-dock-focus-halo:
     inset 0 1px 0 rgba(255, 255, 255, 0.98),
     inset 0 -1px 0 rgba(255, 255, 255, 0.52),
-    0 -4px 26px rgba(255, 132, 32, 0.24),
+    0 -4px 26px rgba(255, 136, 0, 0.24),
     0 -2px 18px rgba(28, 224, 188, 0.22);
 
   --aero-well-bg: rgba(255, 255, 255, 0.80);
@@ -212,10 +207,13 @@
   --aero-input-placeholder: rgba(18, 78, 112, 0.56);
   --aero-bottom-icon: rgba(255, 255, 255, 0.96);
 
+  /* 高纯度荧光橘子橙 + 加宽纯白中心光垫（绝对不透蓝变褐） */
   --aero-plane-color: #FF8800;
   --aero-plane-focus-color: #FFA014;
   --aero-plane-halo-bg: radial-gradient(circle, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.80) 44%, rgba(255, 255, 255, 0.18) 66%, transparent 76%);
   --aero-plane-shadow: 0 0 8px rgba(255, 148, 16, 0.65);
+  --aero-stop-color: #FF3370;
+}
 
 /* ---------- 夜间备选方案 ---------- */
 :root[data-aero-theme="night"] {
@@ -224,7 +222,7 @@
   --spec-emerald-ink: #42FFB8;
 
   --spec-sun: #FFE838;
-  --spec-orange: #FF7B00;
+  --spec-orange: #FF9414;
   --spec-coral: #FF4888;
   --spec-coral-ink: #FF80AB;
 
@@ -235,19 +233,17 @@
   --spec-violet: #A882FF;
   --spec-violet-ink: #C9B2FF;
 
-  --aero-base-bg: #081824;
-  --aurora-ambient-canvas: linear-gradient(170deg, #092220 0%, #0b1c2c 52%, #081829 100%);
+  --aero-base-bg: linear-gradient(170deg, #092220 0%, #0b1c2c 52%, #081829 100%);
 
   --aero-prism-rim: linear-gradient(
     90deg,
     rgba(100, 255, 54, 0.72) 0%,
     rgba(36, 240, 200, 0.75) 22%,
     rgba(255, 232, 56, 0.75) 46%,
-    rgba(255, 120, 16, 0.75) 66%,
+    rgba(255, 148, 20, 0.75) 66%,
     rgba(255, 72, 136, 0.75) 84%,
     rgba(44, 200, 255, 0.80) 100%
   );
-  --aero-grain-opacity: 0.08;
 
   --prose-ai-ink: #dde8f0;
   --prose-ai-em: #92b0c2;
@@ -290,7 +286,7 @@
   --aero-ui-accent: #24F0C8;
   --aero-ui-accent-bright: #42FFB8;
   --aero-slider-track: linear-gradient(90deg, rgba(124, 255, 56, 0.45) 0%, rgba(36, 240, 200, 0.55) 50%, rgba(44, 200, 255, 0.60) 100%);
-  --aero-slider-thumb: radial-gradient(circle at 35% 30%, #ffffff 0%, #ffe848 28%, #ff7810 78%, #ff4888 100%);
+  --aero-slider-thumb: radial-gradient(circle at 35% 30%, #ffffff 0%, #ffe848 28%, #ff9414 78%, #ff4888 100%);
 
   --aero-top-bg: linear-gradient(
     135deg,
@@ -323,7 +319,7 @@
     inset 0 -1px 0 rgba(176, 238, 255, 0.12),
     inset 0 0 0 0.5px rgba(178, 236, 255, 0.20),
     0 6px 24px rgba(16, 178, 216, 0.12);
-  --aero-ai-spine: linear-gradient(180deg, #FFE838 0%, #FF7810 48%, #FF4888 100%);
+  --aero-ai-spine: linear-gradient(180deg, #FFE838 0%, #FF9414 48%, #FF4888 100%);
 
   --aero-user-slate-bg:
     linear-gradient(
@@ -373,7 +369,7 @@
   --aero-dock-focus-halo:
     inset 0 1px 0 rgba(224, 250, 255, 0.72),
     inset 0 -1px 0 rgba(188, 244, 255, 0.34),
-    0 -4px 28px rgba(255, 120, 16, 0.26),
+    0 -4px 28px rgba(255, 148, 20, 0.26),
     0 -2px 18px rgba(36, 240, 200, 0.22);
 
   --aero-well-bg: rgba(8, 26, 44, 0.54);
@@ -386,10 +382,11 @@
   --aero-plane-focus-color: #FFB028;
   --aero-plane-halo-bg: radial-gradient(circle, rgba(255, 248, 236, 0.32) 0%, rgba(255, 152, 24, 0.16) 48%, transparent 74%);
   --aero-plane-shadow: 0 0 10px rgba(255, 156, 36, 0.88);
+  --aero-stop-color: #FF4888;
 }
 
 /* ==========================================================================
-   全域隐藏滚动条 + 透明 body（彻底放行底层 #bg1 与极光舞台）
+   视口锁定 + 全域去滚动条 + 仅保护 ST 原生壁纸不被键盘挤压
    ========================================================================== */
 
 html {
@@ -413,6 +410,13 @@ body {
   background: transparent !important;
   color: var(--aero-panel-text);
   accent-color: var(--aero-ui-accent);
+}
+
+/* 不碰 opacity / z-index / display / filter / background-image，100% 交还 ST 原生壁纸切换，只锁定最小高度防弹键盘缩放 */
+#bg1,
+#bg2,
+#bg_custom {
+  min-height: var(--aero-full-h, 100lvh) !important;
 }
 
 html,
@@ -440,209 +444,6 @@ body::-webkit-scrollbar,
 }
 .drawer-content::-webkit-scrollbar {
   width: 0 !important;
-  display: none !important;
-}
-
-/* ==========================================================================
-   B1 + B2 + B3 浅色糖果生态背景舞台（锁定 --aero-full-h，不随键盘缩放卡顿）
-   ========================================================================== */
-
-:root[data-aero-bg-window="false"] #bg1,
-:root[data-aero-bg-window="false"] #bg2,
-:root[data-aero-bg-window="false"] #bg_custom {
-  opacity: 0 !important;
-  pointer-events: none;
-}
-
-:root[data-aero-bg-window="true"][data-aero-has-st-bg="true"] #bg1,
-:root[data-aero-bg-window="true"][data-aero-has-st-bg="true"] #bg2,
-:root[data-aero-bg-window="true"][data-aero-has-st-bg="true"] #bg_custom {
-  display: block !important;
-  visibility: visible !important;
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  right: auto !important;
-  bottom: auto !important;
-  width: 100vw !important;
-  height: var(--aero-full-h, 100lvh) !important;
-  z-index: 0 !important;
-  opacity: 1 !important;
-  background-color: transparent !important;
-  background-size: cover !important;
-  background-position: center center !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  filter: blur(var(--aero-bg-blur)) saturate(1.10) !important;
-  transform: translate3d(0, 0, 0) scale(1.03);
-  transition: opacity 0.28s ease !important;
-}
-
-:root[data-aero-bg-window="true"][data-aero-has-st-bg="true"][data-aero-bg-blend="soft"] {
-  --aero-bg-blur: 8px;
-  --aero-wash-opacity: 0.34;
-}
-:root[data-aero-bg-window="true"][data-aero-has-st-bg="true"][data-aero-bg-blend="balanced"] {
-  --aero-bg-blur: 3px;
-  --aero-wash-opacity: 0.14;
-}
-:root[data-aero-bg-window="true"][data-aero-has-st-bg="true"][data-aero-bg-blend="clear"] {
-  --aero-bg-blur: 0px;
-  --aero-wash-opacity: 0.03;
-}
-
-#aero-aurora-stage {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: var(--aero-full-h, 100lvh);
-  z-index: 1;
-  pointer-events: none;
-  overflow: hidden;
-  contain: strict;
-  transform: translateZ(0);
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-}
-
-.aero-stage-wash {
-  position: absolute;
-  inset: 0;
-  background: var(--aurora-ambient-canvas);
-  opacity: var(--aero-wash-opacity);
-  transition: opacity 0.3s ease;
-}
-
-.aero-stage-ribbons {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-:root[data-aero-ribbons="false"] .aero-stage-ribbons {
-  display: none !important;
-}
-
-.aero-wave-layer {
-  position: absolute;
-  inset: -12%;
-  width: 124%;
-  height: 124%;
-  pointer-events: none;
-  will-change: transform, opacity;
-}
-
-.aero-wave-layer > svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-:root[data-aero-theme="night"] .aero-wave-layer {
-  opacity: 0.65;
-  filter: saturate(1.16);
-}
-
-.aero-wave-bio {
-  animation: aeroWaveBio 11s ease-in-out infinite alternate;
-}
-
-.aero-wave-solar {
-  animation: aeroWaveSolar 14s ease-in-out infinite alternate;
-}
-
-@keyframes aeroWaveBio {
-  0% {
-    transform: translate3d(-5%, 4%, 0) scale(1);
-    opacity: 0.88;
-  }
-  100% {
-    transform: translate3d(5%, -5%, 0) scale(1.06);
-    opacity: 1;
-  }
-}
-
-@keyframes aeroWaveSolar {
-  0% {
-    transform: translate3d(4%, -4%, 0) scale(1.04);
-    opacity: 0.84;
-  }
-  100% {
-    transform: translate3d(-5%, 4%, 0) scale(0.98);
-    opacity: 0.98;
-  }
-}
-
-.aero-orb {
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-  will-change: transform, opacity;
-}
-
-.aero-orb-1 {
-  width: 220px;
-  height: 220px;
-  top: 6vh;
-  right: -35px;
-  background: radial-gradient(circle, rgba(152, 255, 102, 0.44) 0%, rgba(92, 255, 224, 0.20) 52%, transparent 72%);
-  animation: aeroOrbFloat1 15s ease-in-out infinite alternate;
-}
-
-.aero-orb-2 {
-  width: 200px;
-  height: 200px;
-  top: 38vh;
-  left: -35px;
-  background: radial-gradient(circle, rgba(255, 242, 102, 0.48) 0%, rgba(255, 176, 82, 0.20) 54%, transparent 72%);
-  animation: aeroOrbFloat2 18s ease-in-out infinite alternate;
-}
-
-.aero-orb-3 {
-  width: 195px;
-  height: 195px;
-  bottom: 8vh;
-  right: 2vw;
-  background: radial-gradient(circle, rgba(255, 133, 179, 0.38) 0%, rgba(110, 216, 255, 0.22) 54%, transparent 72%);
-  animation: aeroOrbFloat1 16s ease-in-out infinite alternate-reverse;
-}
-
-@keyframes aeroOrbFloat1 {
-  0% {
-    transform: translate3d(0, 0, 0) scale(0.94);
-    opacity: 0.74;
-  }
-  100% {
-    transform: translate3d(-20px, -28px, 0) scale(1.10);
-    opacity: 1;
-  }
-}
-
-@keyframes aeroOrbFloat2 {
-  0% {
-    transform: translate3d(0, 0, 0) scale(1.06);
-    opacity: 0.70;
-  }
-  100% {
-    transform: translate3d(22px, -24px, 0) scale(0.95);
-    opacity: 0.96;
-  }
-}
-
-.aero-stage-grain {
-  position: absolute;
-  inset: 0;
-  background-image: var(--aero-grain-img);
-  background-repeat: repeat;
-  background-size: 128px 128px;
-  mix-blend-mode: overlay;
-  opacity: var(--aero-grain-opacity);
-  pointer-events: none;
-}
-
-:root[data-aero-grain="false"] .aero-stage-grain {
   display: none !important;
 }
 
@@ -814,7 +615,7 @@ body::-webkit-scrollbar,
   border: none;
   box-shadow:
     inset 0 1px 1px rgba(255, 255, 255, 0.95),
-    0 1px 6px rgba(255, 106, 0, 0.50),
+    0 1px 6px rgba(255, 136, 0, 0.50),
     0 0 8px rgba(255, 232, 56, 0.44);
 }
 
@@ -867,7 +668,7 @@ body::-webkit-scrollbar,
 
 #rm_print_characters_block .tags .tag {
   border: none !important;
-  background: rgba(255, 106, 0, 0.12) !important;
+  background: rgba(255, 136, 0, 0.12) !important;
   color: var(--spec-coral-ink) !important;
   border-radius: 5px;
 }
@@ -1174,7 +975,7 @@ body::-webkit-scrollbar,
   width: 3px;
   border-radius: 3px;
   background: var(--aero-ai-spine);
-  box-shadow: 0 0 10px rgba(255, 110, 0, 0.36);
+  box-shadow: 0 0 10px rgba(255, 136, 0, 0.36);
   pointer-events: none;
   transition: box-shadow 0.25s ease, width 0.25s ease;
 }
@@ -1189,18 +990,18 @@ body::-webkit-scrollbar,
 :root[data-aero-generating="true"] #chat > .mes:not([is_user="true"]):last-of-type {
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.98),
-    0 4px 28px rgba(255, 110, 0, 0.24),
+    0 4px 28px rgba(255, 136, 0, 0.24),
     0 0 18px rgba(255, 72, 136, 0.16) !important;
 }
 
 @keyframes aeroSpineBreathe {
   0%, 100% {
     opacity: 0.74;
-    box-shadow: 0 0 8px rgba(255, 110, 0, 0.45);
+    box-shadow: 0 0 8px rgba(255, 136, 0, 0.45);
   }
   50% {
     opacity: 1;
-    box-shadow: 0 0 16px rgba(255, 110, 0, 0.90), 0 0 26px rgba(255, 72, 136, 0.50);
+    box-shadow: 0 0 16px rgba(255, 136, 0, 0.90), 0 0 26px rgba(255, 72, 136, 0.50);
   }
 }
 
@@ -1586,7 +1387,7 @@ body::-webkit-scrollbar,
 }
 
 /* ==========================================================================
-   底部：晴空水蓝透明玻璃（无模糊防闪动）+ 白光聚光荧光橘橙纸飞机
+   底部：晴空水蓝透明玻璃（无模糊防闪动）+ 不透蓝亮橘橙纸飞机
    ========================================================================== */
 
 #form_sheld {
@@ -1726,6 +1527,7 @@ body::-webkit-scrollbar,
 #options_button,
 #leftSendForm .fa-solid {
   color: var(--aero-bottom-icon) !important;
+  opacity: 1 !important;
   text-shadow: 0 1px 2px rgba(6, 86, 132, 0.36);
 }
 
@@ -1746,7 +1548,6 @@ body::-webkit-scrollbar,
   display: none !important;
 }
 
-/* 无按钮框，但用柔和白色聚光光垫把荧光橙纸飞机托起来，彻底隔绝蓝底串色 */
 #rightSendForm #send_but,
 #rightSendForm #mes_stop {
   width: 38px !important;
