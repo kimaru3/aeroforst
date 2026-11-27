@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Aero Mobile UI v9.0 - 纯净精工 Neo Frutiger（完全兼容 ST 原生全局/自定义壁纸）
+   Aero Mobile UI v10.0 - 硬件级贴图减负版 Neo Aero（Android Chrome）
    ========================================================================== */
 
 :root {
@@ -10,10 +10,8 @@
   --aero-font-sans: inherit;
   --aero-font-serif: "Noto Serif SC", "Source Han Serif SC", "Songti SC", Georgia, serif;
   --aero-humanist-font: inherit;
-  --aero-ai-alpha-top: 0.76;
-  --aero-ai-alpha-bot: 0.66;
-  --aero-user-alpha-top: 0.68;
-  --aero-user-alpha-bot: 0.58;
+  --aero-ai-alpha: 0.74;
+  --aero-user-alpha: 0.64;
 }
 
 :root[data-aero-font="serif"] {
@@ -21,59 +19,35 @@
 }
 
 :root[data-aero-prose-glass="airy"] {
-  --aero-ai-alpha-top: 0.66;
-  --aero-ai-alpha-bot: 0.54;
-  --aero-user-alpha-top: 0.58;
-  --aero-user-alpha-bot: 0.48;
+  --aero-ai-alpha: 0.62;
+  --aero-user-alpha: 0.52;
 }
 :root[data-aero-prose-glass="balanced"] {
-  --aero-ai-alpha-top: 0.76;
-  --aero-ai-alpha-bot: 0.66;
-  --aero-user-alpha-top: 0.68;
-  --aero-user-alpha-bot: 0.58;
+  --aero-ai-alpha: 0.74;
+  --aero-user-alpha: 0.64;
 }
 :root[data-aero-prose-glass="solid"] {
-  --aero-ai-alpha-top: 0.90;
-  --aero-ai-alpha-bot: 0.85;
-  --aero-user-alpha-top: 0.84;
-  --aero-user-alpha-bot: 0.78;
+  --aero-ai-alpha: 0.88;
+  --aero-user-alpha: 0.82;
 }
 
 /* ==========================================================================
-   第一层：Neo Frutiger 光谱体系
+   色彩与贴图变量
    ========================================================================== */
 
 :root[data-aero-theme="day"],
 :root:not([data-aero-theme]) {
   --spec-mint: #16BE8E;
-  --spec-lime: #64FF36;
   --spec-emerald-ink: #08845B;
-
-  --spec-sun: #FFE838;
-  --spec-orange: #FF8800;
   --spec-coral: #FF4888;
   --spec-coral-ink: #D42862;
-
   --spec-sky: #1EB6F8;
-  --spec-aqua: #1CE6C4;
   --spec-sky-ink: #066EB8;
-
-  --spec-violet: #8C62FF;
   --spec-violet-ink: #6A3EE0;
 
-  /* 无壁纸时的静态日光轻盈底色（有壁纸时由 ST 原生 #bg1 / #bg_custom 覆盖其上） */
-  --aero-base-bg: linear-gradient(168deg, #dffdf3 0%, #eaf7ff 52%, #fff9e3 100%);
-
-  --aero-prism-rim: linear-gradient(
-    90deg,
-    rgba(116, 255, 77, 0.78) 0%,
-    rgba(22, 224, 168, 0.78) 22%,
-    rgba(255, 232, 56, 0.82) 44%,
-    rgba(255, 136, 0, 0.82) 64%,
-    rgba(255, 72, 136, 0.80) 82%,
-    rgba(30, 182, 248, 0.85) 100%
-  );
-
+  --aero-base-bg: linear-gradient(168deg, #e4fff6 0%, #ecf8ff 52%, #fffbeb 100%);
+  --prose-ai-bg: rgba(255, 255, 255, var(--aero-ai-alpha));
+  --prose-user-bg: rgba(218, 246, 255, var(--aero-user-alpha));
   --prose-ai-ink: #14202b;
   --prose-ai-em: #4c6272;
   --prose-user-ink: #0c2438;
@@ -117,58 +91,8 @@
   --aero-slider-track: linear-gradient(90deg, rgba(100, 255, 54, 0.34) 0%, rgba(22, 190, 142, 0.40) 50%, rgba(30, 182, 248, 0.45) 100%);
   --aero-slider-thumb: radial-gradient(circle at 35% 30%, #ffffff 0%, #ffe848 28%, #ff8800 78%, #ff4888 100%);
 
-  --aero-top-bg: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.36) 0%,
-    rgba(64, 232, 180, 0.64) 40%,
-    rgba(22, 198, 148, 0.72) 100%
-  );
-  --aero-top-halo:
-    inset 0 1px 0 rgba(255, 255, 255, 0.92),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.36),
-    0 4px 20px rgba(22, 190, 142, 0.14);
   --aero-top-icon: rgba(255, 255, 255, 0.96);
   --aero-top-icon-active: #FFF566;
-  --aero-top-pill-active: linear-gradient(180deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 232, 56, 0.30) 100%);
-
-  --aero-ai-slate-bg:
-    linear-gradient(
-      126deg,
-      rgba(255, 255, 255, 0.46) 0%,
-      rgba(255, 255, 255, 0.12) 28%,
-      transparent 28.6%
-    ),
-    linear-gradient(
-      155deg,
-      rgba(255, 255, 255, var(--aero-ai-alpha-top)) 0%,
-      rgba(248, 253, 255, var(--aero-ai-alpha-bot)) 100%
-    );
-  --aero-ai-halo:
-    inset 0 1px 0 rgba(255, 255, 255, 0.98),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.55),
-    inset 0 0 0 0.5px rgba(255, 255, 255, 0.72),
-    0 6px 24px rgba(18, 152, 196, 0.08);
-  --aero-ai-spine: linear-gradient(180deg, #FFE838 0%, #FF8800 48%, #FF4888 100%);
-
-  --aero-user-slate-bg:
-    linear-gradient(
-      126deg,
-      rgba(255, 255, 255, 0.52) 0%,
-      rgba(255, 255, 255, 0.14) 30%,
-      transparent 30.6%
-    ),
-    linear-gradient(
-      165deg,
-      rgba(218, 246, 255, var(--aero-user-alpha-top)) 0%,
-      rgba(198, 242, 254, var(--aero-user-alpha-bot)) 100%
-    );
-  --aero-user-halo:
-    inset 0 1px 0 rgba(255, 255, 255, 0.98),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.50),
-    inset 0 0 0 0.5px rgba(255, 255, 255, 0.78),
-    0 6px 24px rgba(24, 178, 236, 0.11);
-  --aero-user-spine: linear-gradient(180deg, #64FF36 0%, #16E2AE 50%, #1EB6F8 100%);
-
   --aero-name-color: #102630;
   --aero-meta-color: #466472;
   --aero-floor-text: var(--spec-coral-ink);
@@ -176,75 +100,24 @@
   --aero-action-bg: #ebfbf7;
   --aero-editbar-bg: linear-gradient(180deg, rgba(226, 250, 244, 0.97) 0%, rgba(214, 244, 252, 0.97) 100%);
 
-  --aero-dock-idle-bg: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.34) 0%,
-    rgba(96, 222, 255, 0.66) 40%,
-    rgba(42, 196, 252, 0.70) 74%,
-    rgba(38, 226, 206, 0.70) 100%
-  );
-  --aero-dock-focus-bg: linear-gradient(
-    115deg,
-    rgba(48, 204, 255, 0.74) 0%,
-    rgba(44, 232, 198, 0.72) 28%,
-    rgba(255, 238, 92, 0.68) 54%,
-    rgba(255, 146, 152, 0.68) 78%,
-    rgba(48, 204, 255, 0.74) 100%
-  );
-  --aero-dock-halo:
-    inset 0 1px 0 rgba(255, 255, 255, 0.94),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.38),
-    0 -4px 22px rgba(28, 180, 245, 0.14);
-  --aero-dock-focus-halo:
-    inset 0 1px 0 rgba(255, 255, 255, 0.98),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.52),
-    0 -4px 26px rgba(255, 136, 0, 0.24),
-    0 -2px 18px rgba(28, 224, 188, 0.22);
-
-  --aero-well-bg: rgba(255, 255, 255, 0.80);
-  --aero-well-focus-bg: rgba(255, 255, 255, 0.95);
   --aero-input-text: #0b2436;
   --aero-input-placeholder: rgba(18, 78, 112, 0.56);
   --aero-bottom-icon: rgba(255, 255, 255, 0.96);
-
-  /* 高纯度荧光橘子橙 + 加宽纯白中心光垫（绝对不透蓝变褐） */
-  --aero-plane-color: #FF8800;
-  --aero-plane-focus-color: #FFA014;
-  --aero-plane-halo-bg: radial-gradient(circle, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.80) 44%, rgba(255, 255, 255, 0.18) 66%, transparent 76%);
-  --aero-plane-shadow: 0 0 8px rgba(255, 148, 16, 0.65);
-  --aero-stop-color: #FF3370;
 }
 
-/* ---------- 夜间备选方案 ---------- */
+/* ---------- 夜间共用极简轻量变体（不额外占贴图资源）---------- */
 :root[data-aero-theme="night"] {
   --spec-mint: #16BE8E;
-  --spec-lime: #7CFF38;
   --spec-emerald-ink: #42FFB8;
-
-  --spec-sun: #FFE838;
-  --spec-orange: #FF9414;
   --spec-coral: #FF4888;
   --spec-coral-ink: #FF80AB;
-
   --spec-sky: #2CC8FF;
-  --spec-aqua: #24F0C8;
   --spec-sky-ink: #72DCFF;
-
-  --spec-violet: #A882FF;
   --spec-violet-ink: #C9B2FF;
 
   --aero-base-bg: linear-gradient(170deg, #092220 0%, #0b1c2c 52%, #081829 100%);
-
-  --aero-prism-rim: linear-gradient(
-    90deg,
-    rgba(100, 255, 54, 0.72) 0%,
-    rgba(36, 240, 200, 0.75) 22%,
-    rgba(255, 232, 56, 0.75) 46%,
-    rgba(255, 148, 20, 0.75) 66%,
-    rgba(255, 72, 136, 0.75) 84%,
-    rgba(44, 200, 255, 0.80) 100%
-  );
-
+  --prose-ai-bg: rgba(20, 34, 48, var(--aero-ai-alpha));
+  --prose-user-bg: rgba(14, 42, 66, var(--aero-user-alpha));
   --prose-ai-ink: #dde8f0;
   --prose-ai-em: #92b0c2;
   --prose-user-ink: #e4f3ff;
@@ -280,7 +153,7 @@
   --aero-panel-subtext: #8bb0bc;
   --aero-panel-hairline: rgba(36, 240, 200, 0.18);
   --aero-inner-bevel: rgba(180, 248, 238, 0.26);
-  --aero-panel-halo: 0 10px 30px rgba(0, 14, 24, 0.48), 0 0 24px rgba(22, 190, 142, 0.18);
+  --aero-panel-halo: 0 10px 30px rgba(0, 14, 24, 0.48);
   --aero-disabled-row-bg: rgba(8, 24, 30, 0.72);
   --aero-disabled-text: #7da2ac;
   --aero-ui-accent: #24F0C8;
@@ -288,58 +161,8 @@
   --aero-slider-track: linear-gradient(90deg, rgba(124, 255, 56, 0.45) 0%, rgba(36, 240, 200, 0.55) 50%, rgba(44, 200, 255, 0.60) 100%);
   --aero-slider-thumb: radial-gradient(circle at 35% 30%, #ffffff 0%, #ffe848 28%, #ff9414 78%, #ff4888 100%);
 
-  --aero-top-bg: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.12) 0%,
-    rgba(28, 196, 148, 0.62) 38%,
-    rgba(16, 152, 114, 0.68) 100%
-  );
-  --aero-top-halo:
-    inset 0 1px 0 rgba(196, 255, 236, 0.54),
-    inset 0 -1px 0 rgba(168, 255, 232, 0.22),
-    0 4px 20px rgba(22, 190, 142, 0.20);
   --aero-top-icon: rgba(242, 255, 250, 0.94);
   --aero-top-icon-active: #FFE838;
-  --aero-top-pill-active: linear-gradient(180deg, rgba(255, 255, 255, 0.30) 0%, rgba(255, 232, 56, 0.24) 100%);
-
-  --aero-ai-slate-bg:
-    linear-gradient(
-      126deg,
-      rgba(255, 255, 255, 0.11) 0%,
-      rgba(255, 255, 255, 0.03) 28%,
-      transparent 28.6%
-    ),
-    linear-gradient(
-      155deg,
-      rgba(24, 42, 56, var(--aero-ai-alpha-top)) 0%,
-      rgba(13, 27, 41, var(--aero-ai-alpha-bot)) 100%
-    );
-  --aero-ai-halo:
-    inset 0 1px 0 rgba(255, 246, 224, 0.26),
-    inset 0 -1px 0 rgba(176, 238, 255, 0.12),
-    inset 0 0 0 0.5px rgba(178, 236, 255, 0.20),
-    0 6px 24px rgba(16, 178, 216, 0.12);
-  --aero-ai-spine: linear-gradient(180deg, #FFE838 0%, #FF9414 48%, #FF4888 100%);
-
-  --aero-user-slate-bg:
-    linear-gradient(
-      126deg,
-      rgba(160, 234, 255, 0.16) 0%,
-      rgba(120, 224, 255, 0.04) 30%,
-      transparent 30.6%
-    ),
-    linear-gradient(
-      165deg,
-      rgba(16, 48, 72, var(--aero-user-alpha-top)) 0%,
-      rgba(11, 33, 55, var(--aero-user-alpha-bot)) 100%
-    );
-  --aero-user-halo:
-    inset 0 1px 0 rgba(188, 244, 255, 0.34),
-    inset 0 -1px 0 rgba(140, 226, 255, 0.14),
-    inset 0 0 0 0.5px rgba(130, 224, 255, 0.26),
-    0 6px 24px rgba(44, 200, 255, 0.16);
-  --aero-user-spine: linear-gradient(180deg, #7CFF38 0%, #24F0C8 50%, #2CC8FF 100%);
-
   --aero-name-color: #eaf7fa;
   --aero-meta-color: #8cb2bf;
   --aero-floor-text: var(--spec-coral-ink);
@@ -347,46 +170,13 @@
   --aero-action-bg: #102632;
   --aero-editbar-bg: linear-gradient(180deg, rgba(18, 46, 56, 0.96) 0%, rgba(12, 34, 44, 0.96) 100%);
 
-  --aero-dock-idle-bg: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.12) 0%,
-    rgba(24, 166, 224, 0.64) 38%,
-    rgba(16, 134, 196, 0.68) 72%,
-    rgba(18, 162, 168, 0.70) 100%
-  );
-  --aero-dock-focus-bg: linear-gradient(
-    115deg,
-    rgba(24, 162, 224, 0.74) 0%,
-    rgba(22, 198, 168, 0.72) 30%,
-    rgba(196, 128, 48, 0.64) 56%,
-    rgba(186, 62, 128, 0.66) 78%,
-    rgba(24, 162, 224, 0.74) 100%
-  );
-  --aero-dock-halo:
-    inset 0 1px 0 rgba(196, 244, 255, 0.52),
-    inset 0 -1px 0 rgba(168, 238, 255, 0.22),
-    0 -4px 22px rgba(44, 200, 255, 0.18);
-  --aero-dock-focus-halo:
-    inset 0 1px 0 rgba(224, 250, 255, 0.72),
-    inset 0 -1px 0 rgba(188, 244, 255, 0.34),
-    0 -4px 28px rgba(255, 148, 20, 0.26),
-    0 -2px 18px rgba(36, 240, 200, 0.22);
-
-  --aero-well-bg: rgba(8, 26, 44, 0.54);
-  --aero-well-focus-bg: rgba(8, 26, 44, 0.74);
   --aero-input-text: #eef8ff;
   --aero-input-placeholder: rgba(196, 234, 252, 0.62);
   --aero-bottom-icon: rgba(235, 252, 255, 0.94);
-
-  --aero-plane-color: #FF9414;
-  --aero-plane-focus-color: #FFB028;
-  --aero-plane-halo-bg: radial-gradient(circle, rgba(255, 248, 236, 0.32) 0%, rgba(255, 152, 24, 0.16) 48%, transparent 74%);
-  --aero-plane-shadow: 0 0 10px rgba(255, 156, 36, 0.88);
-  --aero-stop-color: #FF4888;
 }
 
 /* ==========================================================================
-   视口锁定 + 全域去滚动条 + 仅保护 ST 原生壁纸不被键盘挤压
+   视口锁定 + 去滚动条 + 原生壁纸高度保护
    ========================================================================== */
 
 html {
@@ -412,7 +202,6 @@ body {
   accent-color: var(--aero-ui-accent);
 }
 
-/* 不碰 opacity / z-index / display / filter / background-image，100% 交还 ST 原生壁纸切换，只锁定最小高度防弹键盘缩放 */
 #bg1,
 #bg2,
 #bg_custom {
@@ -448,7 +237,7 @@ body::-webkit-scrollbar,
 }
 
 /* ==========================================================================
-   全菜单（100% 不透明防穿透正文，去嵌套盒）
+   全菜单（100% 不透明，去嵌套盒）
    ========================================================================== */
 
 #top-settings-holder .drawer-content {
@@ -508,16 +297,7 @@ body::-webkit-scrollbar,
   color: var(--aero-panel-text) !important;
   border: none !important;
   border-radius: 8px;
-  box-shadow: inset 0 1px 3px rgba(14, 96, 118, 0.08) !important;
-}
-
-.drawer-content .text_pole:focus,
-.drawer-content select:focus,
-.drawer-content textarea:focus {
-  box-shadow:
-    inset 0 1px 3px rgba(22, 190, 142, 0.12),
-    0 0 8px rgba(30, 182, 248, 0.34) !important;
-  outline: none;
+  box-shadow: inset 0 1px 2px rgba(14, 96, 118, 0.08) !important;
 }
 
 .drawer-content .inline-drawer-toggle.inline-drawer-header,
@@ -537,10 +317,8 @@ body::-webkit-scrollbar,
   color: var(--aero-panel-text) !important;
   border: none !important;
   border-radius: 8px;
-  box-shadow:
-    inset 0 1px 0 var(--aero-inner-bevel),
-    0 2px 8px rgba(14, 132, 148, 0.10) !important;
-  transition: transform 0.12s ease, filter 0.15s ease;
+  box-shadow: inset 0 1px 0 var(--aero-inner-bevel) !important;
+  transition: transform 0.12s ease;
 }
 
 .drawer-content .menu_button:active,
@@ -554,10 +332,6 @@ body::-webkit-scrollbar,
 .drawer-content .menu_button_icon.active {
   background: var(--aero-panel-accent-btn) !important;
   color: #ffffff !important;
-  box-shadow:
-    inset 0 1px 0 rgba(210, 255, 242, 0.65),
-    0 3px 12px rgba(22, 190, 142, 0.28) !important;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.16);
 }
 
 .drawer-content .menu_button.redOverlay,
@@ -566,9 +340,6 @@ body::-webkit-scrollbar,
 .popup .menu_button.redWarningBG {
   background: var(--aero-panel-danger-btn) !important;
   color: #ffffff !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 210, 224, 0.55),
-    0 3px 12px rgba(255, 72, 136, 0.28) !important;
 }
 
 .drawer-content small,
@@ -591,7 +362,6 @@ body::-webkit-scrollbar,
   border: none !important;
   box-shadow: none !important;
   height: 22px;
-  cursor: pointer;
 }
 
 .drawer-content input[type="range"]::-webkit-slider-runnable-track,
@@ -599,8 +369,6 @@ body::-webkit-scrollbar,
   height: 6px;
   border-radius: 999px;
   background: var(--aero-slider-track);
-  border: none;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.10);
 }
 
 .drawer-content input[type="range"]::-webkit-slider-thumb,
@@ -613,10 +381,7 @@ body::-webkit-scrollbar,
   border-radius: 50%;
   background: var(--aero-slider-thumb);
   border: none;
-  box-shadow:
-    inset 0 1px 1px rgba(255, 255, 255, 0.95),
-    0 1px 6px rgba(255, 136, 0, 0.50),
-    0 0 8px rgba(255, 232, 56, 0.44);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.95);
 }
 
 .drawer-content input[type="checkbox"],
@@ -639,7 +404,6 @@ body::-webkit-scrollbar,
   box-shadow: none !important;
   padding: 7px 9px !important;
   margin: 2px 0 !important;
-  transition: background-color 0.14s ease;
 }
 
 #rm_print_characters_block .character_select.character_selected,
@@ -713,9 +477,7 @@ body::-webkit-scrollbar,
 #options {
   border-radius: 12px !important;
   overflow: hidden;
-  box-shadow:
-    inset 0 1px 0 var(--aero-inner-bevel),
-    0 8px 28px rgba(22, 168, 224, 0.24) !important;
+  box-shadow: var(--aero-panel-halo) !important;
 }
 
 #options .options-content a {
@@ -730,22 +492,14 @@ body::-webkit-scrollbar,
   color: var(--spec-sky);
 }
 
-#options .options-content a:active {
-  background: var(--aero-panel-control-hover) !important;
-}
-
 #aero_jump_to_bottom {
   font-weight: 600;
   color: var(--spec-emerald-ink) !important;
   background: rgba(22, 190, 142, 0.10);
 }
 
-#aero_jump_to_bottom i {
-  color: var(--spec-mint) !important;
-}
-
 /* ==========================================================================
-   顶部：明亮薄荷玻璃（无模糊防闪动）
+   顶部：硬件级静态纹理顶栏（零阴影与梯度计算）
    ========================================================================== */
 
 #top-bar {
@@ -757,12 +511,12 @@ body::-webkit-scrollbar,
   height: 38px !important;
   min-height: 38px !important;
   z-index: 3000 !important;
-  background: var(--aero-top-bg) !important;
+  background: url('./assets/top-glass.webp') center / 100% 100% no-repeat !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
   border: none !important;
   border-radius: 0 !important;
-  box-shadow: var(--aero-top-halo) !important;
+  box-shadow: none !important;
   padding: 0 4px !important;
   margin: 0 !important;
   display: flex;
@@ -770,16 +524,9 @@ body::-webkit-scrollbar,
   box-sizing: border-box;
 }
 
-#top-bar::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 1px;
-  background: var(--aero-prism-rim);
-  opacity: 0.90;
-  pointer-events: none;
+:root[data-aero-theme="night"] #top-bar {
+  background: linear-gradient(135deg, rgba(20, 168, 126, 0.72), rgba(14, 134, 102, 0.78)) !important;
+  box-shadow: inset 0 1px 0 rgba(188, 255, 232, 0.45) !important;
 }
 
 #top-settings-holder {
@@ -815,15 +562,11 @@ body::-webkit-scrollbar,
   border-radius: 8px !important;
   box-sizing: border-box;
   border: none !important;
-  transition: background 0.16s ease, box-shadow 0.16s ease;
 }
 
 #top-settings-holder > .drawer > .drawer-toggle:active,
 #top-settings-holder > .drawer > .drawer-toggle:has(.openIcon) {
-  background: var(--aero-top-pill-active) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.72),
-    0 0 12px rgba(255, 232, 56, 0.36);
+  background: url('./assets/top-pill-active.webp') center / 100% 100% no-repeat !important;
 }
 
 #top-settings-holder .drawer-icon {
@@ -837,7 +580,7 @@ body::-webkit-scrollbar,
   vertical-align: top !important;
   color: var(--aero-top-icon) !important;
   opacity: 1 !important;
-  text-shadow: 0 1px 2px rgba(6, 98, 70, 0.42) !important;
+  text-shadow: 0 1px 2px rgba(6, 98, 70, 0.35) !important;
   filter: none !important;
   background: transparent !important;
 }
@@ -887,7 +630,7 @@ body::-webkit-scrollbar,
 }
 
 /* ==========================================================================
-   对话区：精工菲涅尔镜面切片
+   消息卡片：9-Slice 硬件玻璃贴图 + 纯色背景（彻底消灭 box-shadow 滚动重绘）
    ========================================================================== */
 
 #chat > .mes {
@@ -897,37 +640,30 @@ body::-webkit-scrollbar,
   padding: 0 !important;
   border-radius: var(--aero-radius-card) !important;
   border: none !important;
+  box-shadow: none !important;
   overflow: visible !important;
   position: relative;
   z-index: 1;
 }
 
 #chat > .mes.aero-mes-enter {
-  animation: aeroMesEnter 0.26s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation: aeroMesEnter 0.24s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
 @keyframes aeroMesEnter {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(7px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 #chat > .mes[is_user="false"],
 #chat > .mes:not([is_user="true"]) {
   width: 100% !important;
   margin: 0 0 16px 0 !important;
-  box-shadow: var(--aero-ai-halo) !important;
 }
 
 #chat > .mes[is_user="true"] {
   width: 91% !important;
   margin: 2px 0 18px auto !important;
-  box-shadow: var(--aero-user-halo) !important;
 }
 
 #chat > .mes:has(.extraMesButtons.visible),
@@ -952,70 +688,67 @@ body::-webkit-scrollbar,
   border-radius: var(--aero-radius-card) !important;
   box-sizing: border-box;
   position: relative;
+  box-shadow: none !important;
+  border-style: solid !important;
+  border-width: 0 !important;
 }
 
-.mes[is_user="false"] > .mes_block,
-.mes:not([is_user="true"]) > .mes_block {
-  background: var(--aero-ai-slate-bg) !important;
+/* 日间：九宫格外框（含菲涅尔倒角+光晕+光刃）+ 顶部不拉伸反光膜 + 单纯色半透底 */
+:root[data-aero-theme="day"] #chat > .mes[is_user="false"] > .mes_block,
+:root[data-aero-theme="day"] #chat > .mes:not([is_user="true"]) > .mes_block,
+:root:not([data-aero-theme]) #chat > .mes[is_user="false"] > .mes_block,
+:root:not([data-aero-theme]) #chat > .mes:not([is_user="true"]) > .mes_block {
+  background-color: var(--prose-ai-bg) !important;
+  background-image: url('./assets/card-sheen.webp') !important;
+  background-repeat: no-repeat !important;
+  background-position: 0 0 !important;
+  background-size: 100% 42px !important;
   color: var(--prose-ai-ink);
+  border-image-source: url('./assets/card-ai-rim.webp');
+  border-image-slice: 48;
+  border-image-width: 24px;
+  border-image-outset: 8px;
+  border-image-repeat: stretch;
 }
 
-.mes[is_user="true"] > .mes_block {
-  background: var(--aero-user-slate-bg) !important;
+:root[data-aero-theme="day"] #chat > .mes[is_user="true"] > .mes_block,
+:root:not([data-aero-theme]) #chat > .mes[is_user="true"] > .mes_block {
+  background-color: var(--prose-user-bg) !important;
+  background-image: url('./assets/card-sheen.webp') !important;
+  background-repeat: no-repeat !important;
+  background-position: 0 0 !important;
+  background-size: 100% 42px !important;
   color: var(--prose-user-ink);
+  border-image-source: url('./assets/card-user-rim.webp');
+  border-image-slice: 48;
+  border-image-width: 24px;
+  border-image-outset: 8px;
+  border-image-repeat: stretch;
 }
 
-.mes[is_user="false"] > .mes_block::before,
-.mes:not([is_user="true"]) > .mes_block::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 14px;
-  bottom: 14px;
-  width: 3px;
-  border-radius: 3px;
-  background: var(--aero-ai-spine);
-  box-shadow: 0 0 10px rgba(255, 136, 0, 0.36);
-  pointer-events: none;
-  transition: box-shadow 0.25s ease, width 0.25s ease;
+/* 夜间极简变体 */
+:root[data-aero-theme="night"] #chat > .mes[is_user="false"] > .mes_block,
+:root[data-aero-theme="night"] #chat > .mes:not([is_user="true"]) > .mes_block {
+  background: var(--prose-ai-bg) !important;
+  color: var(--prose-ai-ink);
+  box-shadow: inset 0 1px 0 rgba(255, 240, 210, 0.22), inset 3px 0 0 #FF9414 !important;
 }
 
-:root[data-aero-generating="true"] #chat > .mes[is_user="false"]:last-of-type > .mes_block::before,
-:root[data-aero-generating="true"] #chat > .mes:not([is_user="true"]):last-of-type > .mes_block::before {
-  width: 4px;
-  animation: aeroSpineBreathe 1.8s ease-in-out infinite;
+:root[data-aero-theme="night"] #chat > .mes[is_user="true"] > .mes_block {
+  background: var(--prose-user-bg) !important;
+  color: var(--prose-user-ink);
+  box-shadow: inset 0 1px 0 rgba(178, 242, 255, 0.28), inset -3px 0 0 #2CC8FF !important;
 }
 
-:root[data-aero-generating="true"] #chat > .mes[is_user="false"]:last-of-type,
-:root[data-aero-generating="true"] #chat > .mes:not([is_user="true"]):last-of-type {
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.98),
-    0 4px 28px rgba(255, 136, 0, 0.24),
-    0 0 18px rgba(255, 72, 136, 0.16) !important;
+/* 纯合成层 opacity 呼吸态（零 box-shadow 重绘） */
+:root[data-aero-generating="true"] #chat > .mes[is_user="false"]:last-of-type > .mes_block,
+:root[data-aero-generating="true"] #chat > .mes:not([is_user="true"]):last-of-type > .mes_block {
+  animation: aeroCardPulse 1.8s ease-in-out infinite;
 }
 
-@keyframes aeroSpineBreathe {
-  0%, 100% {
-    opacity: 0.74;
-    box-shadow: 0 0 8px rgba(255, 136, 0, 0.45);
-  }
-  50% {
-    opacity: 1;
-    box-shadow: 0 0 16px rgba(255, 136, 0, 0.90), 0 0 26px rgba(255, 72, 136, 0.50);
-  }
-}
-
-.mes[is_user="true"] > .mes_block::after {
-  content: "";
-  position: absolute;
-  right: 0;
-  top: 14px;
-  bottom: 14px;
-  width: 3px;
-  border-radius: 3px;
-  background: var(--aero-user-spine);
-  box-shadow: 0 0 10px rgba(22, 224, 168, 0.36);
-  pointer-events: none;
+@keyframes aeroCardPulse {
+  0%, 100% { opacity: 0.94; }
+  50% { opacity: 1; }
 }
 
 .aero-mes-header {
@@ -1056,15 +789,7 @@ body::-webkit-scrollbar,
   overflow: hidden !important;
   background: transparent !important;
   border: none !important;
-  box-shadow:
-    inset 0 0 0 0.5px rgba(255, 255, 255, 0.72),
-    0 3px 14px rgba(22, 168, 214, 0.20) !important;
-}
-
-:root[data-aero-theme="night"] .aero-avatar-slot .avatar {
-  box-shadow:
-    inset 0 0 0 0.5px rgba(188, 244, 255, 0.38),
-    0 3px 16px rgba(36, 240, 200, 0.24) !important;
+  box-shadow: none !important;
 }
 
 :root[data-aero-compact="true"] .aero-avatar-slot .avatar {
@@ -1088,12 +813,7 @@ body::-webkit-scrollbar,
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(
-    132deg,
-    rgba(255, 255, 255, 0.42) 0%,
-    rgba(255, 255, 255, 0.08) 36%,
-    transparent 36.8%
-  );
+  background: url('./assets/avatar-glint.webp') center / 100% 100% no-repeat;
   border-radius: inherit;
 }
 
@@ -1182,12 +902,6 @@ body::-webkit-scrollbar,
   padding: 0 !important;
   margin: 0 !important;
   border-radius: 6px;
-  transition: transform 0.12s ease;
-}
-
-.aero-actions-wrap .mes_buttons > .mes_button:active,
-.aero-actions-wrap .mes_buttons > .extraMesButtonsHint:active {
-  transform: scale(0.92);
 }
 
 .aero-actions-wrap .mes_buttons .extraMesButtons {
@@ -1203,14 +917,10 @@ body::-webkit-scrollbar,
   box-sizing: border-box !important;
   z-index: 20 !important;
   background: var(--aero-editbar-bg) !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
   border: none !important;
   border-radius: 0 !important;
   padding: 7px 14px !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.55),
-    inset 0 -1px 0 var(--aero-panel-hairline) !important;
+  box-shadow: inset 0 -1px 0 var(--aero-panel-hairline) !important;
   flex-direction: row !important;
   flex-wrap: wrap !important;
   justify-content: flex-end !important;
@@ -1239,9 +949,6 @@ body::-webkit-scrollbar,
   border-radius: 6px;
   background: var(--aero-panel-surface);
   border: none !important;
-  box-shadow:
-    inset 0 1px 0 var(--aero-inner-bevel),
-    0 1px 4px rgba(14, 132, 148, 0.10);
 }
 
 .mes_block > .mes_edit_buttons {
@@ -1251,9 +958,7 @@ body::-webkit-scrollbar,
   padding: 7px 14px !important;
   background: var(--aero-editbar-bg);
   border: none !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.55),
-    inset 0 -1px 0 var(--aero-panel-hairline);
+  box-shadow: inset 0 -1px 0 var(--aero-panel-hairline);
   justify-content: flex-end !important;
   align-items: center !important;
   flex-wrap: wrap !important;
@@ -1273,9 +978,6 @@ body::-webkit-scrollbar,
   color: var(--aero-panel-text) !important;
   background: var(--aero-panel-surface);
   border: none !important;
-  box-shadow:
-    inset 0 1px 0 var(--aero-inner-bevel),
-    0 1px 4px rgba(14, 132, 148, 0.10);
 }
 
 .mes_block > .mes_edit_buttons .mes_edit_done {
@@ -1304,23 +1006,10 @@ body::-webkit-scrollbar,
   padding: 0 !important;
 }
 
-.aero-row-meta .timestamp {
-  color: var(--aero-meta-color) !important;
-}
-
-.aero-row-meta .tokenCounterDisplay {
-  color: var(--spec-violet-ink) !important;
-  font-weight: 500;
-}
-
-.aero-row-meta .mes_timer {
-  color: var(--spec-emerald-ink) !important;
-  font-weight: 600;
-}
-
-.mes[is_user="true"] .aero-row-meta .mes_timer {
-  display: none !important;
-}
+.aero-row-meta .timestamp { color: var(--aero-meta-color) !important; }
+.aero-row-meta .tokenCounterDisplay { color: var(--spec-violet-ink) !important; font-weight: 500; }
+.aero-row-meta .mes_timer { color: var(--spec-emerald-ink) !important; font-weight: 600; }
+.mes[is_user="true"] .aero-row-meta .mes_timer { display: none !important; }
 
 .aero-row-meta > *:not(:empty) + *:not(:empty)::before {
   content: "·";
@@ -1373,7 +1062,6 @@ body::-webkit-scrollbar,
   border: none !important;
   border-radius: 8px !important;
   padding: 9px 11px !important;
-  box-shadow: inset 0 1px 3px rgba(14, 96, 118, 0.10);
 }
 
 .mes_block > .mes_reasoning_details {
@@ -1387,7 +1075,7 @@ body::-webkit-scrollbar,
 }
 
 /* ==========================================================================
-   底部：晴空水蓝透明玻璃（无模糊防闪动）+ 不透蓝亮橘橙纸飞机
+   底部：零循环重绘静态纹理底栏 + 3D 抛光霓虹橘纸飞机
    ========================================================================== */
 
 #form_sheld {
@@ -1418,45 +1106,40 @@ body::-webkit-scrollbar,
   border-radius: 0 !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
-  background: var(--aero-dock-idle-bg) !important;
-  background-size: 100% 100%;
+  background: url('./assets/dock-idle.webp') center / 100% 100% no-repeat !important;
   border: none !important;
-  box-shadow: var(--aero-dock-halo) !important;
+  box-shadow: none !important;
   overflow: visible !important;
-  transition: box-shadow 0.25s ease;
 }
 
-#form_sheld #send_form::before {
+:root[data-aero-theme="night"] #form_sheld #send_form {
+  background: linear-gradient(135deg, rgba(22, 148, 210, 0.72), rgba(16, 156, 174, 0.76)) !important;
+  box-shadow: inset 0 1px 0 rgba(196, 244, 255, 0.45) !important;
+}
+
+/* 用单次 0.28s opacity 淡入取代 120fps 持续重绘，打字时零额外能耗 */
+#form_sheld #send_form::after {
   content: "";
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  height: 1px;
-  background: var(--aero-prism-rim);
-  opacity: 0.92;
+  inset: 0;
+  background: url('./assets/dock-focus.webp') center / 100% 100% no-repeat;
+  opacity: 0;
   pointer-events: none;
-  transition: opacity 0.25s ease;
+  z-index: 0;
+  transition: opacity 0.26s ease;
 }
 
-#form_sheld #send_form:has(#send_textarea:focus) {
-  background: var(--aero-dock-focus-bg) !important;
-  background-size: 240% 240% !important;
-  box-shadow: var(--aero-dock-focus-halo) !important;
-  animation: aeroDockAurora 4.8s ease-in-out infinite alternate;
+:root[data-aero-theme="night"] #form_sheld #send_form::after {
+  background: linear-gradient(115deg, rgba(24, 162, 224, 0.76), rgba(22, 198, 168, 0.72), rgba(214, 132, 48, 0.62));
 }
 
-#form_sheld #send_form:has(#send_textarea:focus)::before {
+#form_sheld #send_form:has(#send_textarea:focus)::after {
   opacity: 1;
 }
 
-@keyframes aeroDockAurora {
-  0% {
-    background-position: 0% 50%;
-  }
-  100% {
-    background-position: 100% 50%;
-  }
+#form_sheld #send_form > * {
+  position: relative;
+  z-index: 1;
 }
 
 #form_sheld #send_form #nonQRFormItems {
@@ -1486,6 +1169,7 @@ body::-webkit-scrollbar,
   overflow: visible !important;
 }
 
+/* 九宫格水晶凹槽输入区 */
 #form_sheld #send_form #nonQRFormItems #send_textarea {
   flex: 1 1 auto !important;
   min-width: 0 !important;
@@ -1496,39 +1180,39 @@ body::-webkit-scrollbar,
   margin: 1px 0 !important;
   padding: 8px 13px !important;
   border-radius: 12px !important;
-  background: var(--aero-well-bg) !important;
-  border: none !important;
+  background: transparent !important;
+  border-style: solid !important;
+  border-width: 0 !important;
+  border-image-source: url('./assets/input-well.webp');
+  border-image-slice: 28 fill;
+  border-image-width: 14px;
+  border-image-outset: 2px;
+  border-image-repeat: stretch;
+  box-shadow: none !important;
   outline: none !important;
-  clip-path: none !important;
-  transform: none !important;
   color: var(--aero-input-text) !important;
-  caret-color: var(--spec-orange);
+  caret-color: #FF7B00;
   font-size: 15px !important;
   line-height: 1.4 !important;
   vertical-align: middle !important;
   overflow-y: auto !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.96),
-    inset 0 2px 6px rgba(10, 108, 148, 0.09) !important;
-  transition: background 0.22s ease, box-shadow 0.22s ease;
+}
+
+:root[data-aero-theme="night"] #form_sheld #send_form #nonQRFormItems #send_textarea {
+  border-image: none !important;
+  background: rgba(8, 26, 44, 0.62) !important;
+  box-shadow: inset 0 1px 0 rgba(178, 232, 255, 0.25) !important;
 }
 
 #form_sheld #send_form #nonQRFormItems #send_textarea::placeholder {
   color: var(--aero-input-placeholder) !important;
 }
 
-#form_sheld #send_form #nonQRFormItems #send_textarea:focus {
-  background: var(--aero-well-focus-bg) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 1),
-    0 0 14px rgba(255, 255, 255, 0.62) !important;
-}
-
 #options_button,
 #leftSendForm .fa-solid {
   color: var(--aero-bottom-icon) !important;
   opacity: 1 !important;
-  text-shadow: 0 1px 2px rgba(6, 86, 132, 0.36);
+  text-shadow: 0 1px 2px rgba(6, 86, 132, 0.32);
 }
 
 #options_button {
@@ -1548,43 +1232,7 @@ body::-webkit-scrollbar,
   display: none !important;
 }
 
-#rightSendForm #send_but,
-#rightSendForm #mes_stop {
-  width: 38px !important;
-  min-width: 38px !important;
-  height: 38px !important;
-  line-height: 38px !important;
-  text-align: center !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  border: none !important;
-  box-shadow: none !important;
-  border-radius: 50% !important;
-  font-size: 21px !important;
-  transition: transform 0.14s ease, color 0.2s ease;
-}
-
-#rightSendForm #send_but {
-  background: var(--aero-plane-halo-bg) !important;
-}
-
-#rightSendForm #mes_stop {
-  background: transparent !important;
-  align-items: center !important;
-  justify-content: center !important;
-}
-
-#rightSendForm #send_but::before,
-#rightSendForm #mes_stop::before,
-#rightSendForm #mes_stop i {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  line-height: 1 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
+/* 3D 抛光霓虹橘亚克力纸飞机 & 珊瑚停止宝石（彻底取代扁平字体图标） */
 #rightSendForm,
 #rightSendForm #send_but,
 #rightSendForm #mes_stop {
@@ -1593,38 +1241,40 @@ body::-webkit-scrollbar,
 }
 
 #rightSendForm #send_but,
+#rightSendForm #mes_stop {
+  width: 40px !important;
+  min-width: 40px !important;
+  height: 40px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 50% !important;
+  transition: transform 0.12s ease;
+}
+
+#rightSendForm #send_but {
+  background: url('./assets/send-plane.webp') center / 34px 34px no-repeat !important;
+}
+
+#rightSendForm #mes_stop {
+  background: url('./assets/stop-gem.webp') center / 32px 32px no-repeat !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* 隐藏原生单色 FontAwesome 字体剪影，只显示 3D 抛光宝石贴图 */
+#rightSendForm #send_but::before,
 #rightSendForm #send_but i,
-#rightSendForm #send_but::before {
-  opacity: 1 !important;
-  color: var(--aero-plane-color) !important;
-  -webkit-text-fill-color: var(--aero-plane-color) !important;
-  filter: none !important;
-  text-shadow: var(--aero-plane-shadow) !important;
-}
-
-#rightSendForm #mes_stop,
-#rightSendForm #mes_stop i,
-#rightSendForm #mes_stop::before {
-  opacity: 1 !important;
-  color: var(--aero-stop-color) !important;
-  -webkit-text-fill-color: var(--aero-stop-color) !important;
-  filter: none !important;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9), 0 0 8px rgba(255, 51, 112, 0.55) !important;
-}
-
-#send_form:has(#send_textarea:focus) #rightSendForm #send_but,
-#send_form:has(#send_textarea:focus) #rightSendForm #send_but i,
-#send_form:has(#send_textarea:focus) #rightSendForm #send_but::before {
-  opacity: 1 !important;
-  color: var(--aero-plane-focus-color) !important;
-  -webkit-text-fill-color: var(--aero-plane-focus-color) !important;
-  filter: none !important;
-  text-shadow: var(--aero-plane-shadow) !important;
+#rightSendForm #mes_stop::before,
+#rightSendForm #mes_stop i {
+  opacity: 0 !important;
+  pointer-events: none;
 }
 
 #rightSendForm #send_but:active,
 #rightSendForm #mes_stop:active {
-  transform: scale(0.86);
+  transform: scale(0.88);
 }
 
 :root[data-aero-hide-wand="true"] #extensionsMenuButton {
