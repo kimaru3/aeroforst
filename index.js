@@ -29,7 +29,7 @@ function getSettings() {
     return extensionSettings[MODULE_NAME];
 }
 
-function applyChromeThemeColor(color = '#075B50') {
+function applyChromeThemeColor(color = '#16BE8E') {
     const existing = document.querySelectorAll('meta[name="theme-color"]');
     if (existing.length > 0) {
         existing.forEach((el, idx) => {
@@ -88,7 +88,7 @@ function applyAppearance() {
     }
 
     syncStBackgroundState();
-    applyChromeThemeColor('#075B50');
+    applyChromeThemeColor('#16BE8E');
 }
 
 function initStaticGrainTexture() {
@@ -454,7 +454,7 @@ async function mountSettingsPanel() {
 }
 
 jQuery(async () => {
-    applyChromeThemeColor('#075B50');
+    applyChromeThemeColor('#16BE8E');
     initStaticGrainTexture();
     mountAuroraStage();
     initBgObserver();
