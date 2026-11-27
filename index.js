@@ -121,39 +121,36 @@ function mountAuroraStage() {
     stage.innerHTML = `
       <div class="aero-stage-wash"></div>
       <div class="aero-stage-ribbons">
-        <svg class="aero-eco-wallpaper" viewBox="0 0 400 840" preserveAspectRatio="xMidYMid slice">
-          <defs>
-            <!-- 浅色系高明度植物水光波：荧光草绿 -> 冰薄荷 -> 晴空蓝 -->
-            <linearGradient id="neoBioWave" x1="0%" y1="100%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#98FF66" stop-opacity="0.56" />
-              <stop offset="48%" stop-color="#5CFFE0" stop-opacity="0.50" />
-              <stop offset="100%" stop-color="#6ED8FF" stop-opacity="0.46" />
-            </linearGradient>
-            <!-- 浅色系高明度阳光果味波：柠檬阳光黄 -> 蜜橘橙 -> 樱花珊瑚粉 -->
-            <linearGradient id="neoSolarWave" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#FFF266" stop-opacity="0.58" />
-              <stop offset="48%" stop-color="#FFB052" stop-opacity="0.46" />
-              <stop offset="100%" stop-color="#FF85B3" stop-opacity="0.42" />
-            </linearGradient>
-            <linearGradient id="neoLightThread" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.15" />
-              <stop offset="48%" stop-color="#FFFFFF" stop-opacity="0.95" />
-              <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.20" />
-            </linearGradient>
-          </defs>
-
-          <g class="aero-wave-group aero-wave-bio">
+        <!-- 拆分为独立 HTML 图层承载动画，避免 Android Chrome SVG <g> 动画冻结 -->
+        <div class="aero-wave-layer aero-wave-bio">
+          <svg viewBox="0 0 400 840" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="neoBioWave" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#74FF4D" stop-opacity="0.52" />
+                <stop offset="48%" stop-color="#24F0BA" stop-opacity="0.46" />
+                <stop offset="100%" stop-color="#3BCBFF" stop-opacity="0.42" />
+              </linearGradient>
+            </defs>
             <path d="M-80,780 C45,670 110,490 245,410 C350,348 415,245 480,100 L480,320 C395,435 290,485 195,585 C95,690 20,805 -80,895 Z" fill="url(#neoBioWave)" />
-            <path d="M-80,780 C45,670 110,490 245,410 C350,348 415,245 480,100" fill="none" stroke="url(#neoLightThread)" stroke-width="1.8" />
-            <path d="M-60,810 C65,695 135,520 270,440 C370,378 430,275 490,135" fill="none" stroke="rgba(255,255,255,0.65)" stroke-width="0.9" />
-          </g>
+            <path d="M-80,780 C45,670 110,490 245,410 C350,348 415,245 480,100" fill="none" stroke="rgba(255,255,255,0.92)" stroke-width="1.8" />
+            <path d="M-60,810 C65,695 135,520 270,440 C370,378 430,275 490,135" fill="none" stroke="rgba(255,255,255,0.62)" stroke-width="0.9" />
+          </svg>
+        </div>
 
-          <g class="aero-wave-group aero-wave-solar">
+        <div class="aero-wave-layer aero-wave-solar">
+          <svg viewBox="0 0 400 840" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="neoSolarWave" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FFE642" stop-opacity="0.54" />
+                <stop offset="48%" stop-color="#FF9A38" stop-opacity="0.44" />
+                <stop offset="100%" stop-color="#FF68A0" stop-opacity="0.40" />
+              </linearGradient>
+            </defs>
             <path d="M-70,130 C75,85 185,205 275,285 C365,365 425,405 495,435 L495,625 C390,585 285,500 185,395 C90,295 15,220 -70,265 Z" fill="url(#neoSolarWave)" />
-            <path d="M-70,130 C75,85 185,205 275,285 C365,365 425,405 495,435" fill="none" stroke="url(#neoLightThread)" stroke-width="1.6" />
-            <path d="M-70,158 C70,115 175,232 265,312 C352,390 415,432 495,462" fill="none" stroke="rgba(255,255,255,0.60)" stroke-width="0.9" />
-          </g>
-        </svg>
+            <path d="M-70,130 C75,85 185,205 275,285 C365,365 425,405 495,435" fill="none" stroke="rgba(255,255,255,0.90)" stroke-width="1.6" />
+            <path d="M-70,158 C70,115 175,232 265,312 C352,390 415,432 495,462" fill="none" stroke="rgba(255,255,255,0.58)" stroke-width="0.9" />
+          </svg>
+        </div>
 
         <div class="aero-orb aero-orb-1"></div>
         <div class="aero-orb aero-orb-2"></div>
@@ -170,88 +167,105 @@ function mountAuroraStage() {
  */
 function getSelfExtensionFolder() {
     const pathname = new URL('.', import.meta.url).pathname;
-    const match = pathname.match(/\/scripts\/extensions\/(.+?)\/?$/);
-    if (match && match[1]) {
-        return decodeURIComponent(match[1].replace(/\/$/, ''));
-    }
     const parts = pathname.split('/').filter(Boolean);
     const tpIdx = parts.lastIndexOf('third-party');
     if (tpIdx !== -1 && parts[tpIdx + 1]) {
-        return `third-party/${decodeURIComponent(parts[tpIdx + 1])}`;
+        return {
+            full: `third-party/${decodeURIComponent(parts[tpIdx + 1])}`,
+            short: decodeURIComponent(parts[tpIdx + 1]),
+        };
     }
-    return null;
+    const last = parts[parts.length - 1];
+    return last ? { full: decodeURIComponent(last), short: decodeURIComponent(last) } : null;
 }
 
 async function checkAndUpdateExtension() {
     const btn = document.getElementById('aero_check_update_btn');
     const reloadBtn = document.getElementById('aero_reload_btn');
     const statusEl = document.getElementById('aero_update_status');
-    const extensionName = getSelfExtensionFolder();
+    const selfFolder = getSelfExtensionFolder();
 
-    if (!extensionName) {
-        if (statusEl) statusEl.textContent = '未能识别当前扩展目录路径，请在扩展管理列表中手动更新。';
+    if (!selfFolder) {
+        if (statusEl) statusEl.textContent = '未能识别扩展目录，请在“管理扩展程序”中更新。';
         return;
     }
 
     const { getRequestHeaders } = getCtx();
-    const headers = {
+    const jsonHeaders = {
         ...getRequestHeaders(),
         'Content-Type': 'application/json',
     };
 
     if (btn) btn.disabled = true;
-    if (statusEl) statusEl.textContent = `正在检查更新（${extensionName}）...`;
+    if (statusEl) statusEl.textContent = `正在定位扩展（${selfFolder.short}）...`;
 
     try {
-        // 确认是否为 global 安装
+        let targetName = selfFolder.full;
         let isGlobal = false;
-        try {
-            const discRes = await fetch('/api/extensions/discover', { headers: getRequestHeaders() });
-            if (discRes.ok) {
-                const list = await discRes.json();
-                const found = Array.isArray(list) ? list.find((item) => item.name === extensionName) : null;
-                if (found && found.type === 'global') isGlobal = true;
+
+        // 1. 从 ST 后端获取精确注册的扩展名称与作用域（使用相对路径兼容子路径反代）
+        const discRes = await fetch('api/extensions/discover', { headers: getRequestHeaders() });
+        if (discRes.ok) {
+            const list = await discRes.json();
+            if (Array.isArray(list)) {
+                const found = list.find(
+                    (item) =>
+                        item.name === selfFolder.full ||
+                        item.name === selfFolder.short ||
+                        item.name?.endsWith(`/${selfFolder.short}`),
+                );
+                if (found) {
+                    targetName = found.name;
+                    isGlobal = found.type === 'global';
+                }
             }
-        } catch (_) {
-            // 忽略 discover 探测异常，继续尝试检查版本
         }
 
-        const verRes = await fetch('/api/extensions/version', {
+        // 2. 先尝试 version 检查；若该路由不可用(404)，则直接尝试 update
+        if (statusEl) statusEl.textContent = `正在检查更新（${targetName}）...`;
+        const verRes = await fetch('api/extensions/version', {
             method: 'POST',
-            headers,
-            body: JSON.stringify({ extensionName, global: isGlobal }),
+            headers: jsonHeaders,
+            body: JSON.stringify({ extensionName: targetName, global: isGlobal }),
         });
 
-        if (!verRes.ok) {
+        if (verRes.ok) {
+            const verData = await verRes.json();
+            if (verData.isUpToDate) {
+                const branch = verData.currentBranchName || 'main';
+                if (statusEl) statusEl.textContent = `当前已是最新版本（分支：${branch}）`;
+                window.toastr?.info('Aero Mobile UI 已是最新版本');
+                return;
+            }
+        } else if (verRes.status !== 404) {
             throw new Error(`版本检查失败 (HTTP ${verRes.status})`);
         }
 
-        const verData = await verRes.json();
-        if (verData.isUpToDate) {
-            const branch = verData.currentBranchName || 'main';
-            if (statusEl) statusEl.textContent = `当前已是最新版本（分支：${branch}）`;
-            window.toastr?.info('Aero Mobile UI 已是最新版本');
-            return;
-        }
-
-        if (statusEl) statusEl.textContent = '发现 GitHub 新提交，正在拉取更新...';
-        const updRes = await fetch('/api/extensions/update', {
+        // 3. 执行拉取更新
+        if (statusEl) statusEl.textContent = '正在从 GitHub 拉取更新...';
+        const updRes = await fetch('api/extensions/update', {
             method: 'POST',
-            headers,
-            body: JSON.stringify({ extensionName, global: isGlobal }),
+            headers: jsonHeaders,
+            body: JSON.stringify({ extensionName: targetName, global: isGlobal }),
         });
 
         if (!updRes.ok) {
-            throw new Error(`拉取更新失败 (HTTP ${updRes.status})`);
+            throw new Error(`HTTP ${updRes.status}（请暂用上方“管理扩展程序”更新）`);
         }
 
-        if (statusEl) statusEl.textContent = '更新拉取成功！点击右侧「刷新生效」即可应用新版界面。';
-        if (reloadBtn) reloadBtn.style.display = 'inline-flex';
-        window.toastr?.success('Aero Mobile UI 更新成功，请刷新页面生效');
+        const updText = await updRes.text();
+        const noChange = updText.includes('up to date') || updText.includes('up-to-date');
+        if (noChange) {
+            if (statusEl) statusEl.textContent = '当前已是最新版本，无需刷新。';
+            window.toastr?.info('Aero Mobile UI 已是最新版本');
+        } else {
+            if (statusEl) statusEl.textContent = '更新完成！点击右侧「刷新生效」应用新版。';
+            if (reloadBtn) reloadBtn.style.display = 'inline-flex';
+            window.toastr?.success('更新成功，请刷新页面生效');
+        }
     } catch (err) {
-        console.error('[Aero Mobile UI] 检查更新失败:', err);
-        if (statusEl) statusEl.textContent = `更新失败：${err.message || err}`;
-        window.toastr?.error(`检查更新失败：${err.message || err}`);
+        console.error('[Aero Mobile UI] 更新检查异常:', err);
+        if (statusEl) statusEl.textContent = `检查失败：${err.message || err}`;
     } finally {
         if (btn) btn.disabled = false;
     }
