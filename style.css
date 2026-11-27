@@ -1,5 +1,6 @@
 /* ==========================================================================
-   Aero Mobile UI v6.1 - 修复抽屉宽度 + 真正去嵌套盒子 + 浪漫漂浮琉璃气泡
+   Aero Mobile UI v7.0 - Neo Frutiger 鲜活生态 × 高饱和糖果玻璃（Android Chrome）
+   核心色彩：鲜翠薄荷绿(#16BE8E) · 荧光草绿 · 阳光黄 · 橘子橙 · 珊瑚粉 · 晴空水蓝
    ========================================================================== */
 
 :root {
@@ -13,11 +14,10 @@
   --aero-wash-opacity: 1;
   --aero-bg-opacity: 0;
   --aero-bg-blur: 3px;
-  /* 默认 balanced 降到更透气的 70%/62%，让极光与水泡真正穿透卡片 */
-  --aero-ai-alpha-top: 0.74;
-  --aero-ai-alpha-bot: 0.65;
-  --aero-user-alpha-top: 0.66;
-  --aero-user-alpha-bot: 0.56;
+  --aero-ai-alpha-top: 0.78;
+  --aero-ai-alpha-bot: 0.68;
+  --aero-user-alpha-top: 0.70;
+  --aero-user-alpha-bot: 0.60;
 }
 
 :root[data-aero-font="serif"] {
@@ -25,376 +25,392 @@
 }
 
 :root[data-aero-prose-glass="airy"] {
-  --aero-ai-alpha-top: 0.65;
-  --aero-ai-alpha-bot: 0.54;
-  --aero-user-alpha-top: 0.56;
-  --aero-user-alpha-bot: 0.46;
+  --aero-ai-alpha-top: 0.68;
+  --aero-ai-alpha-bot: 0.56;
+  --aero-user-alpha-top: 0.60;
+  --aero-user-alpha-bot: 0.48;
 }
 :root[data-aero-prose-glass="balanced"] {
-  --aero-ai-alpha-top: 0.74;
-  --aero-ai-alpha-bot: 0.65;
-  --aero-user-alpha-top: 0.66;
-  --aero-user-alpha-bot: 0.56;
+  --aero-ai-alpha-top: 0.78;
+  --aero-ai-alpha-bot: 0.68;
+  --aero-user-alpha-top: 0.70;
+  --aero-user-alpha-bot: 0.60;
 }
 :root[data-aero-prose-glass="solid"] {
-  --aero-ai-alpha-top: 0.90;
-  --aero-ai-alpha-bot: 0.85;
-  --aero-user-alpha-top: 0.84;
-  --aero-user-alpha-bot: 0.78;
+  --aero-ai-alpha-top: 0.92;
+  --aero-ai-alpha-bot: 0.87;
+  --aero-user-alpha-top: 0.86;
+  --aero-user-alpha-bot: 0.80;
 }
 
 /* ==========================================================================
-   第一层：环境光光谱体系
+   第一层：Neo Frutiger 高饱和糖果生态光谱
    ========================================================================== */
 
 :root[data-aero-theme="day"],
 :root:not([data-aero-theme]) {
-  --spec-emerald: #075B50;
-  --spec-emerald-bright: #14d49e;
-  --spec-emerald-ink: #075B50;
+  --spec-mint: #16BE8E;
+  --spec-lime: #4CE838;
+  --spec-emerald-ink: #098A5E;
 
-  --spec-solar: #ff982e;
-  --spec-coral: #ff5c84;
-  --spec-solar-ink: #d44d2a;
+  --spec-sun: #FFD426;
+  --spec-orange: #FF7E1A;
+  --spec-coral: #FF4D82;
+  --spec-coral-ink: #D62D64;
 
-  --spec-cyan: #087DAA;
-  --spec-cyan-bright: #1eb4f5;
-  --spec-cyan-ink: #0a5a96;
+  --spec-sky: #1EB6F8;
+  --spec-aqua: #1CE6C4;
+  --spec-sky-ink: #066EB8;
 
-  --spec-violet: #8262f0;
-  --spec-violet-ink: #5839b5;
+  --spec-violet: #8C62FF;
+  --spec-violet-ink: #6A3EE0;
 
-  --aero-base-bg: #d9ecf2;
-  --aurora-ambient-canvas: linear-gradient(170deg, #cff0e6 0%, #e4f2f8 46%, #bfe2f8 100%);
+  /* 晴天日光生态画布（明亮通风，告别灰沉） */
+  --aero-base-bg: #d9f6ff;
+  --aurora-ambient-canvas: linear-gradient(168deg, #c6fce8 0%, #e0f6ff 46%, #fff4cf 100%);
 
+  /* 多汁糖果棱镜虹彩光边 */
   --aero-prism-rim: linear-gradient(
     90deg,
-    rgba(20, 212, 158, 0.68) 0%,
-    rgba(255, 214, 130, 0.68) 28%,
-    rgba(255, 118, 162, 0.68) 54%,
-    rgba(146, 120, 255, 0.68) 78%,
-    rgba(30, 180, 245, 0.75) 100%
+    rgba(76, 232, 56, 0.78) 0%,
+    rgba(22, 224, 168, 0.78) 20%,
+    rgba(255, 212, 38, 0.82) 42%,
+    rgba(255, 126, 26, 0.82) 62%,
+    rgba(255, 77, 130, 0.80) 80%,
+    rgba(30, 182, 248, 0.85) 100%
   );
 
+  /* B1 鲜活极光丝带 */
   --aero-ribbon-1-bg: linear-gradient(
     180deg,
-    rgba(16, 224, 168, 0.52) 0%,
-    rgba(28, 184, 248, 0.34) 46%,
-    rgba(130, 98, 240, 0.18) 86%,
+    rgba(76, 238, 68, 0.50) 0%,
+    rgba(22, 224, 168, 0.42) 38%,
+    rgba(30, 188, 255, 0.30) 76%,
     transparent 100%
   );
   --aero-ribbon-2-bg: linear-gradient(
     0deg,
-    rgba(255, 156, 56, 0.44) 0%,
-    rgba(255, 92, 136, 0.32) 46%,
-    rgba(30, 180, 245, 0.18) 86%,
+    rgba(255, 216, 48, 0.48) 0%,
+    rgba(255, 130, 34, 0.38) 42%,
+    rgba(255, 77, 136, 0.28) 76%,
     transparent 100%
   );
-  --aero-ribbon-edge: rgba(255, 255, 255, 0.88);
-  --aero-bubble-rim: rgba(255, 255, 255, 0.72);
-  --aero-grain-opacity: 0.10;
+  --aero-ribbon-edge: rgba(255, 255, 255, 0.92);
+  --aero-bubble-rim: rgba(255, 255, 255, 0.82);
+  --aero-grain-opacity: 0.08;
 
-  --prose-ai-ink: #161f28;
-  --prose-ai-em: #4a5a68;
-  --prose-user-ink: #102132;
+  --prose-ai-ink: #16232e;
+  --prose-ai-em: #4a6172;
+  --prose-user-ink: #0c263a;
 
-  --SmartThemeBodyColor: #13242a;
-  --SmartThemeEmColor: #4a656d;
-  --SmartThemeUnderlineColor: #087DAA;
-  --SmartThemeQuoteColor: #0a5a96;
-  --SmartThemeBlurTintColor: #edf5f4;
-  --SmartThemeChatTintColor: #e2ecf2;
-  --SmartThemeUserMesBlurTintColor: #e8f4fd;
-  --SmartThemeBotMesBlurTintColor: #fbfaf8;
-  --SmartThemeShadowColor: rgba(8, 102, 132, 0.14);
+  --SmartThemeBodyColor: #13282e;
+  --SmartThemeEmColor: #496970;
+  --SmartThemeUnderlineColor: #067AC8;
+  --SmartThemeQuoteColor: #066EB8;
+  --SmartThemeBlurTintColor: #f2fcf9;
+  --SmartThemeChatTintColor: #def5ff;
+  --SmartThemeUserMesBlurTintColor: #e4f6ff;
+  --SmartThemeBotMesBlurTintColor: #ffffff;
+  --SmartThemeShadowColor: rgba(14, 142, 168, 0.16);
   --SmartThemeBorderColor: transparent;
-  --black30a: rgba(8, 125, 170, 0.06);
-  --black50a: rgba(8, 125, 170, 0.10);
-  --black70a: #e2efef;
-  --white20a: rgba(255, 255, 255, 0.72);
-  --white30a: rgba(255, 255, 255, 0.85);
-  --grey30: #6b858d;
-  --grey50: #4c6770;
-  --grey70: #385159;
-  --greyCAI: #46616a;
+  --black30a: rgba(22, 190, 142, 0.08);
+  --black50a: rgba(30, 182, 248, 0.12);
+  --black70a: #e2f7f2;
+  --white20a: rgba(255, 255, 255, 0.78);
+  --white30a: rgba(255, 255, 255, 0.90);
+  --grey30: #6a8a8e;
+  --grey50: #4b6e74;
+  --grey70: #36575e;
+  --greyCAI: #44666c;
 
-  /* 菜单：100% 不透明（防穿透正文），彻底去掉外框嵌套 */
-  --aero-panel-bg: #eef6f5;
-  --aero-panel-surface: linear-gradient(180deg, rgba(255, 255, 255, 0.94) 0%, rgba(228, 244, 244, 0.90) 100%);
-  --aero-panel-header-bg: linear-gradient(90deg, rgba(220, 242, 241, 0.90) 0%, rgba(238, 246, 245, 0.4) 100%);
-  --aero-panel-accent-btn: linear-gradient(180deg, #1bb2d8 0%, #087DAA 48%, #075B50 100%);
-  --aero-panel-danger-btn: linear-gradient(180deg, #ff8da4 0%, #e6496d 48%, #c4284e 100%);
-  --aero-panel-control-bg: rgba(255, 255, 255, 0.78);
-  --aero-panel-control-hover: rgba(8, 125, 170, 0.10);
-  --aero-panel-text: #13242a;
-  --aero-panel-subtext: #4c6770;
-  --aero-panel-hairline: rgba(11, 114, 120, 0.12);
-  --aero-inner-bevel: rgba(255, 255, 255, 0.94);
-  --aero-panel-halo: 0 8px 28px rgba(8, 102, 132, 0.14);
-  --aero-disabled-row-bg: rgba(212, 230, 230, 0.50);
-  --aero-disabled-text: #4f6a72;
-  --aero-ui-accent: #075B50;
-  --aero-ui-accent-bright: #0fb88e;
-  --aero-slider-track: linear-gradient(90deg, rgba(7, 91, 80, 0.18) 0%, rgba(8, 125, 170, 0.28) 100%);
-  --aero-slider-thumb: radial-gradient(circle at 35% 30%, #ffffff 0%, #72f2de 32%, #087DAA 78%, #075B50 100%);
+  /* 菜单：100% 不透明鲜活薄荷晨露白底，零文字穿透 */
+  --aero-panel-bg: #f2fcf9;
+  --aero-panel-surface: linear-gradient(180deg, #ffffff 0%, #e0faf2 100%);
+  --aero-panel-header-bg: linear-gradient(90deg, rgba(198, 248, 232, 0.85) 0%, rgba(242, 252, 249, 0.4) 100%);
+  --aero-panel-accent-btn: linear-gradient(180deg, #28e0aa 0%, #16BE8E 48%, #16A4E6 100%);
+  --aero-panel-danger-btn: linear-gradient(180deg, #ff82a4 0%, #ff4d82 48%, #d9265c 100%);
+  --aero-panel-control-bg: rgba(255, 255, 255, 0.92);
+  --aero-panel-control-hover: rgba(22, 190, 142, 0.14);
+  --aero-panel-text: #12292e;
+  --aero-panel-subtext: #466a70;
+  --aero-panel-hairline: rgba(22, 190, 142, 0.20);
+  --aero-inner-bevel: rgba(255, 255, 255, 0.98);
+  --aero-panel-halo: 0 8px 30px rgba(14, 152, 168, 0.16);
+  --aero-disabled-row-bg: rgba(214, 240, 234, 0.56);
+  --aero-disabled-text: #4e6e6a;
+  --aero-ui-accent: #16BE8E;
+  --aero-ui-accent-bright: #16BE8E;
+  --aero-slider-track: linear-gradient(90deg, rgba(76, 232, 56, 0.34) 0%, rgba(22, 190, 142, 0.40) 50%, rgba(30, 182, 248, 0.45) 100%);
+  --aero-slider-thumb: radial-gradient(circle at 35% 30%, #ffffff 0%, #ffe45c 28%, #ff7e1a 78%, #ff4d82 100%);
 
-  /* 顶部：真透光 #075B50 玻璃（约 60% 透光） */
+  /* 顶部：鲜翠薄荷绿 #16BE8E → 荧光嫩草绿 透光琉璃 */
   --aero-top-bg: linear-gradient(
     180deg,
-    rgba(22, 136, 120, 0.62) 0%,
-    rgba(10, 106, 94, 0.54) 46%,
-    rgba(7, 91, 80, 0.60) 48%,
-    rgba(9, 108, 96, 0.66) 100%
+    rgba(64, 234, 178, 0.72) 0%,
+    rgba(22, 190, 142, 0.66) 46%,
+    rgba(24, 198, 134, 0.70) 48%,
+    rgba(46, 218, 152, 0.74) 100%
   );
-  --aero-top-specular: rgba(210, 255, 245, 0.68);
-  --aero-top-halo: 0 4px 20px rgba(7, 91, 80, 0.12);
-  --aero-top-icon: rgba(235, 255, 250, 0.92);
-  --aero-top-icon-active: #8cffdc;
-  --aero-top-pill-active: linear-gradient(180deg, rgba(255, 255, 255, 0.30) 0%, rgba(110, 255, 220, 0.20) 100%);
+  --aero-top-specular: rgba(255, 255, 255, 0.85);
+  --aero-top-halo: 0 4px 20px rgba(22, 190, 142, 0.18);
+  --aero-top-icon: rgba(255, 255, 255, 0.96);
+  --aero-top-icon-active: #FFF266;
+  --aero-top-pill-active: linear-gradient(180deg, rgba(255, 255, 255, 0.42) 0%, rgba(255, 224, 92, 0.28) 100%);
 
-  /* 正文卡片：斜向棱镜受光轻盈切片 */
+  /* 正文卡片：冰透白净玻璃过滤层 */
   --aero-ai-slate-bg: linear-gradient(
     138deg,
-    rgba(255, 253, 250, var(--aero-ai-alpha-top)) 0%,
-    rgba(252, 250, 252, var(--aero-ai-alpha-bot)) 55%,
-    rgba(244, 250, 255, var(--aero-ai-alpha-bot)) 100%
+    rgba(255, 255, 255, var(--aero-ai-alpha-top)) 0%,
+    rgba(252, 254, 255, var(--aero-ai-alpha-bot)) 55%,
+    rgba(246, 252, 255, var(--aero-ai-alpha-bot)) 100%
   );
   --aero-ai-halo:
-    inset 0 1px 0 rgba(255, 255, 255, 0.96),
-    0 4px 24px rgba(18, 118, 158, 0.08);
-  --aero-ai-spine: linear-gradient(180deg, #ffab2e 0%, #ff5c84 52%, var(--spec-violet) 100%);
+    inset 0 1px 0 rgba(255, 255, 255, 0.98),
+    0 4px 24px rgba(30, 172, 216, 0.10);
+  /* AI 暖阳糖果光刃：阳光黄 -> 橘子橙 -> 珊瑚粉 */
+  --aero-ai-spine: linear-gradient(180deg, #FFD426 0%, #FF7E1A 48%, #FF4D82 100%);
 
+  /* 用户卡片：晴空冰水琉璃切片 */
   --aero-user-slate-bg:
     linear-gradient(
       132deg,
-      rgba(255, 255, 255, 0.56) 0%,
-      rgba(196, 236, 255, 0.20) 44%,
-      rgba(176, 226, 255, 0.14) 68%,
-      rgba(232, 248, 255, 0.45) 100%
+      rgba(255, 255, 255, 0.64) 0%,
+      rgba(182, 238, 255, 0.24) 44%,
+      rgba(162, 246, 224, 0.18) 70%,
+      rgba(226, 248, 255, 0.52) 100%
     ),
     linear-gradient(
       165deg,
-      rgba(224, 244, 255, var(--aero-user-alpha-top)) 0%,
-      rgba(202, 234, 254, var(--aero-user-alpha-bot)) 100%
+      rgba(218, 246, 255, var(--aero-user-alpha-top)) 0%,
+      rgba(196, 242, 252, var(--aero-user-alpha-bot)) 100%
     );
   --aero-user-halo:
-    inset 0 1px 0 rgba(255, 255, 255, 0.96),
-    0 4px 24px rgba(8, 125, 170, 0.10);
-  --aero-user-spine: linear-gradient(180deg, var(--spec-cyan-bright) 0%, var(--spec-emerald-bright) 100%);
+    inset 0 1px 0 rgba(255, 255, 255, 0.98),
+    0 4px 24px rgba(24, 178, 236, 0.13);
+  /* 用户鲜活生态光刃：荧光草绿 -> 薄荷绿 -> 晴空蓝 */
+  --aero-user-spine: linear-gradient(180deg, #4CE838 0%, #16D8A4 50%, #1EB6F8 100%);
 
-  --aero-name-color: #13242a;
-  --aero-meta-color: #4f6670;
-  --aero-floor-text: var(--spec-violet-ink);
-  --aero-action-muted: rgba(56, 86, 98, 0.56);
-  --aero-action-bg: #eaf4f4;
-  --aero-editbar-bg: linear-gradient(180deg, rgba(230, 244, 244, 0.96) 0%, rgba(220, 238, 240, 0.96) 100%);
+  --aero-name-color: #102630;
+  --aero-meta-color: #466472;
+  --aero-floor-text: var(--spec-coral-ink);
+  --aero-action-muted: rgba(36, 86, 104, 0.58);
+  --aero-action-bg: #ebfbf7;
+  --aero-editbar-bg: linear-gradient(180deg, rgba(226, 250, 244, 0.97) 0%, rgba(214, 244, 252, 0.97) 100%);
 
-  /* 底部：真透光 #073B69 -> #087DAA 宝石玻璃（约 62% 透光） */
+  /* 底部：晴空水蓝 × 水薄荷 鲜活糖果透光底座 */
   --aero-dock-idle-bg: linear-gradient(
     180deg,
-    rgba(16, 152, 204, 0.62) 0%,
-    rgba(8, 125, 170, 0.58) 45%,
-    rgba(7, 82, 130, 0.64) 48%,
-    rgba(7, 59, 105, 0.70) 100%
+    rgba(68, 212, 255, 0.72) 0%,
+    rgba(30, 182, 248, 0.66) 45%,
+    rgba(22, 168, 236, 0.70) 48%,
+    rgba(28, 214, 196, 0.74) 100%
   );
   --aero-dock-focus-bg: linear-gradient(
     115deg,
-    rgba(7, 59, 105, 0.72) 0%,
-    rgba(8, 125, 170, 0.66) 28%,
-    rgba(22, 174, 214, 0.70) 52%,
-    rgba(14, 158, 156, 0.68) 76%,
-    rgba(7, 59, 105, 0.72) 100%
+    rgba(30, 188, 252, 0.76) 0%,
+    rgba(28, 224, 188, 0.74) 28%,
+    rgba(255, 224, 92, 0.68) 54%,
+    rgba(255, 138, 128, 0.68) 78%,
+    rgba(30, 188, 252, 0.76) 100%
   );
   --aero-dock-halo:
-    inset 0 1px 0 rgba(215, 246, 255, 0.72),
-    0 -4px 22px rgba(8, 125, 170, 0.14);
+    inset 0 1px 0 rgba(255, 255, 255, 0.88),
+    0 -4px 22px rgba(28, 180, 245, 0.18);
   --aero-dock-focus-halo:
-    inset 0 1px 0 rgba(235, 252, 255, 0.90),
-    0 -4px 26px rgba(24, 180, 245, 0.24),
-    0 -2px 16px rgba(20, 212, 158, 0.16);
+    inset 0 1px 0 rgba(255, 255, 255, 0.96),
+    0 -4px 26px rgba(255, 162, 68, 0.24),
+    0 -2px 18px rgba(28, 224, 188, 0.24);
 
-  /* 凹嵌透明深水光槽（消灭蓝框里的白方块盒子！） */
-  --aero-well-bg: rgba(4, 34, 62, 0.28);
-  --aero-well-focus-bg: rgba(4, 34, 62, 0.42);
-  --aero-input-text: #f4fbff;
-  --aero-input-placeholder: rgba(212, 242, 255, 0.68);
-  --aero-bottom-icon: rgba(235, 252, 255, 0.94);
-  --aero-plane-color: #9af0ff;
-  --aero-plane-focus-color: #ffffff;
-  --aero-plane-shadow: drop-shadow(0 1px 2px rgba(5, 36, 72, 0.45)) drop-shadow(0 0 8px rgba(130, 234, 255, 0.72));
-  --aero-stop-color: #ff82a0;
+  /* 冰冻奶白光槽（告别黑坑，像蓝莓苏打里的晶莹冰块） */
+  --aero-well-bg: rgba(255, 255, 255, 0.74);
+  --aero-well-focus-bg: rgba(255, 255, 255, 0.92);
+  --aero-input-text: #0b2436;
+  --aero-input-placeholder: rgba(18, 78, 112, 0.56);
+  --aero-bottom-icon: rgba(255, 255, 255, 0.96);
+
+  /* 跳色糖果橘子橙纸飞机 */
+  --aero-plane-color: #FF7816;
+  --aero-plane-focus-color: #FF5733;
+  --aero-plane-shadow: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.95)) drop-shadow(0 2px 6px rgba(255, 110, 20, 0.48));
+  --aero-stop-color: #FF2E6A;
 }
 
-/* ---------- 夜间备选方案 ---------- */
+/* ---------- 夜间备选方案（荧光生态夜光 / 深海珊瑚礁）---------- */
 :root[data-aero-theme="night"] {
-  --spec-emerald: #075B50;
-  --spec-emerald-bright: #26e0a2;
-  --spec-emerald-ink: #5ae8b8;
+  --spec-mint: #16BE8E;
+  --spec-lime: #7CFF38;
+  --spec-emerald-ink: #42FFB8;
 
-  --spec-solar: #ff9c42;
-  --spec-coral: #ff6288;
-  --spec-solar-ink: #ff9472;
+  --spec-sun: #FFE048;
+  --spec-orange: #FF8E2B;
+  --spec-coral: #FF4D8A;
+  --spec-coral-ink: #FF80AB;
 
-  --spec-cyan: #087DAA;
-  --spec-cyan-bright: #38b6ff;
-  --spec-cyan-ink: #84d2ff;
+  --spec-sky: #2CC8FF;
+  --spec-aqua: #24F0C8;
+  --spec-sky-ink: #72DCFF;
 
-  --spec-violet: #9e82ff;
-  --spec-violet-ink: #bfaaff;
+  --spec-violet: #A882FF;
+  --spec-violet-ink: #C9B2FF;
 
-  --aero-base-bg: #09151d;
-  --aurora-ambient-canvas: linear-gradient(170deg, #091d1b 0%, #0d1722 48%, #071728 100%);
+  --aero-base-bg: #0a1b28;
+  --aurora-ambient-canvas: linear-gradient(170deg, #0b2624 0%, #0d1f30 48%, #0a1c2e 100%);
 
   --aero-prism-rim: linear-gradient(
     90deg,
-    rgba(38, 224, 162, 0.62) 0%,
-    rgba(255, 184, 108, 0.56) 28%,
-    rgba(255, 106, 154, 0.58) 54%,
-    rgba(164, 134, 255, 0.62) 78%,
-    rgba(56, 182, 255, 0.72) 100%
+    rgba(124, 255, 56, 0.72) 0%,
+    rgba(36, 240, 200, 0.75) 22%,
+    rgba(255, 224, 72, 0.75) 46%,
+    rgba(255, 142, 43, 0.75) 66%,
+    rgba(255, 77, 138, 0.75) 84%,
+    rgba(44, 200, 255, 0.80) 100%
   );
 
   --aero-ribbon-1-bg: linear-gradient(
     180deg,
-    rgba(38, 224, 162, 0.44) 0%,
-    rgba(40, 178, 245, 0.28) 48%,
-    rgba(158, 130, 255, 0.16) 86%,
+    rgba(112, 255, 64, 0.36) 0%,
+    rgba(28, 232, 186, 0.30) 44%,
+    rgba(44, 200, 255, 0.22) 82%,
     transparent 100%
   );
   --aero-ribbon-2-bg: linear-gradient(
     0deg,
-    rgba(255, 156, 66, 0.36) 0%,
-    rgba(255, 98, 136, 0.26) 48%,
-    rgba(56, 182, 255, 0.16) 86%,
+    rgba(255, 212, 56, 0.32) 0%,
+    rgba(255, 136, 42, 0.26) 44%,
+    rgba(255, 77, 138, 0.22) 82%,
     transparent 100%
   );
-  --aero-ribbon-edge: rgba(176, 242, 255, 0.54);
-  --aero-bubble-rim: rgba(178, 238, 255, 0.36);
-  --aero-grain-opacity: 0.09;
+  --aero-ribbon-edge: rgba(188, 255, 236, 0.62);
+  --aero-bubble-rim: rgba(186, 244, 255, 0.42);
+  --aero-grain-opacity: 0.08;
 
-  --prose-ai-ink: #dae3ec;
-  --prose-ai-em: #92a8b8;
-  --prose-user-ink: #e2f0fc;
+  --prose-ai-ink: #dde8f0;
+  --prose-ai-em: #92b0c2;
+  --prose-user-ink: #e4f3ff;
 
-  --SmartThemeBodyColor: #dcecf0;
-  --SmartThemeEmColor: #86a3ae;
-  --SmartThemeUnderlineColor: #38b6ff;
-  --SmartThemeQuoteColor: #84d2ff;
-  --SmartThemeBlurTintColor: #0d1b22;
-  --SmartThemeChatTintColor: #09151d;
-  --SmartThemeUserMesBlurTintColor: #142234;
-  --SmartThemeBotMesBlurTintColor: #182028;
-  --SmartThemeShadowColor: rgba(8, 125, 170, 0.20);
+  --SmartThemeBodyColor: #dff0f5;
+  --SmartThemeEmColor: #8eb2bf;
+  --SmartThemeUnderlineColor: #42d4ff;
+  --SmartThemeQuoteColor: #72DCFF;
+  --SmartThemeBlurTintColor: #0d202b;
+  --SmartThemeChatTintColor: #0a1b28;
+  --SmartThemeUserMesBlurTintColor: #142a40;
+  --SmartThemeBotMesBlurTintColor: #142430;
+  --SmartThemeShadowColor: rgba(16, 178, 216, 0.22);
   --SmartThemeBorderColor: transparent;
-  --black30a: rgba(0, 0, 0, 0.24);
-  --black50a: rgba(0, 0, 0, 0.36);
-  --black70a: #0a141a;
-  --white20a: rgba(160, 224, 245, 0.14);
-  --white30a: rgba(160, 224, 245, 0.20);
-  --grey30: #66828e;
-  --grey50: #809da8;
-  --grey70: #9eb9c4;
-  --greyCAI: #88a4b0;
+  --black30a: rgba(0, 0, 0, 0.22);
+  --black50a: rgba(0, 0, 0, 0.34);
+  --black70a: #0a1820;
+  --white20a: rgba(160, 232, 255, 0.16);
+  --white30a: rgba(160, 232, 255, 0.22);
+  --grey30: #6d929e;
+  --grey50: #87adb8;
+  --grey70: #a4c6d0;
+  --greyCAI: #8eb2be;
 
-  --aero-panel-bg: #0c1a21;
-  --aero-panel-surface: linear-gradient(180deg, rgba(28, 60, 72, 0.90) 0%, rgba(18, 42, 52, 0.92) 100%);
-  --aero-panel-header-bg: linear-gradient(90deg, rgba(22, 54, 62, 0.90) 0%, rgba(12, 26, 33, 0.4) 100%);
-  --aero-panel-accent-btn: linear-gradient(180deg, #1cb2d8 0%, #087DAA 48%, #075B50 100%);
-  --aero-panel-danger-btn: linear-gradient(180deg, #ff7a96 0%, #d93c60 48%, #a81e40 100%);
-  --aero-panel-control-bg: rgba(7, 17, 23, 0.85);
-  --aero-panel-control-hover: rgba(24, 178, 212, 0.16);
-  --aero-panel-text: #dcecf0;
-  --aero-panel-subtext: #83a4b0;
-  --aero-panel-hairline: rgba(56, 182, 214, 0.14);
-  --aero-inner-bevel: rgba(178, 238, 255, 0.22);
-  --aero-panel-halo: 0 10px 30px rgba(0, 12, 22, 0.48), 0 0 24px rgba(8, 125, 170, 0.14);
-  --aero-disabled-row-bg: rgba(8, 20, 26, 0.72);
-  --aero-disabled-text: #74929e;
-  --aero-ui-accent: #26e0a2;
-  --aero-ui-accent-bright: #26e0a2;
-  --aero-slider-track: linear-gradient(90deg, rgba(7, 91, 80, 0.65) 0%, rgba(8, 125, 170, 0.72) 100%);
-  --aero-slider-thumb: radial-gradient(circle at 35% 30%, #ffffff 0%, #64ffd8 32%, #14a6dc 78%, #075B50 100%);
+  --aero-panel-bg: #0c1f29;
+  --aero-panel-surface: linear-gradient(180deg, rgba(26, 68, 78, 0.92) 0%, rgba(16, 46, 56, 0.94) 100%);
+  --aero-panel-header-bg: linear-gradient(90deg, rgba(20, 66, 70, 0.92) 0%, rgba(12, 31, 41, 0.4) 100%);
+  --aero-panel-accent-btn: linear-gradient(180deg, #24e0aa 0%, #16BE8E 48%, #1698d8 100%);
+  --aero-panel-danger-btn: linear-gradient(180deg, #ff7aa0 0%, #e6396e 48%, #b81d4e 100%);
+  --aero-panel-control-bg: rgba(7, 20, 28, 0.85);
+  --aero-panel-control-hover: rgba(36, 240, 200, 0.16);
+  --aero-panel-text: #e2f2f6;
+  --aero-panel-subtext: #8bb0bc;
+  --aero-panel-hairline: rgba(36, 240, 200, 0.18);
+  --aero-inner-bevel: rgba(180, 248, 238, 0.26);
+  --aero-panel-halo: 0 10px 30px rgba(0, 14, 24, 0.48), 0 0 24px rgba(22, 190, 142, 0.18);
+  --aero-disabled-row-bg: rgba(8, 24, 30, 0.72);
+  --aero-disabled-text: #7da2ac;
+  --aero-ui-accent: #24F0C8;
+  --aero-ui-accent-bright: #42FFB8;
+  --aero-slider-track: linear-gradient(90deg, rgba(124, 255, 56, 0.45) 0%, rgba(36, 240, 200, 0.55) 50%, rgba(44, 200, 255, 0.60) 100%);
+  --aero-slider-thumb: radial-gradient(circle at 35% 30%, #ffffff 0%, #ffe45c 28%, #ff8e2b 78%, #ff4d8a 100%);
 
+  /* 夜间顶部：荧光薄荷翡翠玻璃 */
   --aero-top-bg: linear-gradient(
     180deg,
-    rgba(16, 126, 110, 0.66) 0%,
-    rgba(7, 91, 80, 0.58) 46%,
-    rgba(5, 74, 65, 0.64) 48%,
-    rgba(7, 96, 84, 0.70) 100%
+    rgba(28, 196, 148, 0.70) 0%,
+    rgba(20, 168, 126, 0.62) 46%,
+    rgba(14, 142, 108, 0.68) 48%,
+    rgba(18, 160, 122, 0.72) 100%
   );
-  --aero-top-specular: rgba(162, 255, 228, 0.42);
-  --aero-top-halo: 0 4px 20px rgba(12, 168, 136, 0.16);
-  --aero-top-icon: rgba(218, 252, 244, 0.90);
-  --aero-top-icon-active: #78ffd8;
-  --aero-top-pill-active: linear-gradient(180deg, rgba(130, 255, 220, 0.24) 0%, rgba(20, 168, 136, 0.18) 100%);
+  --aero-top-specular: rgba(188, 255, 232, 0.52);
+  --aero-top-halo: 0 4px 20px rgba(22, 190, 142, 0.22);
+  --aero-top-icon: rgba(242, 255, 250, 0.94);
+  --aero-top-icon-active: #FFE45C;
+  --aero-top-pill-active: linear-gradient(180deg, rgba(255, 255, 255, 0.30) 0%, rgba(255, 224, 72, 0.24) 100%);
 
   --aero-ai-slate-bg: linear-gradient(
     138deg,
-    rgba(28, 36, 48, var(--aero-ai-alpha-top)) 0%,
-    rgba(16, 24, 36, var(--aero-ai-alpha-bot)) 100%
+    rgba(24, 42, 54, var(--aero-ai-alpha-top)) 0%,
+    rgba(14, 28, 42, var(--aero-ai-alpha-bot)) 100%
   );
   --aero-ai-halo:
-    inset 0 1px 0 rgba(255, 234, 214, 0.18),
-    0 4px 24px rgba(18, 118, 158, 0.12);
-  --aero-ai-spine: linear-gradient(180deg, #ffaa44 0%, #ff6288 52%, var(--spec-violet) 100%);
+    inset 0 1px 0 rgba(255, 242, 214, 0.20),
+    0 4px 24px rgba(22, 190, 142, 0.14);
+  --aero-ai-spine: linear-gradient(180deg, #FFE048 0%, #FF8E2B 48%, #FF4D8A 100%);
 
   --aero-user-slate-bg:
     linear-gradient(
       132deg,
-      rgba(104, 198, 255, 0.18) 0%,
-      rgba(42, 128, 196, 0.08) 42%,
-      rgba(22, 68, 118, 0.12) 66%,
-      rgba(120, 214, 255, 0.14) 100%
+      rgba(104, 220, 255, 0.20) 0%,
+      rgba(36, 208, 196, 0.10) 44%,
+      rgba(22, 82, 128, 0.14) 68%,
+      rgba(120, 224, 255, 0.16) 100%
     ),
     linear-gradient(
       165deg,
-      rgba(16, 40, 64, var(--aero-user-alpha-top)) 0%,
-      rgba(10, 28, 48, var(--aero-user-alpha-bot)) 100%
+      rgba(16, 48, 72, var(--aero-user-alpha-top)) 0%,
+      rgba(12, 34, 56, var(--aero-user-alpha-bot)) 100%
     );
   --aero-user-halo:
-    inset 0 1px 0 rgba(172, 230, 255, 0.30),
-    0 4px 24px rgba(24, 152, 224, 0.15);
-  --aero-user-spine: linear-gradient(180deg, var(--spec-cyan-bright) 0%, var(--spec-emerald-bright) 100%);
+    inset 0 1px 0 rgba(178, 242, 255, 0.32),
+    0 4px 24px rgba(44, 200, 255, 0.18);
+  --aero-user-spine: linear-gradient(180deg, #7CFF38 0%, #24F0C8 50%, #2CC8FF 100%);
 
-  --aero-name-color: #e6f2f5;
-  --aero-meta-color: #849fa9;
-  --aero-floor-text: var(--spec-violet-ink);
-  --aero-action-muted: rgba(192, 218, 228, 0.60);
-  --aero-action-bg: #102029;
-  --aero-editbar-bg: linear-gradient(180deg, rgba(18, 38, 48, 0.96) 0%, rgba(13, 28, 36, 0.96) 100%);
+  --aero-name-color: #eaf7fa;
+  --aero-meta-color: #8cb2bf;
+  --aero-floor-text: var(--spec-coral-ink);
+  --aero-action-muted: rgba(202, 232, 240, 0.64);
+  --aero-action-bg: #102632;
+  --aero-editbar-bg: linear-gradient(180deg, rgba(18, 46, 56, 0.96) 0%, rgba(12, 34, 44, 0.96) 100%);
 
+  /* 夜间底部：夜光水蓝×水薄荷底座 */
   --aero-dock-idle-bg: linear-gradient(
     180deg,
-    rgba(10, 140, 190, 0.66) 0%,
-    rgba(8, 114, 162, 0.60) 45%,
-    rgba(7, 74, 120, 0.66) 48%,
-    rgba(7, 59, 105, 0.72) 100%
+    rgba(32, 178, 236, 0.70) 0%,
+    rgba(20, 146, 206, 0.64) 45%,
+    rgba(14, 118, 176, 0.68) 48%,
+    rgba(18, 152, 174, 0.74) 100%
   );
   --aero-dock-focus-bg: linear-gradient(
     115deg,
-    rgba(7, 59, 105, 0.76) 0%,
-    rgba(8, 125, 170, 0.70) 28%,
-    rgba(22, 168, 210, 0.74) 52%,
-    rgba(16, 162, 148, 0.72) 76%,
-    rgba(7, 59, 105, 0.76) 100%
+    rgba(24, 162, 224, 0.76) 0%,
+    rgba(22, 198, 168, 0.74) 30%,
+    rgba(184, 120, 56, 0.66) 56%,
+    rgba(182, 68, 126, 0.68) 78%,
+    rgba(24, 162, 224, 0.76) 100%
   );
   --aero-dock-halo:
-    inset 0 1px 0 rgba(168, 232, 255, 0.42),
-    0 -4px 22px rgba(8, 125, 170, 0.18);
+    inset 0 1px 0 rgba(188, 242, 255, 0.48),
+    0 -4px 22px rgba(44, 200, 255, 0.20);
   --aero-dock-focus-halo:
-    inset 0 1px 0 rgba(208, 244, 255, 0.62),
-    0 -4px 28px rgba(42, 188, 248, 0.28),
-    0 -2px 16px rgba(38, 224, 162, 0.18);
+    inset 0 1px 0 rgba(218, 248, 255, 0.68),
+    0 -4px 28px rgba(255, 142, 43, 0.26),
+    0 -2px 18px rgba(36, 240, 200, 0.22);
 
-  --aero-well-bg: rgba(4, 20, 38, 0.42);
-  --aero-well-focus-bg: rgba(4, 20, 38, 0.60);
-  --aero-input-text: #eaf6ff;
-  --aero-input-placeholder: rgba(188, 226, 248, 0.58);
-  --aero-bottom-icon: rgba(214, 244, 255, 0.92);
-  --aero-plane-color: #7ae6ff;
-  --aero-plane-focus-color: #ffffff;
-  --aero-plane-shadow: drop-shadow(0 1px 2px rgba(2, 18, 38, 0.55)) drop-shadow(0 0 8px rgba(88, 218, 255, 0.68));
-  --aero-stop-color: #ff7896;
+  --aero-well-bg: rgba(8, 26, 44, 0.52);
+  --aero-well-focus-bg: rgba(8, 26, 44, 0.72);
+  --aero-input-text: #eef8ff;
+  --aero-input-placeholder: rgba(196, 234, 252, 0.62);
+  --aero-bottom-icon: rgba(235, 252, 255, 0.94);
+
+  /* 夜间跳色糖果橘子橙纸飞机 */
+  --aero-plane-color: #FF942B;
+  --aero-plane-focus-color: #FFB248;
+  --aero-plane-shadow: drop-shadow(0 1px 2px rgba(4, 18, 36, 0.65)) drop-shadow(0 0 8px rgba(255, 148, 43, 0.72));
+  --aero-stop-color: #FF5288;
 }
 
 /* ==========================================================================
@@ -443,7 +459,7 @@ body::-webkit-scrollbar,
 }
 
 /* ==========================================================================
-   B1 + B2 + B3 浪漫极光光斑与琉璃气泡舞台
+   B1 + B2 + B3 鲜活糖果生态舞台
    ========================================================================== */
 
 :root[data-aero-bg-window="false"] #bg1,
@@ -469,22 +485,22 @@ body::-webkit-scrollbar,
   background-position: center center !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
-  filter: blur(var(--aero-bg-blur)) saturate(1.06) !important;
+  filter: blur(var(--aero-bg-blur)) saturate(1.12) !important;
   transform: scale(1.03);
   transition: opacity 0.28s ease, filter 0.28s ease;
 }
 
 :root[data-aero-bg-window="true"][data-aero-has-st-bg="true"][data-aero-bg-blend="soft"] {
   --aero-bg-blur: 8px;
-  --aero-wash-opacity: 0.36;
+  --aero-wash-opacity: 0.34;
 }
 :root[data-aero-bg-window="true"][data-aero-has-st-bg="true"][data-aero-bg-blend="balanced"] {
   --aero-bg-blur: 3px;
-  --aero-wash-opacity: 0.16;
+  --aero-wash-opacity: 0.14;
 }
 :root[data-aero-bg-window="true"][data-aero-has-st-bg="true"][data-aero-bg-blend="clear"] {
   --aero-bg-blur: 0px;
-  --aero-wash-opacity: 0.04;
+  --aero-wash-opacity: 0.03;
 }
 
 #aero-aurora-stage {
@@ -529,7 +545,7 @@ body::-webkit-scrollbar,
   top: 10vh;
   background: var(--aero-ribbon-1-bg);
   border-top: 2px solid var(--aero-ribbon-edge);
-  box-shadow: 0 -10px 34px rgba(20, 214, 162, 0.30);
+  box-shadow: 0 -10px 36px rgba(76, 232, 56, 0.28);
   animation: aeroRibbonWave1 10s ease-in-out infinite alternate;
 }
 
@@ -537,14 +553,14 @@ body::-webkit-scrollbar,
   bottom: 8vh;
   background: var(--aero-ribbon-2-bg);
   border-bottom: 2px solid var(--aero-ribbon-edge);
-  box-shadow: 0 10px 34px rgba(30, 180, 245, 0.28);
+  box-shadow: 0 10px 36px rgba(255, 130, 34, 0.26);
   animation: aeroRibbonWave2 13s ease-in-out infinite alternate;
 }
 
 @keyframes aeroRibbonWave1 {
   0% {
     transform: translate3d(-10vw, -4vh, 0) rotate(-14deg) scale(1);
-    opacity: 0.78;
+    opacity: 0.80;
   }
   100% {
     transform: translate3d(12vw, 7vh, 0) rotate(-4deg) scale(1.08);
@@ -555,14 +571,15 @@ body::-webkit-scrollbar,
 @keyframes aeroRibbonWave2 {
   0% {
     transform: translate3d(10vw, 4vh, 0) rotate(12deg) scale(1.06);
-    opacity: 0.72;
+    opacity: 0.76;
   }
   100% {
     transform: translate3d(-12vw, -6vh, 0) rotate(2deg) scale(0.98);
-    opacity: 0.96;
+    opacity: 0.98;
   }
 }
 
+/* 鲜活糖果生态散景光斑（薄荷/草绿 · 阳光黄/橘橙 · 珊瑚粉 · 晴空蓝） */
 .aero-orb {
   position: absolute;
   border-radius: 50%;
@@ -571,71 +588,70 @@ body::-webkit-scrollbar,
 }
 
 .aero-orb-1 {
-  width: 190px;
-  height: 190px;
-  top: 10vh;
+  width: 200px;
+  height: 200px;
+  top: 8vh;
   right: -25px;
-  background: radial-gradient(circle, rgba(64, 244, 198, 0.62) 0%, rgba(30, 198, 232, 0.20) 52%, transparent 72%);
+  background: radial-gradient(circle, rgba(84, 245, 92, 0.60) 0%, rgba(22, 224, 168, 0.24) 52%, transparent 72%);
   animation: aeroOrbFloat1 14s ease-in-out infinite alternate;
 }
 
 .aero-orb-2 {
-  width: 160px;
-  height: 160px;
-  top: 40vh;
+  width: 170px;
+  height: 170px;
+  top: 38vh;
   left: -25px;
-  background: radial-gradient(circle, rgba(255, 182, 112, 0.58) 0%, rgba(255, 102, 152, 0.20) 54%, transparent 72%);
+  background: radial-gradient(circle, rgba(255, 220, 56, 0.62) 0%, rgba(255, 126, 26, 0.24) 54%, transparent 72%);
   animation: aeroOrbFloat2 17s ease-in-out infinite alternate;
 }
 
 .aero-orb-3 {
-  width: 118px;
-  height: 118px;
+  width: 126px;
+  height: 126px;
   bottom: 24vh;
-  left: 12vw;
-  background: radial-gradient(circle, rgba(168, 140, 255, 0.58) 0%, rgba(86, 188, 255, 0.20) 54%, transparent 72%);
+  left: 10vw;
+  background: radial-gradient(circle, rgba(255, 92, 142, 0.56) 0%, rgba(255, 148, 86, 0.20) 54%, transparent 72%);
   animation: aeroOrbFloat1 12s ease-in-out infinite alternate-reverse;
 }
 
 .aero-orb-4 {
-  width: 170px;
-  height: 170px;
-  bottom: 8vh;
-  right: 6vw;
-  background: radial-gradient(circle, rgba(78, 218, 255, 0.58) 0%, rgba(32, 168, 240, 0.18) 55%, transparent 72%);
+  width: 180px;
+  height: 180px;
+  bottom: 6vh;
+  right: 4vw;
+  background: radial-gradient(circle, rgba(42, 206, 255, 0.60) 0%, rgba(28, 224, 188, 0.22) 55%, transparent 72%);
   animation: aeroOrbFloat2 15s ease-in-out infinite alternate-reverse;
 }
 
-/* 经典 Frutiger/Neo-Aero 晶莹悬浮气泡（带高光泡壁与反光月牙） */
 .aero-bubble {
   position: absolute;
   border-radius: 50%;
-  border: 1px solid var(--aero-bubble-rim);
-  background: radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.68) 0%, rgba(255, 255, 255, 0.14) 36%, rgba(130, 234, 255, 0.08) 72%, rgba(255, 255, 255, 0.28) 100%);
-  box-shadow: inset 0 -4px 10px rgba(20, 180, 245, 0.18);
+  border: 1.5px solid var(--aero-bubble-rim);
+  background: radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.16) 36%, rgba(112, 242, 224, 0.12) 72%, rgba(255, 255, 255, 0.34) 100%);
+  box-shadow: inset 0 -4px 10px rgba(24, 198, 245, 0.20);
   pointer-events: none;
   will-change: transform, opacity;
 }
 
 .aero-bubble-1 {
-  width: 46px;
-  height: 46px;
+  width: 48px;
+  height: 48px;
   top: 22vh;
   left: 8vw;
   animation: aeroOrbFloat2 11s ease-in-out infinite alternate;
 }
 
 .aero-bubble-2 {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   top: 56vh;
   right: 12vw;
   animation: aeroOrbFloat1 9s ease-in-out infinite alternate;
 }
 
 .aero-bubble-3 {
-  width: 62px;
-  height: 62px;
+  width: 64px;
+  height: 64px;
   bottom: 18vh;
   left: 34vw;
   animation: aeroOrbFloat2 14s ease-in-out infinite alternate-reverse;
@@ -644,22 +660,22 @@ body::-webkit-scrollbar,
 @keyframes aeroOrbFloat1 {
   0% {
     transform: translate3d(0, 0, 0) scale(0.92);
-    opacity: 0.68;
+    opacity: 0.70;
   }
   100% {
     transform: translate3d(-22px, -34px, 0) scale(1.12);
-    opacity: 0.96;
+    opacity: 0.98;
   }
 }
 
 @keyframes aeroOrbFloat2 {
   0% {
     transform: translate3d(0, 0, 0) scale(1.06);
-    opacity: 0.64;
+    opacity: 0.66;
   }
   100% {
     transform: translate3d(24px, -30px, 0) scale(0.94);
-    opacity: 0.94;
+    opacity: 0.96;
   }
 }
 
@@ -682,7 +698,6 @@ body::-webkit-scrollbar,
    全菜单（修复全宽 fixed 定位 + 100% 不透明 + 彻底消灭内部嵌套盒子）
    ========================================================================== */
 
-/* 关键修复：绝不写 position: relative；锁定全宽展开在顶栏正下方 */
 #top-settings-holder .drawer-content {
   position: fixed !important;
   top: 38px !important;
@@ -708,11 +723,10 @@ body::-webkit-scrollbar,
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
   box-shadow:
-    inset 0 2px 0 var(--spec-emerald-bright),
+    inset 0 2px 0 var(--spec-mint),
     var(--aero-panel-halo) !important;
 }
 
-/* 彻底打散抽屉内部的嵌套盒子结构（清掉所有包装 div 的边框、内框阴影与多余背景） */
 .drawer-content .inline-drawer,
 .drawer-content .inline-drawer-content,
 .drawer-content .range-block,
@@ -741,19 +755,18 @@ body::-webkit-scrollbar,
   color: var(--aero-panel-text) !important;
   border: none !important;
   border-radius: 8px;
-  box-shadow: inset 0 1px 3px rgba(7, 45, 58, 0.08) !important;
+  box-shadow: inset 0 1px 3px rgba(14, 96, 118, 0.08) !important;
 }
 
 .drawer-content .text_pole:focus,
 .drawer-content select:focus,
 .drawer-content textarea:focus {
   box-shadow:
-    inset 0 1px 3px rgba(8, 125, 170, 0.10),
-    0 0 8px rgba(20, 180, 224, 0.30) !important;
+    inset 0 1px 3px rgba(22, 190, 142, 0.12),
+    0 0 8px rgba(30, 182, 248, 0.34) !important;
   outline: none;
 }
 
-/* 折叠栏头：无边框，纯靠左侧柔和光条与极淡底色过渡 */
 .drawer-content .inline-drawer-toggle.inline-drawer-header,
 #user-settings-block h4,
 .standoutHeader {
@@ -761,11 +774,10 @@ body::-webkit-scrollbar,
   color: var(--aero-panel-text) !important;
   border: none !important;
   border-radius: 8px;
-  box-shadow: inset 3px 0 0 var(--spec-cyan-bright) !important;
+  box-shadow: inset 3.5px 0 0 var(--spec-mint) !important;
   padding-left: 11px !important;
 }
 
-/* 琉璃按钮：无硬边框 */
 .drawer-content .menu_button,
 .popup .menu_button {
   background: var(--aero-panel-surface) !important;
@@ -774,7 +786,7 @@ body::-webkit-scrollbar,
   border-radius: 8px;
   box-shadow:
     inset 0 1px 0 var(--aero-inner-bevel),
-    0 2px 8px rgba(8, 102, 132, 0.08) !important;
+    0 2px 8px rgba(14, 132, 148, 0.10) !important;
   transition: transform 0.12s ease, filter 0.15s ease;
 }
 
@@ -790,9 +802,9 @@ body::-webkit-scrollbar,
   background: var(--aero-panel-accent-btn) !important;
   color: #ffffff !important;
   box-shadow:
-    inset 0 1px 0 rgba(186, 255, 240, 0.55),
-    0 3px 12px rgba(8, 125, 170, 0.28) !important;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.20);
+    inset 0 1px 0 rgba(210, 255, 242, 0.65),
+    0 3px 12px rgba(22, 190, 142, 0.28) !important;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.16);
 }
 
 .drawer-content .menu_button.redOverlay,
@@ -802,8 +814,8 @@ body::-webkit-scrollbar,
   background: var(--aero-panel-danger-btn) !important;
   color: #ffffff !important;
   box-shadow:
-    inset 0 1px 0 rgba(255, 210, 220, 0.50),
-    0 3px 12px rgba(214, 47, 88, 0.24) !important;
+    inset 0 1px 0 rgba(255, 210, 224, 0.55),
+    0 3px 12px rgba(255, 77, 130, 0.28) !important;
 }
 
 .drawer-content small,
@@ -835,7 +847,7 @@ body::-webkit-scrollbar,
   border-radius: 999px;
   background: var(--aero-slider-track);
   border: none;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.12);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.10);
 }
 
 .drawer-content input[type="range"]::-webkit-slider-thumb,
@@ -849,9 +861,9 @@ body::-webkit-scrollbar,
   background: var(--aero-slider-thumb);
   border: none;
   box-shadow:
-    inset 0 1px 1px rgba(255, 255, 255, 0.90),
-    0 1px 6px rgba(8, 125, 170, 0.42),
-    0 0 8px rgba(18, 214, 158, 0.36);
+    inset 0 1px 1px rgba(255, 255, 255, 0.95),
+    0 1px 6px rgba(255, 126, 26, 0.48),
+    0 0 8px rgba(255, 212, 38, 0.42);
 }
 
 .drawer-content input[type="checkbox"],
@@ -880,7 +892,7 @@ body::-webkit-scrollbar,
 #rm_print_characters_block .character_select.character_selected,
 #rm_print_characters_block .group_select.character_selected {
   background: var(--aero-panel-control-hover) !important;
-  box-shadow: inset 3px 0 0 var(--spec-cyan-bright) !important;
+  box-shadow: inset 3px 0 0 var(--spec-mint) !important;
 }
 
 #rm_print_characters_block .character_select_container,
@@ -903,8 +915,8 @@ body::-webkit-scrollbar,
 
 #rm_print_characters_block .tags .tag {
   border: none !important;
-  background: rgba(130, 98, 240, 0.10) !important;
-  color: var(--spec-violet-ink) !important;
+  background: rgba(255, 126, 26, 0.12) !important;
+  color: var(--spec-coral-ink) !important;
   border-radius: 5px;
 }
 
@@ -950,7 +962,7 @@ body::-webkit-scrollbar,
   overflow: hidden;
   box-shadow:
     inset 0 1px 0 var(--aero-inner-bevel),
-    0 8px 28px rgba(8, 125, 170, 0.22) !important;
+    0 8px 28px rgba(22, 168, 224, 0.24) !important;
 }
 
 #options .options-content a {
@@ -962,7 +974,7 @@ body::-webkit-scrollbar,
 }
 
 #options .options-content a i {
-  color: var(--spec-cyan);
+  color: var(--spec-sky);
 }
 
 #options .options-content a:active {
@@ -971,16 +983,16 @@ body::-webkit-scrollbar,
 
 #aero_jump_to_bottom {
   font-weight: 600;
-  color: var(--aero-ui-accent) !important;
-  background: rgba(18, 214, 158, 0.08);
+  color: var(--spec-emerald-ink) !important;
+  background: rgba(22, 190, 142, 0.10);
 }
 
 #aero_jump_to_bottom i {
-  color: var(--aero-ui-accent-bright) !important;
+  color: var(--spec-mint) !important;
 }
 
 /* ==========================================================================
-   顶部：真透光 #075B50 玻璃冠层
+   顶部：鲜翠薄荷绿 #16BE8E 阳光透光玻璃
    ========================================================================== */
 
 #top-bar {
@@ -1013,9 +1025,9 @@ body::-webkit-scrollbar,
   left: 0;
   right: 0;
   bottom: 0;
-  height: 1px;
+  height: 1.5px;
   background: var(--aero-prism-rim);
-  opacity: 0.78;
+  opacity: 0.88;
   pointer-events: none;
 }
 
@@ -1059,8 +1071,8 @@ body::-webkit-scrollbar,
 #top-settings-holder > .drawer > .drawer-toggle:has(.openIcon) {
   background: var(--aero-top-pill-active) !important;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.45),
-    0 0 10px rgba(126, 255, 212, 0.24);
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    0 0 12px rgba(255, 232, 92, 0.34);
 }
 
 #top-settings-holder .drawer-icon {
@@ -1074,7 +1086,7 @@ body::-webkit-scrollbar,
   vertical-align: top !important;
   color: var(--aero-top-icon) !important;
   opacity: 1 !important;
-  text-shadow: 0 1px 3px rgba(3, 36, 30, 0.40) !important;
+  text-shadow: 0 1px 2px rgba(6, 98, 70, 0.42) !important;
   filter: none !important;
   background: transparent !important;
 }
@@ -1122,7 +1134,7 @@ body::-webkit-scrollbar,
 }
 
 /* ==========================================================================
-   对话区：零重量无框光学切片
+   对话区：冰透白净光学切片 × 鲜活糖果生态光刃
    ========================================================================== */
 
 #chat > .mes {
@@ -1207,36 +1219,36 @@ body::-webkit-scrollbar,
   left: 0;
   top: 14px;
   bottom: 14px;
-  width: 2.5px;
+  width: 3px;
   border-radius: 3px;
   background: var(--aero-ai-spine);
-  box-shadow: 0 0 8px rgba(255, 118, 92, 0.28);
+  box-shadow: 0 0 10px rgba(255, 126, 26, 0.34);
   pointer-events: none;
   transition: box-shadow 0.25s ease, width 0.25s ease;
 }
 
 :root[data-aero-generating="true"] #chat > .mes[is_user="false"]:last-of-type > .mes_block::before,
 :root[data-aero-generating="true"] #chat > .mes:not([is_user="true"]):last-of-type > .mes_block::before {
-  width: 3.5px;
+  width: 4px;
   animation: aeroSpineBreathe 1.8s ease-in-out infinite;
 }
 
 :root[data-aero-generating="true"] #chat > .mes[is_user="false"]:last-of-type,
 :root[data-aero-generating="true"] #chat > .mes:not([is_user="true"]):last-of-type {
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.96),
-    0 4px 28px rgba(255, 118, 128, 0.20),
-    0 0 18px rgba(130, 98, 240, 0.16) !important;
+    inset 0 1px 0 rgba(255, 255, 255, 0.98),
+    0 4px 28px rgba(255, 126, 26, 0.22),
+    0 0 18px rgba(255, 77, 130, 0.16) !important;
 }
 
 @keyframes aeroSpineBreathe {
   0%, 100% {
-    opacity: 0.72;
-    box-shadow: 0 0 8px rgba(255, 118, 92, 0.40);
+    opacity: 0.74;
+    box-shadow: 0 0 8px rgba(255, 126, 26, 0.45);
   }
   50% {
     opacity: 1;
-    box-shadow: 0 0 16px rgba(255, 118, 92, 0.85), 0 0 26px rgba(130, 98, 240, 0.48);
+    box-shadow: 0 0 16px rgba(255, 126, 26, 0.88), 0 0 26px rgba(255, 77, 130, 0.50);
   }
 }
 
@@ -1246,10 +1258,10 @@ body::-webkit-scrollbar,
   right: 0;
   top: 14px;
   bottom: 14px;
-  width: 2.5px;
+  width: 3px;
   border-radius: 3px;
   background: var(--aero-user-spine);
-  box-shadow: 0 0 8px rgba(20, 180, 245, 0.30);
+  box-shadow: 0 0 10px rgba(22, 224, 168, 0.34);
   pointer-events: none;
 }
 
@@ -1291,11 +1303,11 @@ body::-webkit-scrollbar,
   overflow: hidden !important;
   background: transparent !important;
   border: none !important;
-  box-shadow: 0 3px 14px rgba(18, 128, 178, 0.18) !important;
+  box-shadow: 0 3px 14px rgba(22, 168, 214, 0.20) !important;
 }
 
 :root[data-aero-theme="night"] .aero-avatar-slot .avatar {
-  box-shadow: 0 3px 16px rgba(18, 148, 210, 0.24) !important;
+  box-shadow: 0 3px 16px rgba(36, 240, 200, 0.24) !important;
 }
 
 :root[data-aero-compact="true"] .aero-avatar-slot .avatar {
@@ -1321,7 +1333,7 @@ body::-webkit-scrollbar,
   pointer-events: none;
   background: linear-gradient(
     132deg,
-    rgba(255, 255, 255, 0.34) 0%,
+    rgba(255, 255, 255, 0.36) 0%,
     rgba(255, 255, 255, 0.06) 36%,
     transparent 38%
   );
@@ -1353,7 +1365,6 @@ body::-webkit-scrollbar,
   flex: 1 1 0;
 }
 
-/* 彻底去掉楼层小框底，改为纯净淡紫晶标字 */
 .aero-identity-main .mesIDDisplay {
   flex: 0 0 auto;
   font-size: 11.5px !important;
@@ -1367,7 +1378,7 @@ body::-webkit-scrollbar,
   border: none !important;
   box-shadow: none !important;
   color: var(--aero-floor-text) !important;
-  opacity: 0.86 !important;
+  opacity: 0.90 !important;
   margin: 0 !important;
 }
 
@@ -1441,7 +1452,7 @@ body::-webkit-scrollbar,
   border-radius: 0 !important;
   padding: 7px 14px !important;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
     inset 0 -1px 0 var(--aero-panel-hairline) !important;
   flex-direction: row !important;
   flex-wrap: wrap !important;
@@ -1473,7 +1484,7 @@ body::-webkit-scrollbar,
   border: none !important;
   box-shadow:
     inset 0 1px 0 var(--aero-inner-bevel),
-    0 1px 4px rgba(8, 102, 132, 0.08);
+    0 1px 4px rgba(14, 132, 148, 0.10);
 }
 
 .mes_block > .mes_edit_buttons {
@@ -1484,7 +1495,7 @@ body::-webkit-scrollbar,
   background: var(--aero-editbar-bg);
   border: none !important;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
     inset 0 -1px 0 var(--aero-panel-hairline);
   justify-content: flex-end !important;
   align-items: center !important;
@@ -1507,7 +1518,7 @@ body::-webkit-scrollbar,
   border: none !important;
   box-shadow:
     inset 0 1px 0 var(--aero-inner-bevel),
-    0 1px 4px rgba(8, 102, 132, 0.08);
+    0 1px 4px rgba(14, 132, 148, 0.10);
 }
 
 .mes_block > .mes_edit_buttons .mes_edit_done {
@@ -1523,7 +1534,7 @@ body::-webkit-scrollbar,
   line-height: 1.25;
   color: var(--aero-meta-color);
   font-variant-numeric: tabular-nums;
-  opacity: 0.90;
+  opacity: 0.92;
 }
 
 .aero-row-meta > * {
@@ -1580,16 +1591,16 @@ body::-webkit-scrollbar,
 
 .mes[is_user="false"] .mes_block > .mes_text q,
 .mes[is_user="false"] .mes_block > .mes_text span[style*="Quote"] {
-  color: var(--spec-cyan-ink) !important;
+  color: var(--spec-sky-ink) !important;
 }
 
 .mes_block > .mes_text blockquote {
-  border-left: 2.5px solid var(--spec-violet);
+  border-left: 2.5px solid var(--spec-coral);
   padding: 4px 10px;
   margin: 6px 0;
-  background: rgba(130, 98, 240, 0.06);
+  background: rgba(255, 77, 130, 0.06);
   border-radius: 0 6px 6px 0;
-  color: var(--spec-cyan-ink);
+  color: var(--spec-sky-ink);
 }
 
 .mes[is_user="false"] .mes_block > .mes_text em {
@@ -1605,21 +1616,21 @@ body::-webkit-scrollbar,
   border: none !important;
   border-radius: 8px !important;
   padding: 9px 11px !important;
-  box-shadow: inset 0 1px 3px rgba(7, 45, 58, 0.10);
+  box-shadow: inset 0 1px 3px rgba(14, 96, 118, 0.10);
 }
 
 .mes_block > .mes_reasoning_details {
   margin: 8px 16px 2px 16px !important;
   border: none !important;
-  border-left: 2.5px solid var(--spec-emerald-bright) !important;
+  border-left: 2.5px solid var(--spec-mint) !important;
   border-radius: 0 8px 8px 0;
   padding: 6px 10px;
-  background: rgba(20, 212, 158, 0.07);
+  background: rgba(22, 190, 142, 0.08);
   font-size: 13px;
 }
 
 /* ==========================================================================
-   底部：真透光 #073B69 -> #087DAA 琉璃 + 凹嵌透明深水输入光槽（无白框嵌套）
+   底部：晴空水蓝×水薄荷糖果玻璃 + 冰冻奶白光槽 + 糖果橘子橙纸飞机
    ========================================================================== */
 
 #form_sheld {
@@ -1664,9 +1675,9 @@ body::-webkit-scrollbar,
   left: 0;
   right: 0;
   top: 0;
-  height: 1px;
+  height: 1.5px;
   background: var(--aero-prism-rim);
-  opacity: 0.80;
+  opacity: 0.88;
   pointer-events: none;
   transition: opacity 0.25s ease;
 }
@@ -1718,7 +1729,6 @@ body::-webkit-scrollbar,
   overflow: visible !important;
 }
 
-/* 凹嵌透明深水光槽：无白块、无硬边，直接与海蓝底座融为一体 */
 #form_sheld #send_form #nonQRFormItems #send_textarea {
   flex: 1 1 auto !important;
   min-width: 0 !important;
@@ -1735,14 +1745,14 @@ body::-webkit-scrollbar,
   clip-path: none !important;
   transform: none !important;
   color: var(--aero-input-text) !important;
-  caret-color: #9af0ff;
+  caret-color: var(--spec-orange);
   font-size: 15px !important;
   line-height: 1.4 !important;
   vertical-align: middle !important;
   overflow-y: auto !important;
   box-shadow:
-    inset 0 1px 5px rgba(2, 18, 38, 0.28),
-    0 1px 0 rgba(190, 240, 255, 0.26) !important;
+    inset 0 1px 4px rgba(10, 92, 138, 0.14),
+    0 1px 0 rgba(255, 255, 255, 0.52) !important;
   transition: background 0.22s ease, box-shadow 0.22s ease;
 }
 
@@ -1753,14 +1763,14 @@ body::-webkit-scrollbar,
 #form_sheld #send_form #nonQRFormItems #send_textarea:focus {
   background: var(--aero-well-focus-bg) !important;
   box-shadow:
-    inset 0 1px 4px rgba(2, 18, 38, 0.22),
-    0 0 12px rgba(140, 236, 255, 0.30) !important;
+    inset 0 1px 3px rgba(10, 92, 138, 0.10),
+    0 0 14px rgba(255, 255, 255, 0.55) !important;
 }
 
 #options_button,
 #leftSendForm .fa-solid {
   color: var(--aero-bottom-icon) !important;
-  text-shadow: 0 1px 3px rgba(2, 22, 48, 0.45);
+  text-shadow: 0 1px 2px rgba(6, 86, 132, 0.36);
 }
 
 #options_button {
@@ -1833,7 +1843,7 @@ body::-webkit-scrollbar,
 #send_form:has(#send_textarea:focus) #rightSendForm #send_but i,
 #send_form:has(#send_textarea:focus) #rightSendForm #send_but::before {
   color: var(--aero-plane-focus-color) !important;
-  filter: var(--aero-plane-shadow) brightness(1.10);
+  filter: var(--aero-plane-shadow) brightness(1.06);
 }
 
 #rightSendForm #send_but:active,
