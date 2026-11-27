@@ -446,12 +446,37 @@ function initChatObserver() {
 }
 
 function initAndroidViewportFix() {
-    if (!window.visualViewport) return;
+    let fullWidth = window.innerWidth;
+    let fullHeight = Math.max(window.innerHeight, window.visualViewport?.height || 0);
+    document.documentElement.style.setProperty('--aero-full-h', `${fullHeight}px`);
+
+    let rafId = 0;
     const syncHeight = () => {
-        document.documentElement.style.setProperty('--aero-vvh', `${window.visualViewport.height}px`);
+        if (rafId) return;
+        rafId = requestAnimationFrame(() => {
+            rafId = 0;
+            const curW = window.innerWidth;
+            const curH = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+            document.documentElement.style.setProperty('--aero-vvh', `${curH}px`);
+
+            // 仅在横竖屏切换（宽度变化）或可视高度变更大（地址栏收起）时更新背景锁定高度，弹出键盘绝不缩小背景
+            if (Math.abs(curW - fullWidth) > 20) {
+                fullWidth = curW;
+                fullHeight = Math.max(window.innerHeight, curH);
+                document.documentElement.style.setProperty('--aero-full-h', `${fullHeight}px`);
+            } else if (curH > fullHeight) {
+                fullHeight = curH;
+                document.documentElement.style.setProperty('--aero-full-h', `${fullHeight}px`);
+            }
+        });
     };
-    window.visualViewport.addEventListener('resize', syncHeight, { passive: true });
-    window.visualViewport.addEventListener('scroll', syncHeight, { passive: true });
+
+    if (window.visualViewport) {
+        window.visualViewport.addEventListener('resize', syncHeight, { passive: true });
+        window.visualViewport.addEventListener('scroll', syncHeight, { passive: true });
+    } else {
+        window.addEventListener('resize', syncHeight, { passive: true });
+    }
     syncHeight();
 }
 
