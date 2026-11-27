@@ -132,6 +132,10 @@ function mountAuroraStage() {
       <div class="aero-stage-ribbons">
         <div class="aero-ribbon aero-ribbon-1"></div>
         <div class="aero-ribbon aero-ribbon-2"></div>
+        <div class="aero-orb aero-orb-1"></div>
+        <div class="aero-orb aero-orb-2"></div>
+        <div class="aero-orb aero-orb-3"></div>
+        <div class="aero-orb aero-orb-4"></div>
       </div>
       <div class="aero-stage-grain"></div>
     `;
