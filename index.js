@@ -233,6 +233,36 @@ function restructureMessage(mesEl, isLiveNew = false) {
         header.after(mesEditButtons);
     }
 
+    // 让 ... 展开菜单（.extraMesButtons）像铅笔编辑条一样下拉推开正文，不再覆盖短消息
+    if (mesButtons) {
+        const extraButtons = mesButtons.querySelector('.extraMesButtons');
+        if (extraButtons) {
+            const syncExtraMenuSpace = () => {
+                const buttonsVisible = getComputedStyle(mesButtons).display !== 'none';
+                const extraStyle = getComputedStyle(extraButtons);
+                const isOpen =
+                    buttonsVisible &&
+                    extraStyle.display !== 'none' &&
+                    extraStyle.visibility !== 'hidden' &&
+                    extraButtons.offsetHeight > 0;
+                header.style.marginBottom = isOpen ? `${extraButtons.offsetHeight}px` : '';
+            };
+
+            const attrObs = new MutationObserver(() => {
+                syncExtraMenuSpace();
+                requestAnimationFrame(syncExtraMenuSpace);
+            });
+            attrObs.observe(extraButtons, { attributes: true, attributeFilter: ['style', 'class'] });
+            attrObs.observe(mesButtons, { attributes: true, attributeFilter: ['style', 'class'] });
+
+            if (typeof ResizeObserver !== 'undefined') {
+                const resizeObs = new ResizeObserver(syncExtraMenuSpace);
+                resizeObs.observe(extraButtons);
+            }
+            syncExtraMenuSpace();
+        }
+    }
+
     avatarWrapper.classList.add('aero-emptied');
     if (chName) chName.classList.add('aero-emptied');
 
