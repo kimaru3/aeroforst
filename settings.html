@@ -8,7 +8,7 @@
       <div class="aero-setting-row">
         <label for="aero_theme_mode">界面气候主题（防误触内置切换）</label>
         <select id="aero_theme_mode" class="text_pole">
-          <option value="day">日间主方案（翡翠顶 × 暖珊瑚AI × 水蓝底）</option>
+          <option value="day">日间主方案（翡翠顶 × 暖珊瑚AI × 深海蓝底）</option>
           <option value="night">夜间备选方案（深海极光低疲劳）</option>
         </select>
       </div>
@@ -16,9 +16,9 @@
       <div class="aero-setting-row" style="margin-top: 8px;">
         <label for="aero_prose_glass">正文背景通透度（呼吸感调节）</label>
         <select id="aero_prose_glass" class="text_pole">
-          <option value="airy">通透呼吸（74% 磨砂 · 背后光影更鲜活）</option>
-          <option value="balanced">均衡琉璃（82% 磨砂 · 推荐）</option>
-          <option value="solid">高遮盖纸面（92% · 适合超花哨背景图）</option>
+          <option value="airy">轻盈呼吸（62% 玻璃 · 光影与气泡最鲜活）</option>
+          <option value="balanced">均衡琉璃（70% 玻璃 · 推荐）</option>
+          <option value="solid">稳重磨砂（86% · 适合复杂高对比壁纸）</option>
         </select>
       </div>
 
@@ -34,7 +34,7 @@
 
       <div class="aero-setting-row checkbox_label">
         <input id="aero_enable_ribbons" type="checkbox" />
-        <label for="aero_enable_ribbons">B1 · 动态 Vista Aurora 极光丝带</label>
+        <label for="aero_enable_ribbons">B1 · 动态 Vista Aurora 极光丝带与漂浮气泡</label>
       </div>
 
       <div class="aero-setting-row checkbox_label" style="margin-top: 6px;">
@@ -66,6 +66,20 @@
       <div class="aero-setting-row checkbox_label" style="margin-top: 6px;">
         <input id="aero_compact_meta" type="checkbox" />
         <label for="aero_compact_meta">铭牌紧凑模式（略微压缩上下边距）</label>
+      </div>
+
+      <hr class="sysHR" style="margin: 10px 0;" />
+
+      <div class="aero-setting-row" style="gap: 8px;">
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <button id="aero_check_update_btn" type="button" class="menu_button" style="flex: 1; padding: 7px 10px;">
+            <i class="fa-solid fa-rotate"></i> 检查并更新扩展
+          </button>
+          <button id="aero_reload_btn" type="button" class="menu_button active" style="display: none; padding: 7px 12px;">
+            <i class="fa-solid fa-arrows-rotate"></i> 刷新生效
+          </button>
+        </div>
+        <small id="aero_update_status">当前版本：v6.1（点击可从 GitHub 检查并拉取更新）</small>
       </div>
     </div>
   </div>

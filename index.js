@@ -48,9 +48,6 @@ function applyChromeThemeColor(color = '#075B50') {
     }
 }
 
-/**
- * 实时检测 ST 是否已设置背景图（全局 #bg1 或聊天专属 #bg_custom）
- */
 function syncStBackgroundState() {
     const ids = ['bg1', 'bg2', 'bg_custom'];
     const hasImg = ids.some((id) => {
@@ -94,9 +91,6 @@ function applyAppearance() {
     applyChromeThemeColor('#075B50');
 }
 
-/**
- * 修复 B2 透明度乘法归零问题：提升离屏噪点切片自身对比度
- */
 function initStaticGrainTexture() {
     const size = 128;
     const canvas = document.createElement('canvas');
@@ -118,9 +112,6 @@ function initStaticGrainTexture() {
     document.documentElement.style.setProperty('--aero-grain-img', `url(${canvas.toDataURL('image/png')})`);
 }
 
-/**
- * 改用纯 CSS 极光光弧实体（彻底摆脱 SVG stop 变量兼容性问题）
- */
 function mountAuroraStage() {
     if (document.getElementById('aero-aurora-stage')) return;
 
@@ -136,11 +127,106 @@ function mountAuroraStage() {
         <div class="aero-orb aero-orb-2"></div>
         <div class="aero-orb aero-orb-3"></div>
         <div class="aero-orb aero-orb-4"></div>
+        <div class="aero-bubble aero-bubble-1"></div>
+        <div class="aero-bubble aero-bubble-2"></div>
+        <div class="aero-bubble aero-bubble-3"></div>
       </div>
       <div class="aero-stage-grain"></div>
     `;
 
     document.body.prepend(stage);
+}
+
+/**
+ * 自动识别当前扩展目录名并通过 ST API 检查/拉取 GitHub 更新
+ */
+function getSelfExtensionFolder() {
+    const pathname = new URL('.', import.meta.url).pathname;
+    const match = pathname.match(/\/scripts\/extensions\/(.+?)\/?$/);
+    if (match && match[1]) {
+        return decodeURIComponent(match[1].replace(/\/$/, ''));
+    }
+    const parts = pathname.split('/').filter(Boolean);
+    const tpIdx = parts.lastIndexOf('third-party');
+    if (tpIdx !== -1 && parts[tpIdx + 1]) {
+        return `third-party/${decodeURIComponent(parts[tpIdx + 1])}`;
+    }
+    return null;
+}
+
+async function checkAndUpdateExtension() {
+    const btn = document.getElementById('aero_check_update_btn');
+    const reloadBtn = document.getElementById('aero_reload_btn');
+    const statusEl = document.getElementById('aero_update_status');
+    const extensionName = getSelfExtensionFolder();
+
+    if (!extensionName) {
+        if (statusEl) statusEl.textContent = '未能识别当前扩展目录路径，请在扩展管理列表中手动更新。';
+        return;
+    }
+
+    const { getRequestHeaders } = getCtx();
+    const headers = {
+        ...getRequestHeaders(),
+        'Content-Type': 'application/json',
+    };
+
+    if (btn) btn.disabled = true;
+    if (statusEl) statusEl.textContent = `正在检查更新（${extensionName}）...`;
+
+    try {
+        // 确认是否为 global 安装
+        let isGlobal = false;
+        try {
+            const discRes = await fetch('/api/extensions/discover', { headers: getRequestHeaders() });
+            if (discRes.ok) {
+                const list = await discRes.json();
+                const found = Array.isArray(list) ? list.find((item) => item.name === extensionName) : null;
+                if (found && found.type === 'global') isGlobal = true;
+            }
+        } catch (_) {
+            // 忽略 discover 探测异常，继续尝试检查版本
+        }
+
+        const verRes = await fetch('/api/extensions/version', {
+            method: 'POST',
+            headers,
+            body: JSON.stringify({ extensionName, global: isGlobal }),
+        });
+
+        if (!verRes.ok) {
+            throw new Error(`版本检查失败 (HTTP ${verRes.status})`);
+        }
+
+        const verData = await verRes.json();
+        if (verData.isUpToDate) {
+            const branch = verData.currentBranchName || 'main';
+            if (statusEl) statusEl.textContent = `当前已是最新版本（分支：${branch}）`;
+            window.toastr?.info('Aero Mobile UI 已是最新版本');
+            return;
+        }
+
+        if (statusEl) statusEl.textContent = '发现 GitHub 新提交，正在拉取更新...';
+        const updRes = await fetch('/api/extensions/update', {
+            method: 'POST',
+            headers,
+            body: JSON.stringify({ extensionName, global: isGlobal }),
+        });
+
+        if (!updRes.ok) {
+            throw new Error(`拉取更新失败 (HTTP ${updRes.status})`);
+        }
+
+        if (statusEl) statusEl.textContent = '更新拉取成功！点击右侧「刷新生效」即可应用新版界面。';
+        if (reloadBtn) reloadBtn.style.display = 'inline-flex';
+        window.toastr?.success('Aero Mobile UI 更新成功，请刷新页面生效');
+    } catch (err) {
+        console.error('[Aero Mobile UI] 检查更新失败:', err);
+        if (statusEl) statusEl.textContent = `更新失败：${err.message || err}`;
+        window.toastr?.error(`检查更新失败：${err.message || err}`);
+    } finally {
+        if (btn) btn.disabled = false;
+    }
 }
 
 function instantJumpToBottom() {
@@ -237,7 +323,6 @@ function restructureMessage(mesEl, isLiveNew = false) {
         header.after(mesEditButtons);
     }
 
-    // 让 ... 展开菜单（.extraMesButtons）像铅笔编辑条一样下拉推开正文，不再覆盖短消息
     if (mesButtons) {
         const extraButtons = mesButtons.querySelector('.extraMesButtons');
         if (extraButtons) {
@@ -356,6 +441,11 @@ async function mountSettingsPanel() {
         bindSettingCheckbox('aero_enable_bg_window', 'enableBgWindow');
         bindSettingCheckbox('aero_hide_wand', 'hideWand');
         bindSettingCheckbox('aero_compact_meta', 'compactMeta');
+
+        const updateBtn = document.getElementById('aero_check_update_btn');
+        const reloadBtn = document.getElementById('aero_reload_btn');
+        if (updateBtn) updateBtn.addEventListener('click', checkAndUpdateExtension);
+        if (reloadBtn) reloadBtn.addEventListener('click', () => window.location.reload());
 
         applyAppearance();
     } catch (err) {
