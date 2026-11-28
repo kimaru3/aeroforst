@@ -85,8 +85,8 @@
   --aero-slider-thumb: radial-gradient(circle at 35% 30%, #ffffff 0%, #ffe848 28%, #ff8800 78%, #ff4888 100%);
 
   /* Opalite 顶轨图标（深海青墨保证在乳白玉石上清晰锐利，色素绝不挡图标） */
-  --aero-top-icon: #154A54;
-  --aero-top-icon-active: #066C7E;
+  --aero-top-icon: #0C3844;
+  --aero-top-icon-active: #04687A;
   --aero-name-color: #102630;
   --aero-meta-color: #466472;
   --aero-floor-text: var(--spec-coral-ink);
@@ -510,6 +510,10 @@ body::-webkit-scrollbar,
    顶部：Opalite 悬浮流体轨道（乳白基底 + 蓝青云雾 + 焦点色素聚集差分）
    ========================================================================== */
 
+/* ==========================================================================
+   顶部：Opalite 悬浮流体轨道（#top-bar 为底层装饰，#top-settings-holder 同位浮于其上）
+   ========================================================================== */
+
 #top-bar {
   position: fixed !important;
   top: 8px !important;
@@ -520,6 +524,7 @@ body::-webkit-scrollbar,
   height: 38px !important;
   min-height: 38px !important;
   z-index: 3000 !important;
+  pointer-events: none !important;
   margin: 0 auto !important;
   padding: 0 6px !important;
   border-radius: 999px !important;
@@ -562,20 +567,29 @@ body::-webkit-scrollbar,
   opacity: 0.28;
 }
 
-/* 差分核心：当某个按钮聚焦打开时，其余轨道退回无色素的纯乳白 Opalite，色素全集中到激活按钮 */
-#top-bar:has(.openIcon)::before {
+/* 差分核心：因 #top-settings-holder 与 #top-bar 是兄弟节点，必须从 body 探测 .openIcon */
+body:has(#top-settings-holder .openIcon) #top-bar::before {
   opacity: 0.10;
 }
 
+/* #top-settings-holder 与 #top-bar 同位置对齐，且 z-index: 3005 稳居 #top-bar(3000) 与 #sheld(2) 之上 */
 #top-settings-holder {
-  position: relative;
-  z-index: 1;
-  width: 100% !important;
+  position: fixed !important;
+  top: 8px !important;
+  left: 10px !important;
+  right: 10px !important;
+  width: calc(100vw - 20px) !important;
+  max-width: 520px !important;
   height: 38px !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  display: flex;
-  align-items: center;
+  min-height: 38px !important;
+  margin: 0 auto !important;
+  padding: 0 6px !important;
+  box-sizing: border-box !important;
+  z-index: 3005 !important;
+  display: flex !important;
+  align-items: center !important;
+  overflow: visible !important;
+  pointer-events: auto !important;
 }
 
 #top-settings-holder > .drawer {
@@ -594,6 +608,7 @@ body::-webkit-scrollbar,
 
 #top-settings-holder > .drawer > .drawer-toggle {
   position: relative;
+  display: block;
   width: 100% !important;
   height: 30px !important;
   margin: 4px 0 !important;
@@ -604,6 +619,7 @@ body::-webkit-scrollbar,
   box-sizing: border-box;
   border: none !important;
   overflow: visible;
+  cursor: pointer;
 }
 
 /* 色素聚集层（位于图标下方 z-index:0，绝不遮挡图标） */
