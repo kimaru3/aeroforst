@@ -3,9 +3,7 @@ const MODULE_NAME = 'aero_mobile_ui';
 const DEFAULT_SETTINGS = Object.freeze({
     theme: 'day',
     proseGlass: 'balanced',
-    fontStyle: 'sans',
     hideWand: true,
-    compactMeta: false,
 });
 
 function getCtx() {
@@ -49,9 +47,7 @@ function applyAppearance() {
     const root = document.documentElement;
     root.setAttribute('data-aero-theme', s.theme);
     root.setAttribute('data-aero-prose-glass', s.proseGlass || 'balanced');
-    root.setAttribute('data-aero-font', s.fontStyle || 'sans');
     root.setAttribute('data-aero-hide-wand', String(Boolean(s.hideWand)));
-    root.setAttribute('data-aero-compact', String(Boolean(s.compactMeta)));
 
     applyChromeThemeColor('#16BE8E');
 }
@@ -403,10 +399,7 @@ async function mountSettingsPanel() {
 
         bindSettingSelect('aero_theme_mode', 'theme');
         bindSettingSelect('aero_prose_glass', 'proseGlass');
-        bindSettingSelect('aero_font_style', 'fontStyle');
-
         bindSettingCheckbox('aero_hide_wand', 'hideWand');
-        bindSettingCheckbox('aero_compact_meta', 'compactMeta');
 
         const updateBtn = document.getElementById('aero_check_update_btn');
         const mgrBtn = document.getElementById('aero_open_mgr_btn');

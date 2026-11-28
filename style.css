@@ -1,5 +1,6 @@
 /* ==========================================================================
-   Aero Mobile UI v10.0 - 硬件级贴图减负版 Neo Aero（Android Chrome）
+   Aero Mobile UI v10.1 - 硬件贴图减负版（Android Chrome）
+   改进：释放 Char 右侧 Swipe 占位实现两侧等距；放大纸飞机；移除紧凑与字体设置
    ========================================================================== */
 
 :root {
@@ -8,14 +9,8 @@
   --aero-radius-card: 16px;
   --aero-radius-avatar: 8px;
   --aero-font-sans: inherit;
-  --aero-font-serif: "Noto Serif SC", "Source Han Serif SC", "Songti SC", Georgia, serif;
-  --aero-humanist-font: inherit;
   --aero-ai-alpha: 0.74;
   --aero-user-alpha: 0.64;
-}
-
-:root[data-aero-font="serif"] {
-  --aero-humanist-font: var(--aero-font-serif);
 }
 
 :root[data-aero-prose-glass="airy"] {
@@ -105,7 +100,6 @@
   --aero-bottom-icon: rgba(255, 255, 255, 0.96);
 }
 
-/* ---------- 夜间共用极简轻量变体（不额外占贴图资源）---------- */
 :root[data-aero-theme="night"] {
   --spec-mint: #16BE8E;
   --spec-emerald-ink: #42FFB8;
@@ -499,7 +493,7 @@ body::-webkit-scrollbar,
 }
 
 /* ==========================================================================
-   顶部：硬件级静态纹理顶栏（零阴影与梯度计算）
+   顶部：硬件级静态纹理顶栏
    ========================================================================== */
 
 #top-bar {
@@ -630,7 +624,7 @@ body::-webkit-scrollbar,
 }
 
 /* ==========================================================================
-   消息卡片：9-Slice 硬件玻璃贴图 + 纯色背景（彻底消灭 box-shadow 滚动重绘）
+   消息卡片：9-Slice 圆角包裹光刃 + Char 两侧等距正文
    ========================================================================== */
 
 #chat > .mes {
@@ -693,7 +687,6 @@ body::-webkit-scrollbar,
   border-width: 0 !important;
 }
 
-/* 日间：九宫格外框（含菲涅尔倒角+光晕+光刃）+ 顶部不拉伸反光膜 + 单纯色半透底 */
 :root[data-aero-theme="day"] #chat > .mes[is_user="false"] > .mes_block,
 :root[data-aero-theme="day"] #chat > .mes:not([is_user="true"]) > .mes_block,
 :root:not([data-aero-theme]) #chat > .mes[is_user="false"] > .mes_block,
@@ -726,7 +719,6 @@ body::-webkit-scrollbar,
   border-image-repeat: stretch;
 }
 
-/* 夜间极简变体 */
 :root[data-aero-theme="night"] #chat > .mes[is_user="false"] > .mes_block,
 :root[data-aero-theme="night"] #chat > .mes:not([is_user="true"]) > .mes_block {
   background: var(--prose-ai-bg) !important;
@@ -740,7 +732,6 @@ body::-webkit-scrollbar,
   box-shadow: inset 0 1px 0 rgba(178, 242, 255, 0.28), inset -3px 0 0 #2CC8FF !important;
 }
 
-/* 纯合成层 opacity 呼吸态（零 box-shadow 重绘） */
 :root[data-aero-generating="true"] #chat > .mes[is_user="false"]:last-of-type > .mes_block,
 :root[data-aero-generating="true"] #chat > .mes:not([is_user="true"]):last-of-type > .mes_block {
   animation: aeroCardPulse 1.8s ease-in-out infinite;
@@ -749,6 +740,41 @@ body::-webkit-scrollbar,
 @keyframes aeroCardPulse {
   0%, 100% { opacity: 0.94; }
   50% { opacity: 1; }
+}
+
+/* 释放 Char 卡片右侧被 .swipeRightBlock 占用的垂直长条，改为右下角横向角标 */
+#chat > .mes > .swipe_left,
+#chat > .mes > .swipeRightBlock {
+  position: absolute !important;
+  bottom: 8px !important;
+  top: auto !important;
+  height: 24px !important;
+  min-height: 24px !important;
+  width: auto !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  padding: 0 4px !important;
+  z-index: 15 !important;
+  align-items: center !important;
+  justify-content: center !important;
+  opacity: 0.72;
+}
+
+#chat > .mes > .swipe_left {
+  right: 64px !important;
+  left: auto !important;
+}
+
+#chat > .mes > .swipeRightBlock {
+  right: 12px !important;
+  left: auto !important;
+  flex-direction: row !important;
+  gap: 4px !important;
+}
+
+#chat > .mes.last_mes[is_user="false"] > .mes_block > .mes_text,
+#chat > .mes.last_mes:not([is_user="true"]) > .mes_block > .mes_text {
+  padding-bottom: 34px !important;
 }
 
 .aero-mes-header {
@@ -763,11 +789,6 @@ body::-webkit-scrollbar,
   min-height: 68px;
   box-sizing: border-box;
   overflow: visible;
-}
-
-:root[data-aero-compact="true"] .aero-mes-header {
-  padding: 8px 12px 5px 12px;
-  min-height: 58px;
 }
 
 .aero-avatar-slot {
@@ -790,13 +811,6 @@ body::-webkit-scrollbar,
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
-}
-
-:root[data-aero-compact="true"] .aero-avatar-slot .avatar {
-  width: 38px !important;
-  height: 50px !important;
-  min-width: 38px !important;
-  min-height: 50px !important;
 }
 
 .aero-avatar-slot .avatar img {
@@ -868,11 +882,6 @@ body::-webkit-scrollbar,
   text-overflow: ellipsis;
   line-height: 1.3;
   letter-spacing: 0.01em;
-}
-
-.mes[is_user="false"] .aero-identity-main .name_text,
-.mes:not([is_user="true"]) .aero-identity-main .name_text {
-  font-family: var(--aero-humanist-font);
 }
 
 .aero-actions-wrap,
@@ -1018,17 +1027,13 @@ body::-webkit-scrollbar,
   opacity: 0.50;
 }
 
+/* 两侧严格等距 14px */
 .mes_block > .mes_text {
-  padding: 10px 16px 15px 16px !important;
+  padding: 10px 14px 15px 14px !important;
   font-size: 15.5px;
-  line-height: 1.78;
+  line-height: 1.76;
   letter-spacing: 0.015em;
   word-break: break-word;
-}
-
-.mes[is_user="false"] .mes_block > .mes_text,
-.mes:not([is_user="true"]) .mes_block > .mes_text {
-  font-family: var(--aero-humanist-font);
 }
 
 .mes[is_user="true"] .mes_block > .mes_text {
@@ -1065,7 +1070,7 @@ body::-webkit-scrollbar,
 }
 
 .mes_block > .mes_reasoning_details {
-  margin: 8px 16px 2px 16px !important;
+  margin: 8px 14px 2px 14px !important;
   border: none !important;
   border-left: 2.5px solid var(--spec-mint) !important;
   border-radius: 0 8px 8px 0;
@@ -1075,7 +1080,7 @@ body::-webkit-scrollbar,
 }
 
 /* ==========================================================================
-   底部：零循环重绘静态纹理底栏 + 3D 抛光霓虹橘纸飞机
+   底部：零循环重绘静态纹理底栏 + 放大无白底 3D 纸飞机 + 原尺寸无白底停止键
    ========================================================================== */
 
 #form_sheld {
@@ -1117,7 +1122,6 @@ body::-webkit-scrollbar,
   box-shadow: inset 0 1px 0 rgba(196, 244, 255, 0.45) !important;
 }
 
-/* 用单次 0.28s opacity 淡入取代 120fps 持续重绘，打字时零额外能耗 */
 #form_sheld #send_form::after {
   content: "";
   position: absolute;
@@ -1169,7 +1173,6 @@ body::-webkit-scrollbar,
   overflow: visible !important;
 }
 
-/* 九宫格水晶凹槽输入区 */
 #form_sheld #send_form #nonQRFormItems #send_textarea {
   flex: 1 1 auto !important;
   min-width: 0 !important;
@@ -1232,7 +1235,6 @@ body::-webkit-scrollbar,
   display: none !important;
 }
 
-/* 3D 抛光霓虹橘亚克力纸飞机 & 珊瑚停止宝石（彻底取代扁平字体图标） */
 #rightSendForm,
 #rightSendForm #send_but,
 #rightSendForm #mes_stop {
@@ -1249,45 +1251,10 @@ body::-webkit-scrollbar,
   padding: 0 !important;
   border: none !important;
   box-shadow: none !important;
-  border-radius: 50% !important;
+  border-radius: 0 !important;
   transition: transform 0.12s ease;
 }
 
+/* 放大版 3D 纸飞机（38px），停止宝石维持 32px 原大小 */
 #rightSendForm #send_but {
-  background: url('./assets/send-plane.webp') center / 34px 34px no-repeat !important;
-}
-
-#rightSendForm #mes_stop {
-  background: url('./assets/stop-gem.webp') center / 32px 32px no-repeat !important;
-  align-items: center !important;
-  justify-content: center !important;
-}
-
-/* 隐藏原生单色 FontAwesome 字体剪影，只显示 3D 抛光宝石贴图 */
-#rightSendForm #send_but::before,
-#rightSendForm #send_but i,
-#rightSendForm #mes_stop::before,
-#rightSendForm #mes_stop i {
-  opacity: 0 !important;
-  pointer-events: none;
-}
-
-#rightSendForm #send_but:active,
-#rightSendForm #mes_stop:active {
-  transform: scale(0.88);
-}
-
-:root[data-aero-hide-wand="true"] #extensionsMenuButton {
-  display: none !important;
-}
-
-#aero_mobile_ui_settings .aero-setting-row {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-#aero_mobile_ui_settings .aero-setting-row.checkbox_label {
-  flex-direction: row;
-  align-items: center;
-  gap: 8px;
-}
+  background: url('./assets/send-plane.webp') center
