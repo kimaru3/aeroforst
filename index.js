@@ -3,7 +3,9 @@ const MODULE_NAME = 'aero_mobile_ui';
 const DEFAULT_SETTINGS = Object.freeze({
     theme: 'day',
     proseGlass: 'balanced',
+    fontStyle: 'sans',
     hideWand: true,
+    compactMeta: false,
 });
 
 function getCtx() {
@@ -23,7 +25,7 @@ function getSettings() {
     return extensionSettings[MODULE_NAME];
 }
 
-function applyChromeThemeColor(color) {
+function applyChromeThemeColor(color = '#16BE8E') {
     const existing = document.querySelectorAll('meta[name="theme-color"]');
     if (existing.length > 0) {
         existing.forEach((el, idx) => {
@@ -47,76 +49,11 @@ function applyAppearance() {
     const root = document.documentElement;
     root.setAttribute('data-aero-theme', s.theme);
     root.setAttribute('data-aero-prose-glass', s.proseGlass || 'balanced');
+    root.setAttribute('data-aero-font', s.fontStyle || 'sans');
     root.setAttribute('data-aero-hide-wand', String(Boolean(s.hideWand)));
+    root.setAttribute('data-aero-compact', String(Boolean(s.compactMeta)));
 
-    // 悬浮 Opalite 顶轨下，状态栏同步柔和亮水青(日间)或深碧(夜间)
-    applyChromeThemeColor(s.theme === 'night' ? '#092224' : '#DDF4F6');
-}
-
-/**
- * 注入不规则轻微起伏的流体 SVG 胶囊外轮廓（左内凹控制槽 · 中平稳 · 右外凸发射舱）
- * 使用 vector-effect="non-scaling-stroke"，多行输入容器向上生长时边缘高光永远保持锐利
- */
-function mountFluidInputIsland() {
-    const sendForm = document.getElementById('send_form');
-    if (!sendForm || sendForm.querySelector('.aero-island-svg')) return;
-
-    const ns = 'http://www.w3.org/2000/svg';
-    const svg = document.createElementNS(ns, 'svg');
-    svg.setAttribute('class', 'aero-island-svg');
-    svg.setAttribute('viewBox', '0 0 360 64');
-    svg.setAttribute('preserveAspectRatio', 'none');
-    svg.setAttribute('aria-hidden', 'true');
-
-    // 不规则流体闭合轮廓路径：左端微内凹收腰(x≈48)，右端发射舱温和外鼓(x≈326)
-    const fluidPath =
-        'M 30 7 ' +
-        'C 42 7, 45 10.5, 56 10.5 ' +
-        'C 84 10.5, 250 9.5, 286 9.5 ' +
-        'C 302 9.5, 310 3, 328 3 ' +
-        'C 347 3, 357 15, 357 32 ' +
-        'C 357 49, 347 61, 328 61 ' +
-        'C 310 61, 302 54.5, 286 54.5 ' +
-        'C 250 54.5, 84 53.5, 56 53.5 ' +
-        'C 45 53.5, 42 57, 30 57 ' +
-        'C 13 57, 3 46, 3 32 ' +
-        'C 3 18, 13 7, 30 7 Z';
-
-    svg.innerHTML = `
-      <defs>
-        <linearGradient id="micaIslandBase" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="var(--aero-mica-1)" />
-          <stop offset="52%" stop-color="var(--aero-mica-2)" />
-          <stop offset="100%" stop-color="var(--aero-mica-3)" />
-        </linearGradient>
-        <radialGradient id="micaLeftPocket" cx="9%" cy="50%" r="16%">
-          <stop offset="0%" stop-color="var(--aero-pocket-tint)" />
-          <stop offset="100%" stop-color="transparent" />
-        </radialGradient>
-        <radialGradient id="micaPodCrystal" cx="90%" cy="50%" r="18%">
-          <stop offset="0%" stop-color="var(--aero-pod-glow)" />
-          <stop offset="100%" stop-color="transparent" />
-        </radialGradient>
-        <linearGradient id="micaRimIdle" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="rgba(255,255,255,0.94)" />
-          <stop offset="48%" stop-color="rgba(190,242,255,0.45)" />
-          <stop offset="100%" stop-color="rgba(255,255,255,0.72)" />
-        </linearGradient>
-        <linearGradient id="micaRimFocus" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="rgba(160,255,232,0.95)" />
-          <stop offset="48%" stop-color="rgba(255,255,255,1)" />
-          <stop offset="82%" stop-color="rgba(120,230,255,0.96)" />
-          <stop offset="100%" stop-color="rgba(255,198,110,0.95)" />
-        </linearGradient>
-      </defs>
-      <path d="${fluidPath}" fill="url(#micaIslandBase)" />
-      <path d="${fluidPath}" fill="url(#micaLeftPocket)" />
-      <path d="${fluidPath}" fill="url(#micaPodCrystal)" />
-      <path class="aero-island-rim-idle" d="${fluidPath}" fill="none" stroke="url(#micaRimIdle)" stroke-width="1.4" vector-effect="non-scaling-stroke" />
-      <path class="aero-island-rim-focus" d="${fluidPath}" fill="none" stroke="url(#micaRimFocus)" stroke-width="2" vector-effect="non-scaling-stroke" />
-    `;
-
-    sendForm.prepend(svg);
+    applyChromeThemeColor('#16BE8E');
 }
 
 function getSelfExtensionFolder() {
@@ -192,7 +129,7 @@ async function checkAndUpdateExtension() {
                 }
             }
         } catch (_) {
-            // 忽略
+            // 忽略 discover 探测异常
         }
 
         const candidates = [
@@ -466,7 +403,10 @@ async function mountSettingsPanel() {
 
         bindSettingSelect('aero_theme_mode', 'theme');
         bindSettingSelect('aero_prose_glass', 'proseGlass');
+        bindSettingSelect('aero_font_style', 'fontStyle');
+
         bindSettingCheckbox('aero_hide_wand', 'hideWand');
+        bindSettingCheckbox('aero_compact_meta', 'compactMeta');
 
         const updateBtn = document.getElementById('aero_check_update_btn');
         const mgrBtn = document.getElementById('aero_open_mgr_btn');
@@ -482,8 +422,8 @@ async function mountSettingsPanel() {
 }
 
 jQuery(async () => {
+    applyChromeThemeColor('#16BE8E');
     applyAppearance();
-    mountFluidInputIsland();
     initAndroidViewportFix();
     injectJumpToBottomMenuItem();
     await mountSettingsPanel();
