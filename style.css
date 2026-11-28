@@ -1,6 +1,5 @@
 /* ==========================================================================
-   Aero Mobile UI v10.1 - 硬件贴图减负版（Android Chrome）
-   改进：释放 Char 右侧 Swipe 占位实现两侧等距；放大纸飞机；移除紧凑与字体设置
+   Aero Mobile UI v10.2 - 完整硬件贴图减负版（Android Chrome）
    ========================================================================== */
 
 :root {
@@ -505,7 +504,7 @@ body::-webkit-scrollbar,
   height: 38px !important;
   min-height: 38px !important;
   z-index: 3000 !important;
-  background: url('./assets/top-glass.webp') center / 100% 100% no-repeat !important;
+  background: url('./assets/top-glass.webp?v=102') center / 100% 100% no-repeat !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
   border: none !important;
@@ -560,7 +559,7 @@ body::-webkit-scrollbar,
 
 #top-settings-holder > .drawer > .drawer-toggle:active,
 #top-settings-holder > .drawer > .drawer-toggle:has(.openIcon) {
-  background: url('./assets/top-pill-active.webp') center / 100% 100% no-repeat !important;
+  background: url('./assets/top-pill-active.webp?v=102') center / 100% 100% no-repeat !important;
 }
 
 #top-settings-holder .drawer-icon {
@@ -692,12 +691,12 @@ body::-webkit-scrollbar,
 :root:not([data-aero-theme]) #chat > .mes[is_user="false"] > .mes_block,
 :root:not([data-aero-theme]) #chat > .mes:not([is_user="true"]) > .mes_block {
   background-color: var(--prose-ai-bg) !important;
-  background-image: url('./assets/card-sheen.webp') !important;
+  background-image: url('./assets/card-sheen.webp?v=102') !important;
   background-repeat: no-repeat !important;
   background-position: 0 0 !important;
   background-size: 100% 42px !important;
   color: var(--prose-ai-ink);
-  border-image-source: url('./assets/card-ai-rim.webp');
+  border-image-source: url('./assets/card-ai-rim.webp?v=102');
   border-image-slice: 48;
   border-image-width: 24px;
   border-image-outset: 8px;
@@ -707,12 +706,12 @@ body::-webkit-scrollbar,
 :root[data-aero-theme="day"] #chat > .mes[is_user="true"] > .mes_block,
 :root:not([data-aero-theme]) #chat > .mes[is_user="true"] > .mes_block {
   background-color: var(--prose-user-bg) !important;
-  background-image: url('./assets/card-sheen.webp') !important;
+  background-image: url('./assets/card-sheen.webp?v=102') !important;
   background-repeat: no-repeat !important;
   background-position: 0 0 !important;
   background-size: 100% 42px !important;
   color: var(--prose-user-ink);
-  border-image-source: url('./assets/card-user-rim.webp');
+  border-image-source: url('./assets/card-user-rim.webp?v=102');
   border-image-slice: 48;
   border-image-width: 24px;
   border-image-outset: 8px;
@@ -827,7 +826,7 @@ body::-webkit-scrollbar,
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: url('./assets/avatar-glint.webp') center / 100% 100% no-repeat;
+  background: url('./assets/avatar-glint.webp?v=102') center / 100% 100% no-repeat;
   border-radius: inherit;
 }
 
@@ -1080,7 +1079,7 @@ body::-webkit-scrollbar,
 }
 
 /* ==========================================================================
-   底部：零循环重绘静态纹理底栏 + 放大无白底 3D 纸飞机 + 原尺寸无白底停止键
+   底部：零循环重绘静态纹理底栏 + 内联矢量 3D 纸飞机与珊瑚停止宝石
    ========================================================================== */
 
 #form_sheld {
@@ -1111,7 +1110,7 @@ body::-webkit-scrollbar,
   border-radius: 0 !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
-  background: url('./assets/dock-idle.webp') center / 100% 100% no-repeat !important;
+  background: url('./assets/dock-idle.webp?v=102') center / 100% 100% no-repeat !important;
   border: none !important;
   box-shadow: none !important;
   overflow: visible !important;
@@ -1126,7 +1125,7 @@ body::-webkit-scrollbar,
   content: "";
   position: absolute;
   inset: 0;
-  background: url('./assets/dock-focus.webp') center / 100% 100% no-repeat;
+  background: url('./assets/dock-focus.webp?v=102') center / 100% 100% no-repeat;
   opacity: 0;
   pointer-events: none;
   z-index: 0;
@@ -1186,7 +1185,7 @@ body::-webkit-scrollbar,
   background: transparent !important;
   border-style: solid !important;
   border-width: 0 !important;
-  border-image-source: url('./assets/input-well.webp');
+  border-image-source: url('./assets/input-well.webp?v=102');
   border-image-slice: 28 fill;
   border-image-width: 14px;
   border-image-outset: 2px;
@@ -1235,15 +1234,15 @@ body::-webkit-scrollbar,
   display: none !important;
 }
 
-#rightSendForm,
-#rightSendForm #send_but,
-#rightSendForm #mes_stop {
+#form_sheld #send_form #rightSendForm,
+#form_sheld #send_form #rightSendForm #send_but,
+#form_sheld #send_form #rightSendForm #mes_stop {
   opacity: 1 !important;
   mix-blend-mode: normal !important;
 }
 
-#rightSendForm #send_but,
-#rightSendForm #mes_stop {
+#form_sheld #send_form #rightSendForm #send_but,
+#form_sheld #send_form #rightSendForm #mes_stop {
   width: 40px !important;
   min-width: 40px !important;
   height: 40px !important;
@@ -1252,9 +1251,56 @@ body::-webkit-scrollbar,
   border: none !important;
   box-shadow: none !important;
   border-radius: 0 !important;
+  font-size: 0 !important;
+  color: transparent !important;
   transition: transform 0.12s ease;
 }
 
-/* 放大版 3D 纸飞机（38px），停止宝石维持 32px 原大小 */
-#rightSendForm #send_but {
-  background: url('./assets/send-plane.webp') center
+/* 彻底屏蔽 ST 原生字体/SVG/div/i 等一切默认图标残留 */
+#form_sheld #send_form #rightSendForm #send_but::before,
+#form_sheld #send_form #rightSendForm #send_but::after,
+#form_sheld #send_form #rightSendForm #send_but *,
+#form_sheld #send_form #rightSendForm #send_but *::before,
+#form_sheld #send_form #rightSendForm #mes_stop::before,
+#form_sheld #send_form #rightSendForm #mes_stop::after,
+#form_sheld #send_form #rightSendForm #mes_stop *,
+#form_sheld #send_form #rightSendForm #mes_stop *::before {
+  content: none !important;
+  display: none !important;
+  opacity: 0 !important;
+  font-size: 0 !important;
+  color: transparent !important;
+  pointer-events: none !important;
+}
+
+/* 放大版无白底 3D 抛光霓虹橘亚克力纸飞机（内联矢量，零缓存隐患） */
+#form_sheld #send_form #rightSendForm #send_but {
+  background: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'><defs><linearGradient id='gL' x1='10%' y1='45%' x2='90%' y2='10%'><stop offset='0%' stop-color='%23FF7D00'/><stop offset='50%' stop-color='%23FF9E14'/><stop offset='100%' stop-color='%23FFD442'/></linearGradient><linearGradient id='gR' x1='50%' y1='65%' x2='92%' y2='10%'><stop offset='0%' stop-color='%23FF5A00'/><stop offset='55%' stop-color='%23FF8A00'/><stop offset='100%' stop-color='%23FFC632'/></linearGradient><linearGradient id='gK' x1='40%' y1='55%' x2='88%' y2='15%'><stop offset='0%' stop-color='%23D94300'/><stop offset='100%' stop-color='%23FF6E00'/></linearGradient><linearGradient id='gC' x1='40%' y1='60%' x2='92%' y2='10%'><stop offset='0%' stop-color='%23FF6800'/><stop offset='100%' stop-color='%23FFE36E'/></linearGradient><linearGradient id='gS' x1='10%' y1='15%' x2='75%' y2='55%'><stop offset='0%' stop-color='rgba(255,255,255,0.78)'/><stop offset='65%' stop-color='rgba(255,255,255,0.20)'/><stop offset='100%' stop-color='rgba(255,255,255,0)'/></linearGradient></defs><path d='M116 17 L10 59 L52 75 L52 117 L70 83 L90 121 Z' fill='rgba(160,48,0,0.22)'/><polygon points='116,14 52,72 52,114' fill='url(%23gK)'/><polygon points='52,114 70,80 78,86' fill='%23B83200'/><polygon points='116,14 10,56 52,72' fill='url(%23gL)'/><polygon points='116,14 70,80 90,118' fill='url(%23gR)'/><polygon points='116,14 52,72 70,80' fill='url(%23gC)'/><polygon points='116,14 10,56 36,66 86,32' fill='url(%23gS)'/><polyline points='10,56 116,14 90,118' fill='none' stroke='rgba(255,255,255,0.92)' stroke-width='2' stroke-linejoin='round' stroke-linecap='round'/><line x1='52' y1='72' x2='116' y2='14' stroke='rgba(255,255,255,0.86)' stroke-width='1.8' stroke-linecap='round'/></svg>") center / 38px 38px no-repeat !important;
+}
+
+/* 原尺寸无白底 3D 抛光珊瑚红宝石停止键 */
+#form_sheld #send_form #rightSendForm #mes_stop {
+  background: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'><defs><linearGradient id='sg' x1='26%' y1='26%' x2='74%' y2='74%'><stop offset='0%' stop-color='%23FF88B0'/><stop offset='50%' stop-color='%23FF3874'/><stop offset='100%' stop-color='%23CC144E'/></linearGradient><linearGradient id='ss' x1='26%' y1='26%' x2='74%' y2='55%'><stop offset='0%' stop-color='rgba(255,255,255,0.72)'/><stop offset='80%' stop-color='rgba(255,255,255,0.16)'/><stop offset='100%' stop-color='rgba(255,255,255,0)'/></linearGradient></defs><rect x='34' y='37' width='60' height='60' rx='16' fill='rgba(160,16,58,0.26)'/><rect x='34' y='34' width='60' height='60' rx='16' fill='url(%23sg)'/><path d='M50 34 H78 A16 16 0 0 1 94 50 V56 L34 72 V50 A16 16 0 0 1 50 34 Z' fill='url(%23ss)'/><rect x='34.8' y='34.8' width='58.4' height='58.4' rx='15.2' fill='none' stroke='rgba(255,255,255,0.88)' stroke-width='1.6'/></svg>") center / 32px 32px no-repeat !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+#form_sheld #send_form #rightSendForm #send_but:active,
+#form_sheld #send_form #rightSendForm #mes_stop:active {
+  transform: scale(0.88);
+}
+
+:root[data-aero-hide-wand="true"] #extensionsMenuButton {
+  display: none !important;
+}
+
+#aero_mobile_ui_settings .aero-setting-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+#aero_mobile_ui_settings .aero-setting-row.checkbox_label {
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
