@@ -1392,3 +1392,41 @@ body::-webkit-scrollbar,
   align-items: center;
   gap: 8px;
 }
+/* ==========================================================================
+   Aero Mobile UI hotfix: Android Chrome top-bar hit testing
+   Keep decorative layers transparent to touch and restore native drawer taps.
+   ========================================================================== */
+#top-bar {
+  pointer-events: auto !important;
+  isolation: isolate;
+  z-index: 10000 !important;
+}
+
+#top-bar::before,
+#top-settings-holder > .drawer > .drawer-toggle::before {
+  pointer-events: none !important;
+}
+
+#top-settings-holder,
+#top-settings-holder > .drawer,
+#top-settings-holder > .drawer > .drawer-toggle,
+#top-settings-holder .drawer-toggle,
+#top-settings-holder .drawer-icon,
+#top-settings-holder .drawer-content,
+#top-settings-holder .drawer-content * {
+  pointer-events: auto !important;
+}
+
+#top-settings-holder {
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+#top-settings-holder > .drawer {
+  position: relative;
+}
+
+#top-settings-holder .drawer-content {
+  z-index: 10001 !important;
+  touch-action: pan-y;
+}
